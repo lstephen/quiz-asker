@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <script
+                          src="https://code.jquery.com/jquery-3.3.1.js"
+                          integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+                          crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+1. În studiul termodinamic al reacţiilor chimice, atunci când ΔH > 0: 
+I. sistemul primeşte căldură. 
+II. sistemul cedează căldură 
+B
+
+2.Comportamentul dipolar este caracteristic: 
+I. Unor molecule asimetrice. 
+II. Moleculelor perfect simetrice
+ B
+
+3.Legatura hidrofobă se realizează între:
+I. Molecule hidrofobe în prezenţa moleculelor de apă
+II. Atomii de oxigen şi hidrogen din componenţa moleculei de apă
+B
+
+4.În legătură cu proprietăţile coligative ale soluţiilor: 
+I. Constanta crioscopică reprezintă creşterea ΔT la dizolvarea unui mol de substanţă într-un litru de soluţie 
+II. Una dintre consecinţele prezenţei moleculelor de solvit este apariţia în anumite condiţii a unei presiuni osmotice. 
+C
+
+5.Despre osmoză se poate afirma:
+I. Poate avea loc în prezenţa unei membrane semipermeabile
+II. Soluţiile în care hematiile se umflă sunt hipertone (hiperosmotice)
+B
+
+6.La nivelul capilarelor se întâlnesc următoarele :
+I.La capătul arterial al capilarului  Δπ > Δp
+II. In capilarul venos diferenţa dintre presiunile efective intravasculară şi interstiţiala este mai mare decât în cel arterial
+C
+
+7.Referitor la legile difuziei este adevărat că:
+I. Pentru 2 soluţii de concentrătii c1 şi c2, separate de o membrană  cu coeficient de permeabilitate P, legea difuziei este Δν/SΔt = -PΔc
+II. În cazul membranei  P = βD/ δ (δ - grosimea membranei, β - coeficient de partiţie solvent-membrană)
+C
+
+8. La nivelul capilarelor se întâlnesc următoarele :
+I. La capătul venos al capilarului are loc ultrafiltrarea
+II. La capătul arterial al capilarului  Δπ < Δp
+C
+
+9.În legătură cu membranele celulare se pot face următoarele afirmaţii : 
+I. Prin organizarea spontană a lipidelor cozile acestora sunt expuse mediului apos. 
+II. Membrana celulară poate asigura transportul diferitelor specii moleculare dintr-o parte a ei în cealaltă.  
+C
+
+10.Pompa de Na+ şi K+ din membrana celulară :
+I. Evacuează 3 Na+ din celulă şi introduce 2 K+ în celulă pentru un ATP scindat
+II. Utilizează exclusiv energia de agitaţie termică a ionilor de Na şi K
+B
+
+11.În legătură cu transportul pasiv se poate afirma că: 
+I. Difuzia facilitată se produce prin dizolvarea speciei moleculare transportate în membrană. 
+II. Win – Wex >  0, ionii au tendinţa de a părăsi celula.  
+C
+
+12.În sinapsele neuronale:
+I. La nivelul membranei postsinaptice se formează un potenţial de acţiune local  
+II. În sinapsa electrică se poate face o gradare în intensitate a semnalului
+B
+
+13.În legătură cu propagarea PA este adevărat că:
+I. În fibrele mielinizate propagarea este recurentă.
+II. Teaca de mielină este un izolator
+C
+
+14.În legătură cu miofilamentele este adevărat că:
+I. Tropomiozina se află în şanţul dintre şirurile de molecule de actină
+II. Actomiozina are activitate ATP-azică
+A
+
+15.Referitor la caracterul izotonic sau izometric al unei contracţii musculare este adevărat că:
+I. Un muşchi obligat să susţină o greutate mai mare decât forţa maximă pe care o poate dezvolta se contractă izotonic
+II. Un muşchi care ridică o greutate egală cu zero se contractă izometric
+D
+
+16. Reprezentarea grafică a relaţiei lui Hill (între forţa şi viteza de contracţie a unui muşchi) este:
+I. Elipsă  
+II. Hiperbolă
+C
+
+17.În legătură cu miofilamentele este adevărat că:
+I. Filamentele groase sunt alcătuite din miozină 
+II. Actina are mare afinitate pentru ionii de calciu
+B
+
+18.Cu privire la aspectele termodinamice ale contracţiei musculare se poate spune că:
+I. În contracţie muşchiul efectuează lucru mecanic dar nu dezvoltă căldură.
+II. Puterea dezvoltată de muşchi este maximă în contracţia izometrică
+D
+19.În procesul biofizic al recepţiei auditive:
+I. De-a lungul membranei tectoria  se deplasează o undă călătoare
+II. Sunetele joase se recepţioneaza la baza melcului
+D
+20. În procesul biofizic al recepţiei auditive:
+I. În celulele receptoare apar potenţiale de acţiune de tip tot-sau-nimic
+II. De-a lungul membranei bazilare se deplasează o undă călătoare
+C
+
+21.Ultrasunetele:
+I. Sunt vibraţii acustice cu frecvenţe mai mici decât 20.000 Hz
+II. Pot fi produse şi recepţionate, printre organismele vii, numai de către insecte 
+D
+
+22.Contribuţia cea mai mare la convergenţa totală a ochiului o are:
+I. Corneea         
+II. Cristalinul           
+B
+
+23.Procesul de adaptare la lumină presupune:
+I. Bombarea corneei
+II. Contracţia muşchilor irisului
+C
+
+24.În celulele fotoreceptoare: 
+I. Celulele fotoreceptoare cu bastonaş asigură vederea scotopică. 
+II. Pragul de activare al celulelor cu bastonaş este mai scăzut decât cel al celulelor cu conuri.
+A
+
+25.Ochiul miop se caracterizează prin:  
+I. Imaginea se corectează cu lentile divergente. 
+II. Punctum proximum este mai departe de ochi decât la ochiul emetrop
+B
+
+26.În legătură cu fototerapia icterului la nou născuți:
+I. Se bazează pe existenţa unor reacţii fotochimice ale cromoforilor endogeni
+II. Bilirubina absoarbe la nivelul lungimii de undă corespunzătoare culorii roșii 
+B
+
+27.În legătură cu terapia hemangioamelor faciale:
+I. Lungimea de undă optimă pentru tratament este reprezentată de maximul curbei de absorbție a oxihemoglobinei: 577 nm
+II. Constă în distrugerea ireversibilă a tuturor vaselor sanguine anomale care produc hemangioame 
+A
+
+28.În legătură cu pârghiile în organism:
+I. Mușchiul biceps este o pârghie de gradul III
+II. La pârghiile de gradul II punctul de sprijin se află la mijloc
+B
+
+
+
+29.În legătură cu curgerea sângelui este adevărat că:
+I. Viteza sângelui, conform ecuaţiei Bernoulli, creşte în vasele mici datorită îngustării acestora
+II. Rezistenţa hidraulică la curgere a coloanei de sânge este invers proporţională cu puterea a patra a razei vasului
+C
+
+
+30.În legătură cu curgerea sângelui este adevărat că:
+I. Este microturbulentă în vasele mari
+II. Este laminară în aortă şi în artera pulmonară
+B
+
+31.În legătură cu elasticitatea vaselor de sânge se poate afirma că:
+I. Conform legii lui Laplace tensiunea în pereţii vaselor de sânge este invers proporţională cu raza acestora
+II. Fibrele de colagen sunt mai puţin rezistente la întinderi decât elastina
+D
+
+32. În legătură cu aspectele patologice ale curgerii sângelui:
+I. În insuficienţa cardiacă razele de curbură ale pereţilor inimii scad şi debitul sanguin scade
+II. Creşterea hematocritului peste 58% duce la deformări mecanice ale hematocritului
+B
+
+33.În legătură cu presiunea sângelui este adevărat că:
+I. pm = (ps + pd)/2
+II. Presiunea scade dinspre aortă înspre vena cavă
+C
+
+34.Despre numărul lui Reynolds se poate spune că:
+I. Dacă are valoarea mai mare de 3000 indică o curgere laminară
+II. Este invers proporţional cu viteza de curgere a lichidului printr-un tub
+D
+
+
+35.În legătură cu radiaţiile ionizante este adevărat că:
+I. Radiaţiile β sunt de natură electromagnetică 
+II. Radiaţiile α sunt nuclee de heliu.
+A
+
+36.Cu privire la efectele somatice şi genetice ale radiaţiilor ionizante se poate afirma că:
+I. Radiosensibilitatea ţesuturilor este cu atât mai mare cu cât acestea sunt mai diferenţiate 
+II. Cu cât un ţesut este mai nediferenţiat şi în el au loc mai multe mitoze, cu atât este mai mare radiosensibilitatea sa
+C
+
+
+
+37.În cazul interacţiunii radiaţiilor ionizante cu materia:
+I. Distanţa medie străbătută de o particulă ionizantă într-un mediu este cu atât mai mică cu cât puterea ei de ionizare este mai mare 
+II. Radiaţiile γ sau x pot fi total absorbite de către un strat de substanţă suficient de gros
+D
+
+38. Despre protecţia împotriva radiaţiilor se poate afirma că:
+I. DMA anuală se stabileşte în funcţie de cel mai radiorezistent organ
+II. O doză de 6 mSv duce la moarte în decurs de o lună
+D
+
+39.În legătură cu dozimetria radiaţiilor ionizante se poate afirma că:
+I. Doza incidentă de radiaţie se exprimă în Sv
+II. Dacă 1 kg de material absoarbe 1 J de energie a radiaţiei incidente, doza absorbită este de 1 Gy
+C
+
+40. În legătură cu ecografia se poate afirma că:
+I. O mare importanţă o prezintă  fenomenul de reflexie a US la interfaţa a două ţesuturi diferite
+II. Cu cât diferenţa dintre impedanţele acustice ale structurilor aflate de-o parte şi alta a interfeţei este mai mare cu atât intensitatea undei reflectate este mai mică
+B
+
+41.Radiaţiile x:
+I. Fac parte din categoria radiaţiilor electromagnetice neionizante
+II. Sunt atenuate diferenţiat, la trecerea prin substanţă, în funcţie de coeficientul de absorbţie al diferitelor zone
+C
+
+42. În legătură cu iradierea internă este adevărat că:
+I. Perioada de înjumătăţire efectivă este cu atât mai mică cu cât timpul de înjumătăţire al radionuclidului este mai mic
+II. Tef se defineşte prin relaţia: Tef  = Tf + Tb
+Tf  - perioada de înjumătăţire prin dezintegrare
+Tb  - perioada de înjumătăţire prin eliminare din organism
+B
+
+43.Substanţele chimice radioprotectoare:
+I. Trebuie să diminueze acţiunea indirectă a radicalilor liberi
+II. Trebuie să fie administrate înaintea iradierii
+A
+
+44.În legătură cu legea dezintegrării radioactive se poate afirma că:
+I. Timpul de înjumătăţire este direct proporţional cu constanta dezintegrării radioactive λ
+II. Activitatea unei surse radioactive se măsoară în Bq
+B
+
+45.În legătură cu iradierea internă este adevărat că:
+I. Tef  este cu atât mai mare cu cât eliminarea izotopului din organism este mai rapidă
+II. Radioelementele cu Tf  şi Tb  mari sunt foarte periculoase pentru organism
+C
+
+46. În legătură cu tomografia computerizată în RMN se poate spune că:
+I. În tomografia computerizată RMN pacientul este introdus într-o incintă în care se realizează întotdeauna un câmp magnetic variabil
+II. Asupra regiunii care trebuie investigată se trimite o succesiune de pulsuri de radiofrecvenţă şi apoi se detectează semnalele ecou
+C
+
+47.În legătură cu tehnica PET:
+I. În tehnica PET se iau în consideraţie numai impulsurile detectate simultan de către o pereche de detectori situaţi la 1800 unul faţă de altul
+II. Prin reacţia de anihilare între un pozitron şi un electron se emit doi fotoni γ care pleacă în aceeaşi direcţie
+B
+      `
+
+    const q_regex = new RegExp('\n\n+', 'm');
+    const q_text = questions_raw.trim().split(q_regex);
+
+    const qs = q_text.map(function(q) {
+      var split = q.split(new RegExp('\n', 'm'));
+
+      const answer = split.pop();
+      const question = split.join('<br/>');
+
+      return [question, answer];
+    }).filter(function(q) {
+      return q[0] != "";
+    });
+
+    var chosen_q;
+
+    function nextQuestion() {
+      chosen_q = qs[Math.floor(Math.random()*qs.length)];
+
+      $('#question').html(chosen_q[0]);
+      $('#answer').text('');
+    }
+
+    function showAnswer() {
+      $('#answer').text(chosen_q[1]);
+    }
+
+    $(document).ready(function() {
+      $('#b_next').click(nextQuestion);
+      $('#b_show').click(showAnswer);
+
+      nextQuestion();
+    });
+
+    </script>
+
+
+    <div id="question">
+
+
+    </div>
+
+    <button type="button" id="b_show">Show Answer</button>
+    <button type="button" id="b_next">Next Question</button>
+
+    <div id="answer">
+
+    </div>
+  </body>
+</html>
