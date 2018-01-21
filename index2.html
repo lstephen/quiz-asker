@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+
+1. Fagocitoza este procesul prin care:
+I. Sunt înglobate lichide în interiorul celulei
+II. Macrofagele înglobează celule alterate și resturi celulare
+C
+
+2. Undele radio (radiație electromagnetică):
+I. Au lungimi de undă în domeniul centimetrilor ... kilometrilor
+II. Nu au energie suficientă pentru a produce ionizari ale atomilor sau moleculelor
+A
+
+3. Noțiunea de nucleu atomic a fost introdusă de următorul model atomic:
+I. Modelul Bohr
+II. Modelul Thompson
+D
+
+4. În urma excitării celulelor senzoriale din retină:
+I. Se întrerupe curentul de întuneric
+II. Se deschid porţile canalelor de Na
+B
+
+5. Labirintul membranos conține:
+I. Perilimfă
+II. Endolimfă
+C
+
+6. În cazul hipermetropiei imaginea se formează:
+I. La nivelul a mai multe puncte focale pe retină
+II. În fața retinei
+D
+
+7. Molecula de colesterol de la nivelul membranei celulare este o moleculă de natură:
+I. Lipidică
+II. Proteică
+B
+
+8. În legătură cu presiunea se poate afirma:
+I. Este forţă exercitată pe unitatea de suprafață
+II. Poate fi măsurată în Pascali ( N / m2 )
+A
+
+9. VSH (Viteza de sedimentare a hematiilor):
+I. Cu cat vâscozitatea sângelui este mai mare, cu atât hematiile se sedimentează mai încet
+II. Nu este influenţată de vâscozitatea sângelui
+B
+
+10. Sistemele biologice sunt sisteme termodinamice:
+I. Deschise
+II. Departe de echilibru
+A
+
+11. Sarcina electrică:
+I. Este o proprietate fundamentală a materiei
+II. Se măsoară în C (Coulombi)
+A
+
+12. În categoria radiaţiilor ionizante intră:
+I. Radiaţiile γ, X, UV cu energie mai mare de 10 eV
+II. Radiaţiile α, β, neutroni
+A
+
+13. O soluție injectabilă intravenos trebuie să aibă o presiune osmotică:
+I. Mai mică decât a plasmei sanguine, pentru a nu interacționa cu hematiile
+II. Egală cu a plasmei sanguine
+C
+
+14. Canalele ionice:
+I. Sunt structuri selective
+II. Transportă milioane de ioni pe secundă
+B
+
+15. Câmpul magnetic:
+I. Apare între magneţi
+II. Apare în jurul conductorilor străbătuţi de curenţi electrici
+A
+
+16. În contracția musculară, ATP-ul se poate reface prin:
+I. Reacția creatinkinazei
+II. Metilarea adeninei
+B
+
+17. Menținerea capului în echilibru pe coloana vertebrală se realizează printr-o:
+I. Pârghie de gradul I
+II. Pârghie de gradul II
+B
+
+18. Conform modelulului atomic al lui Bohr se poate afirma că:
+I. Electronii se pot deplasa doar pe anumite orbite
+II. Electronii pot trece de pe o orbită pe alta doar dacă absorb/emit radiație electromagnetică
+A
+
+19. Într-un sistem dezordinea scade dacă:
+I. În sistem au loc procese ireversibile
+II. Sistemul cedează căldură spre exterior
+C
+
+20. În scintigrafie factorul fizic utilizat este:
+I. Radiaţia X
+II. Radiaţia γ
+C
+
+21. Unitatea de măsură a dozei biologice poate fi:
+I. Sievert (Sv)
+II. rem
+A
+
+22. Potențialul de repaus de la nivelul membranei celulare depinde de:
+I. Permeabilitatea membranei pentru speciile ionice
+II. Concentrațiile ionilor pe ambele fețe ale membranei plasmatice
+A
+
+23. Tomografia prin emisie de pozitroni presupune:
+I. Injectarea în corpul pacientului a unui trasor metabolic activ
+II. Expunerea pacientului la un câmp magnetic uniform şi constant
+B
+
+24. Tomografia prin emisie de pozitroni (PET):
+I. Se bazează pe înregistrarea radiației infraroșii emise de corpul uman
+II. Utilizează izotopi radioactivi care produc prin dezintegrare protoni
+D
+
+25. Sângele este:
+I. Soluție pentru cristaloizi
+II. Suspensie pentru elementele figurate
+A
+
+26. Tehnicile imagistice pot furniza informații:
+I. Anatomice (topografice)
+II. Funcționale
+A
+
+27. Pentru tratamentul prin fototerapie al icterului post-natal, se pot folosi:
+I. Lămpi cu lumina albastră intensă
+II. Lumina naturală a soarelui
+A
+
+28. Undele sonore:
+I. Sunt unde mecanice longitudinale
+II. Se pot propaga în vid
+B
+
+29. Prin hemodializă pot fi eliminate următoarele componente:
+I. Uree, creatinină
+II. Proteine, celule
+B
+
+30. Bistratul lipidic de la nivelul membranei celulare:
+I. Se comportă din punct de vedere electric ca un conductor
+II. Are suprafaţa cu mult mai mică decât suprafaţa canalelor ionice aflate în membrană
+D
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
