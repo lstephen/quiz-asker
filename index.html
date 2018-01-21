@@ -283,8 +283,6 @@ function nextQuestion() {
     qs = load_qs();
   }
 
-  console.log(qs.length);
-
   const idx = Math.floor(Math.random()*qs.length);
   const chosen_q = qs[idx];
   qs.splice(idx, 1);
