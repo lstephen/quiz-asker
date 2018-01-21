@@ -268,7 +268,7 @@ function load_qs() {
     var split = q.split(new RegExp('\n', 'm'));
 
     const answer = split.pop();
-    const question = split.join('<br/>');
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
 
     return [question, answer];
   }).filter(function(q) {
