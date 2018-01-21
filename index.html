@@ -263,19 +263,31 @@ B
 const q_regex = new RegExp('\n\n+', 'm');
 const q_text = questions_raw.trim().split(q_regex);
 
-const qs = q_text.map(function(q) {
-  var split = q.split(new RegExp('\n', 'm'));
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
 
-  const answer = split.pop();
-  const question = split.join('<br/>');
+    const answer = split.pop();
+    const question = split.join('<br/>');
 
-  return [question, answer];
-}).filter(function(q) {
-  return q[0] != "";
-});
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
 
 function nextQuestion() {
-  const chosen_q = qs[Math.floor(Math.random()*qs.length)];
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  console.log(qs.length);
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
 
   $('#question').html(chosen_q[0]);
   $('#answer').text(chosen_q[1]).css('visibility','hidden');
@@ -295,7 +307,7 @@ $(document).ready(function() {
     </script>
 
     <div class="container-fluid" style="margin-top:1em;">
-      <div class="row align-items-center">
+      <div class="row">
         <div class="col-md">&nbsp;</div>
         <div class="col-md-8">
           <div class="card">
