@@ -1,0 +1,542 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+ 1. Frecvenţa respiraţiei la persoana adultă este: 
+b
+a. 14-16 respiraţii/min; 
+b. 16-18 respiraţii/min;
+c. 18-22 respiraţii/min. 
+2. Concentraţia O2 în aerul inspirat este: 
+a
+a. 21%; 
+b. 15-16% 
+c. 24%.] 
+3. Hipoxia reprezintă: 
+b
+a. scăderea cantităţii de O2 în sânge; 
+b. scăderea cantităţii de O2 în ţesuturi; 
+c. scăderea cantităţii de CO2 în sânge. 
+4. Respiraţia este influenţată de postura persoanei şi este favorizată de: 
+a
+a) Poziţia ortostatică şi şezând; 
+b) Poziţia şezând şi clinostatică; 
+c) Poziţia decubit lateral 
+5. Declanşarea hemoptiziei este precedată de: 
+a
+a) senzaţie de căldură retrosternală, jenă respiratorie; 
+b) senzaţie de vomă; 
+c) vărsătură. 
+6. Eliminarea sângelui provenind din arborele bronşic se defineşte ca: 
+b
+a. hematemeză; 
+b. hemoptizie 
+c. hematurie. 
+7. Aşezaţi în ordine intervenţiile asistentei medicale pentru administrarea O2: 
+a, d, e, b, c
+a) pregătirea psihică a pacientului; 
+b) introducerea sondei nazale şi fixarea ei; 
+c) fixarea debitului de O2 /min; 
+d) dezobstruarea căilor respiratorii; 
+e) măsurarea lungimii sondei care se introduce. 
+8. Factorii biologici care influenţează pulsul sunt: 
+a
+a) vârsta, alimentaţia, înălţimea corporală; 
+b) emoţiile şi plânsul; 
+c) vârsta. 
+9. Pulsul dicrot se manifestă astfel: 
+b
+a) pauzele dintre pulsaţii sunt inegale; 
+b) se percep două pulsaţii, una puternică, alta slabă, urmată de pauză; 
+c)pulsaţii abia perceptibile. 
+10. Pentru măsurarea corectă a tensiunii arteriale asistenta medicală are în vedere: 
+c
+a) pregătirea psihică a pacientului; 
+b) liniştirea pacientului, folosirea aceluiaşi aparat; 
+c) informarea pacientului, plasarea manometrului la nivelul arterei la care se face măsurarea, folosirea aceluiaşi aparat. 
+11. Tensiunea arterială la o persoană adultă este: 
+a
+a) 115-140/70-90 mm Hg; 
+b) 150/80 mm Hg; 
+c) 90-115/50-80 mm Hg. 
+12. Climatul determină modificări ale alimentaţiei. Astfel: 
+b
+a) iarna - alimente bogate nutritiv şi aport mare de lichide; 
+b) vara - alimente uşor digerabile şi aport mare de lichide; 
+c) nu sunt modificări ale alimentaţiei în cele două anotimpuri. 
+13. Nevoile organismului/kg corp/24 h în condiţii normale, de substanţe organice din alimente, sunt: 
+a
+a) glucide 4-6 g, proteine 1-1,5 g, lipide 1-2 g; 
+b) glucide 4-6 g, proteine 4-6 g, lipide 1-2 g; 
+c) glucide 1-1,5 g, proteine 4-6 g, lipide 1-2 g. 
+14. Pentru calcularea nevoilor calorice ale organismului asistenta medicală ia în consideraţie: 
+c
+a) vârsta pacientului; 
+b) greutatea corporală; 
+c) activitatea desfăşurată de individ, vârsta şi greutatea corporală. 
+15. Vitaminele au rol în organism: 
+a
+a. biocatalizatori; 
+b. materie primă de formare a hormonilor şi anticorpilor; 
+c. sursă de energie. 
+16. Alimentaţia raţională cuprinde următoarele grupe de alimente: 
+a
+a) carne, lapte, legume, fructe, cereale, ouă; 
+b) lapte, proteine, vegetale, ouă; 
+c) lapte, proteine, fructe şi cereale. 
+17. Glucidele conţinute în alimente reprezintă: 
+c
+a) elementele organice cu cea mai mare valoare calorică; 
+b) elementele organice cu rol în formarea anticorpilor; 
+c) elementele organice care sunt metabolizate de organism cu cel mai redus consum de energie. 
+18. În stările de hipertermie nevoile energetice ale organismului cresc cu:
+b
+ a) 20-30%; 
+b) 13% pentru fiecare grad de temperatură peste 37°C; 
+c) 10%. 
+19. Bulionul alimentar pentru alimentarea pacientului prin sondă gastrică trebuie să fie:
+c 
+a) la temperatura corpului, lichid, omogen; 
+b) cu valoare calorică ridicată; 
+c) ambele. 
+20. Alimentaţia artificială prin perfuzie se practică la următoarele categorii de pacienţi cu excepţia: 
+a
+a) inapetenţi; 
+b) cu tulburări de deglutiţie şi intoleranţă digestivă; 
+c) inconştienţi. 
+21. Tulburările de micţiune sunt: 
+c
+a) poliuria, oliguria, disuria; 
+b) anuria, polachiuria, nicturia; 
+c) nicturia, disuria, ischiuria, polachiuria, incontinenţa urinară. 
+22. Incontinenţa urinară reprezintă: 
+b
+a. incapacitatea vezicii urinare de a-şi goli conţinutul; 
+b. eliminare inconştientă, involuntară a urinei; 
+c. micţiuni involuntare nocturne. 
+23. Globul vezical este o formaţiune tumorală: 
+b
+a. suprapubiană, dură, mobilă la palparea bimanuală; 
+b. ovală, elastică, localizată în hipogastru; 
+c. suprapubiană, intens dureroasă la palpare, aderentă de peretele abdominal interior. 
+24. Hipostenuria reprezintă: 
+b
+a. urină cu sânge; 
+b. urină cu densitate scăzută sub 1010; 
+c. urină în cantitate redusă/24 h. 
+25. Aşezaţi pe trei coloane următoarele manifestări de dependenţă ale eliminării urinare: 
+a = 1, 5, 9
+b = 3, 4, 7, 11, 12
+c = 2, 6, 8, 10
+a) tulburări cantitative, 
+b) tulburări de emisie urinară, 
+c) tulburări calitative)
+
+1. oligurie 5. anurie 9. poliurie 2. hematurie 6. albuminurie 10. glicozurie 3. polakiurie 7. disurie 11. ischiurie 4. nicturie 8. izostenurie 12. retenţie de urină. 
+26. Perspiraţia reprezintă o pierdere: 
+c
+ a) de apă şi căldură la nivelul pielii; 
+b) de apă la nivelul pielii; 
+c) de apă prin expiraţie şi la nivelul pielii. 
+27. Pentru urmărirea bilanţului lichidian asistenta măsoară zilnic: 
+c
+a) eliminările prin urină, scaun, vărsături, drenaje; 
+b) temperatura corporală; 
+c) ambele. 
+28. Vărsăturile alimentare cu conţinut vechi sunt manifestări de dependenţă întâlnite în: 
+a
+a) stenoza pilorică; 
+b) la gravide; 
+c) în colecistite. 
+29. Vomica reprezintă: 
+b
+a) vărsătură cu conţinut alimentar; 
+b) eliminarea unor colecţii de puroi sau exsudat din căile respiratorii; 
+c) vărsătură fecaloidă. 
+30. Hemoragiile menstruale prelungite se numesc: 
+a
+a) menoragii; 
+b) oligomenoree; 
+c) hipermenoree. 
+31. Persoana sănătoasă e capabilă: 
+a, b
+a) să execute mişcări de abductie, adducţie, flexie, extensie; 
+b) să ia poziţie ortostatică, clinostatică, şezând; 
+c) prezintă hipertrofie musculară. 
+32. Manifestările de dependenţă ale imobilităţii sunt: 
+a
+a) anchiloza, crampa, atrofia musculară; 
+b) mişcări necoordonate; 
+c) tremurături. 
+33. Consecinţele imobilizării îndelungate la pat pot fi: 
+b
+a) spasmele musculare; 
+b) atrofia musculară, escarele; 
+c) contracturile musculare. 
+34. Crampele musculare se caracterizează prin: 
+b
+a) contracţie involuntară permanentă a muşchiului; 
+b) contracţie spasmodică involuntară şi dureroasă a muşchiului; 
+c) dificultate de deplasare. 
+35. Mobilizarea după o perioadă lungă de imobilizare depinde de: 
+a
+a) natura bolii şi starea pacientului; 
+b) dorinţa pacientului; 
+c) condiţiile de mediu. 
+36. Obiectivele urmărite în cazul mobilizării pacientului grav sunt: 
+a, b, c
+a) stimularea circulaţiei sanguine, favorizarea eliminărilor, starea de bine a pacientului;
+b) stimularea metabolismului; 
+c)stimularea respiraţiei. 
+37. Pacientul grav îşi petrece tot timpul în pat. De aceea patul trebuie să aibă nişte calităţi care să asigure confortul: 
+a, c
+a) permite pacientului să se mişte în voie; 
+b).prezintă o somieră rigidă; 
+c) este uşor de manipulat şi curăţat. 
+38. Schimbarea lenjeriei de pat şi de corp la pacientul grav permite asistentei medicale: 
+b, c
+a) să comunice cu pacientul, să observe tegumentele; 
+b) să asigure condiţii igienice, comunicare şi observare; 
+c) să prevină complicaţiile. 
+39. Nevoia de somn la persoana adultă sănătoasă este de: 
+a
+a) 7-9 h/24 h; 
+b) 12-14 h/24 h; 
+c)6-8 h/24 h. 
+40. Insomnia poate fi combătută prin: 
+b, c
+a) administrarea medicaţiei hipnotice; 
+b) stabilirea unui orar de somn-odihnă; 
+c) evitarea consumului de cafea, alcool, tutun, înainte de culcare. 
+41. Somnolenţa se caracterizează astfel: 
+a
+a) pacientul aţipeşte, aude cuvintele rostite tare, fără un stimul adoarme din nou; 
+b) pacientul doarme profund, este trezit numai de stimuli foarte puternici; 
+c) pacientul răspunde cu greutate la întrebări. 
+42. Pentru evaluarea reală a temperaturii corpului, termometrul va fi menţinut în axilă: 
+c
+a) minimum 2 min; 
+b) maximum 6 min; 
+c) 10 min. 
+43. Prin măsurarea temperaturii în cavităţile închise valorile ei pot creşte cu: 
+c
+a) 0,8-1 °C; 
+b) 0,5-0,8°C; 
+c) 0,3-0,5°C. 
+44. Valoarea normală a temperaturii corporale măsurată în cavitatea bucală este: 
+b
+a) 37,4-37,7°C; 
+b) 36,4-37,4°C; 
+c) 36-38°C. 
+45. Subfebrilitatea reprezintă: 
+b
+a) scăderea temperaturii corporale sub 36°C; 
+b) menţinerea temperaturii între 37 şi 38°C; 
+c) menţinerea temperaturii între 38 şi 39°C. 
+46. Starea de hipotermie este determinată de: 
+a
+a) pierderea excesivă de căldură; 
+b) creşterea arderilor din organism; 
+c) intensificarea metabolismului. 
+47. Pacientul cu hipertermie prezintă: 
+b
+a) tegumente palide; 
+b) frisoane, piele caldă, roşie; 
+c) ambele. 
+48. Echilibrul dintre termogeneză şi termoliză - homeotermia se realizează prin mecanisme fizice: 
+a, b
+a) evaporarea, radiaţia, conducţia, convecţia; 
+b) vasodilataţia, vasoconstricţia; 
+c) reducerea proceselor metabolice din organism. 
+49. Factorii biologici care influenţează satisfacerea nevoii de a se îmbrăca şi dezbrăca sunt:
+c 
+a) clima, emoţiile, cultura, credinţa; 
+b) vârsta, activitatea, cultura; 
+c) vârsta, activitatea, talia, statura. 
+50. Funcţiile pielii sunt: 
+c
+a) de protecţie şi termoreglare, de depozit, de excreţie; 
+b) de absorbţie, de respiraţie; 
+c) toate.  
+51. Scopul toaletei generale a pacientului imobilizat la pat este: 
+c
+a) înviorarea circulaţiei cutanate, îndepărtarea secreţiilor de pe piele; 
+b) crearea stării de confort; 
+c)ambele. 
+52. Alterarea integrităţii pielii şi mucoaselor se manifestă prin: 
+a
+a) escoriaţii, fisuri, vezicule, ulceraţii, escare; 
+b) alopecie; 
+c) vitiligo. 
+53. Toaleta cavităţii bucale la pacientul inconştient se face aşezând pacientul: 
+a
+a) în poziţie decubit dorsal, capul într-o parte; 
+b) în poziţie decubit lateral; 
+c) în poziţie decubit dorsal. 
+54. Cauzele care favorizează apariţia escarelor de decubit sunt: 
+a, c
+a) igiena defectuoasă, menţinerea pacientului timp îndelungat în aceeaşi poziţie; 
+b) paraliziile; 
+c)cutele lenjeriei de pat sau de corp. 
+55. Evaluarea riscului de producere a escarei se face la internarea pacientului în spital, evaluându-se următoarele criterii: 
+c
+a) starea generală, de nutriţie, psihică, a pacientului; 
+b) mobilizarea, incontinenţa, starea pielii; 
+c) ambele. 
+56. Pentru prevenirea escarelor de decubit, intervenţiile autonome ale asistentei medicale sunt: 
+c
+a) schimbarea poziţiei pacientului la interval de 6-8 ore; 
+b) menţinerea tegumentelor curate şi uscate; 
+c) schimbarea poziţiei pacientului la interval de două ore şi menţinerea tegumentelor curate şi uscate. 
+57. Semnele obiective ale durerii includ următoarele manifestări, cu excepţia: 
+c
+a) pulsul, TA, respiraţia - crescute; 
+b) expresia feţei, poziţia corpului - modificate; 
+c) creşterea cantităţii de urină/24 h. 
+58. Tehnici nefarmacologice de control al durerii pot fi: 
+c
+a) tehnici de relaxare; 
+b) căldura şi frigul; 
+c) ambele. 
+59. Substanţele chimice - neurohormonii - produse de hipofiza intermediară care blochează recepţia durerii se numesc: 
+c
+a) influxuri; 
+b) impulsuri; 
+c) endorfine. 
+60. Reacţiile pacientului la stres se pot manifesta prin: 
+a, c
+a) creşterea valorilor funcţiilor vitale, palme reci, umede; 
+b) creşterea temperaturii corporale; 
+c) modificarea apetitului, insomnie, nervozitate. 
+61. Factorii de mediu (ecologici) influenţează starea de sănătate astfel: 
+a, b
+a) hipoxie, tulburări motorii, senzoriale, moarte, determinate de scăderea cantităţii de O2 din aer; b) tulburări de auz, insomnie, determinate de zgomot; 
+c) anemie, inapetenţă, determinate de alimentele contaminate cu germeni patogeni. 
+62. Comunicarea eficientă la toate nivelurile (senzorial, motor, intelectual şi afectiv) e influenţată de: 
+c
+a) integritatea organelor de simţ, organelor fonaţiei şi aparatul locomotor; 
+b) gradul de inteligenţă al persoanei, anturajul şi cultura persoanei; 
+c) ambele. 
+63. Următoarele manifestări de dependenţă sunt la nivel senzorial, în afară de: 
+b
+a) hipoacuzie, anosmie; 
+b) paralizie;  
+c) cecitate, hipoestezie. 
+64. Afazia este manifestarea comunicării ineficiente care priveşte: 
+c
+a) scăderea masei musculare; 
+b) tulburarea sensibilităţii pielii; 
+c)incapacitatea de a pronunţa cuvintele. 
+65. Amnezia reprezintă: 
+a
+a) tulburarea memoriei; 
+b) tulburare de gândire; 
+c) tulburare de percepţie. 
+66. Hemiplegia se defineşte ca pierderea totală a funcţiei motorii a: 
+b
+a) membrelor inferioare; 
+b) unei jumătăţi laterale a corpului; 
+c) unui membru. 
+67. Coma este o pierdere totală sau parţială a: 
+c
+a) conştientei;
+b) conştientei cu alterarea funcţiilor vegetative; 
+c)a conştientei, mobilităţii, sensibilităţii, cu conservarea celor mai importante funcţii vegetative. 68. Pacientul cu comunicare ineficientă la nivel afectiv se poate manifesta prin: 
+a, b
+a) agresivitate, euforie, egocentrism; 
+b) fobie, apatie; 
+c) disartrie, dislalie. 
+69. Nevoia de a acţiona conform propriilor credinţe şi valori este influenţată de: 
+a, b, c
+a) factorii sociali - cultura, apartenenţa religioasă a individului; 
+b) factorii psihologici - dorinţa de a comunica cu fiinţa divină; 
+c) factorii economici - sărăcia. 
+70. Problemele de dependenţă care apar prin nesatisfacerea nevoii de realizare a individului pot fi:
+a 
+a) devalorizarea, neputinţa, dificultatea de a se realiza; 
+b) culpabilitatea; 
+c) frustrarea. 
+71. Pacientul care-şi satisface autonom nevoia de recreere prezintă următoarele manifestări de independenţă: 
+c
+a) satisfacţie, plăcere; 
+b) destindere, amuzament; 
+c) ambele. 
+72. Intervenţiile asistentei medicale pentru a asigura pacientului cunoştinţe, priceperi, deprinderi, pentru menţinerea sau păstrarea sănătăţii constau în: 
+a, b
+a) explorarea nevoilor de cunoaştere ale pacientului; 
+b) organizarea activităţilor de educaţie; 
+c) admonestarea pacientului pentru că nu posedă cunoştinţe şi deprinderi corecte de păstrare a sănătăţii. 
+73. Termoreglarea reprezintă: 
+a
+a) funcţia organismului care menţine echilibrul între producerea căldurii (termogeneză) şi pierderea căldurii (termoliză); 
+b) funcţia organismului de păstrare a valorilor constante de 36,7°-37°C dimineaţa şi 37°-37,3°C seara; 
+c) rezultatul proceselor oxidative din organism, generatoare de căldură prin dezintegrarea alimentelor energetice. 
+74. Frecvenţa respiraţiei variază în funcţie de: 
+a, b, c
+a) vârstă, sex; 
+b) poziţie, temperatura mediului ambiant; 
+c) starea de veghe sau somn.  
+75. Dispneea Kussmaul este: 
+a, c
+a) o respiraţie în patru timpi, o inspiraţie profundă urmată de o scurtă pauză şi o expiraţie scurtă, zgomotoasă, după care urmează o altă pauză scurtă; 
+b) o respiraţie accelerată; 
+c)o perturbare ritmică şi periodică a respiraţiei. 
+76. Dispneea Cheyne - Stockes este: 
+b, c
+a) o respiraţie accelerată; 
+b) o perturbare ritmică şi periodică a respiraţiei; 
+c)o respiraţie cu amplitudini crescânde până la maximum şi apoi scăzând până la apnee, ce durează 10-20 secunde. 
+77. În obstrucţia căilor respiratorii pacientul prezintă următoarele manifestări de dependenţă, cu excepţia: 
+c
+a) respiraţie dificilă pe nas; 
+b) secreţii nazale abundente; 
+c) respiraţie ritmică. 
+78. Pulsul este influenţat de următorii factori biologici, cu excepţia: 
+b
+a) vârsta; 
+b) emoţiile; 
+c)înălţimea corporală. 
+79. Factorii care determină tensiunea arterială sunt: 
+a, b, c
+a) debitul cardiac; 
+b) forţa de contracţie a inimii; 
+c) elasticitatea şi calibrul vaselor. 
+80. Factorii biologici care influenţează TA sunt următorii, cu excepţia: 
+c
+a) vârsta; 
+b) activitatea; 
+c) climatul. 
+81. Valoarea normală a TA la adult este: 
+c
+a) 100-120 max; 60-75 mm Hg min; 
+b) peste 150 max; peste 90 mm Hg min; 
+c) 115-140 max; 75-90 mm Hg min. 
+82. Următoarele manifestări de dependenţă reprezintă tulburări de emisie urinară, cu excepţia: 
+c
+a) polakiuria;
+b) disuria; 
+c) hematuria. 
+83. Izostenuria reprezintă: 
+c 
+a) densitatea crescută a urinei (urina concentrată); 
+b) densitate mică a urinei (urină diluată); 
+c)urină cu densitate mică ce se menţine în permanenţă la aceleaşi valori, indiferent de regimul alimentar. 
+84. Ischiuria reprezintă: 
+a
+a) incapacitatea vezicii urinare de a-şi elimina conţinutul; 
+b) eliminarea urinei cu durere şi cu mare greutate; 
+c)senzaţie de micţiune frecventă. 
+85. Deformările coloanei vertebrale se pot manifesta astfel: 
+a 
+a) cifoză, lordoză, scolioză 
+b) lordoză, genu varum 
+c) cifoză, lordoză. 
+86. Obiectivele asistentei medicale în îngrijirea pacientului care expectorează urmăresc: 
+a, b, c
+a) pacientul să nu devină sursă de infecţie nosocomială 
+b) pacientul să aibă căile respiratorii permeabile 
+c) pacientul să beneficieze de microclimat optim. 
+87. Intervenţiile asistentei medicale în îngrijirea pacientului cu stare depresivă constau în: 
+a, b
+a) readucerea persoanei la timpul prezent  
+b) sublinierea necesităţii îngrijirilor personale 
+c) comunicarea tuturor evenimentelor petrecute în familie. 
+88. Pacientul cu risc de accident fizic cauzat de confuzie necesită: 
+b, c
+a) imobilizare totală 
+b) supravegherea schimbărilor de comportament 
+c) asigurarea satisfacerii nevoilor alimentare şi de igienă. 
+89. Mijloacele de siguranţă utilizate pentru prevenirea accidentelor în cazul pacientului cu deficienţe senzoro-motorii sunt: 
+a, b, c
+a. baston, cârje, proteze, cadru de mers 
+b. clopoţel de apel 
+c. pardoseală uscată, luminozitate adecvată. 
+90. Pacientul care satisface nevoia de recreere prezintă ca manifestări de independenţă: 
+a, c
+a) destindere, satisfacţie 
+b) plictiseală 
+c) plăcere, amuzament.
+`
+
+const q_regex = new RegExp('^[0-9]+\. ', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split[1];
+    split.splice(1, 1);
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
