@@ -1,0 +1,860 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+
+1. Respiraţia este un proces format din următoarele etape: 
+a) inspiraţie şi expiraţie; 
+b) ventilaţie, difuziunea gazelor, etapa circulatorie, etapa tisulară; 
+c) etapa pulmonară şi etapa tisulară. 
+
+2. Ventilaţia este influenţată de: 
+a) permeabilitatea căilor respiratorii şi concentraţia oxigenului în aerul respirat; 
+b) funcţionalitatea centrilor respiratorii şi expansiunea cutiei toracice; 
+c) alimentaţie şi efort fizic.
+
+3. Etapa circulatorie a respiraţiei depinde de: 
+a) numărul şi calitatea hematiilor din sânge; 
+b) debitul cardiac şi permeabilitatea capilară; 
+c) viteza cu care circulă sângele arterial. 
+
+4. Actul respirator este reglat prin: 
+a) SNC; 
+b) sistemul neurovegetativ;
+ c) sistemul nervos şi prin stimulare chimică. 
+
+5. Componenta voluntară a respiraţiei este reglată la nivelul: 
+a) centrului respirator bulbar; 
+b) scoarţei cerebrale; 
+c) centrului pneumotaxic pontin. 
+
+6. Valorile normale ale ritmului respirator sunt cuprinse între: 
+a) 16-20 r/min; 
+b) 12-14 r/min; 
+c) 23-25 r/min. 
+
+7. Termenul de apnee înseamnă: 
+a) oprirea respiraţiei; 
+b) respiraţie normală; 
+c) respiraţie modificată. 
+
+8. Dispneea este: 
+a) oprirea respiraţiei; 
+b) respiraţie normală; 
+c) respiraţie dificilă. 
+
+9. Alterarea (modificarea) vocii se manifestă cu: 
+a) afonie, disfonie; b) apnee; 
+c) modificarea amplitudinii respiratorii. 
+
+10. În unele afecţiuni ale aparatului respirator sputa poate avea un anumit caracter ce ajută la stabilirea diagnosticului medical. Astfel, sputa perlată este specifică pacientului cu: 
+a) tuberculoză pulmonară; 
+b) cancer pulmonar; 
+c) astm bronşic.  
+
+11. Mijlocul cel mai eficient prin care se poate aprecia că un pacient are nevoie de O2 este: 
+a) observarea culorii tegumentelor; 
+b) notarea modificărilor apărute în frecvenţa şi amplitudinea respiraţiei; 
+c) determinarea presiunii parţiale a O2 şi CO2 în sânge. 
+
+12. Respiraţia Cheyne-Stockes este caracterizată prin: 
+a) perioade de respiraţii din ce în ce mai frecvente, după care frecvenţa se reduce, urmează apnee; ciclul se reia; 
+b) respiraţie foarte slabă;
+c) perioade de respiraţii rapide, întrerupte de perioade de apnee. 
+13. Respiraţia Kussmaul înseamnă: 
+a)  respiraţie de tip superficial; 
+b)  respiraţie modificată întâlnită în stările febrile; 
+c)  inspiraţie prelungită urmată de expiraţia forţată şi apnee. 
+14. Ralurile reprezintă: 
+a)  zgomote supraadăugate, patologice, percepute în timpul ascultaţiei; 
+b)  secreţii pe căile respiratorii superioare; 
+c)  murmurul vezicular. 
+15. Ortopneea se defineşte ca o: 
+a)  expectoraţie seroasă; 
+b)  respiraţie în poziţie verticală a corpului; 
+c)  respiraţie în poziţie orizontală a corpului. 
+16. Atelectazia înseamnă: 
+a)  o metodă de investigaţie a plămânului; 
+b)  o modificare a respiraţiei; 
+c)  pierderea expansiunii pulmonare prin colabarea căilor aeriene intrapulmonare. 
+17. Capacitatea vitală se referă la: 
+a)  amplitudinea respiratorie; 
+b)  cantitatea maximă de aer ce poate fi expirată din plămâni după o inspiraţie forţată; 
+c)  aerul rămas în plămâni în urma expiraţiei forţate. 
+18. Intre MD ale dispneei întâlnim: 
+a)  ortopneea; 
+b)  situaţia de criză; 
+c)  hiperventilaţia; 
+d)  tusea; 
+e)  cianoza; f) paliditatea tegumentelor. 
+19. Drenajul postural înseamnă: 
+a)  eliminarea secreţiilor bronşice prin tuse; 
+b)  utilizarea gravitaţiei pentru drenarea secreţiilor de la nivel pulmonar; 
+c)  o incizie la care se aplică un tub de dren. 
+20. In cursul observării unui pacient se descoperă că prezintă „torace în butoi". Acesta poate fi: 
+a)  normal; 
+b)  rezultat al măririi ficatului sau inimii; 
+c)  rezultat al obstrucţiei prelungite şi generalizate a căilor respiratorii. 3 
+21. Pulsul reprezintă: 
+a)  presiunea sângelui în vase; 
+b)  contracţiile inimii; 
+c)  unda vibratoare tradusă printr-o mişcare ritmică a arterelor, sincronă cu sistola ventriculară. 
+22. Valorile normale ale pulsului la persoana adultă sunt cuprinse între: 
+a)  50-70 bătăi/minut; 
+b)  70-90 bătăi/minut; 
+c)  60-80 bătăi/minut. 
+23. Celeritatea este o caracteristică a pulsului, însemnând: 
+a)  rapiditate, viteza unei pulsaţii; 
+b)  ritmicitate; 
+c)  tărie. 
+24. Măsurarea pulsului se poate efectua: 
+a)  numai pe artera carotidă; 
+b)  pe orice arteră accesibilă palpării, care poate fi comprimată pe un plan osos; 
+c)  numai pe o venă vizibilă. 
+25. Pentru ca măsurarea pulsului să ducă la valori corecte, pacientul se va afla: 
+a)  în decubit dorsal; 
+b)  în repaus fizic şi psihic timp de 5-10 minute; 
+c)  în cadrul intim, alături de familie. 
+26. Pulsul tahicardie înseamnă: 
+a)  puls rar; 
+b)  puls rapid; 
+c)  puls superficial. 
+27. Valoarea pulsului variază odată cu: 
+a)  vârsta; 
+b)  valoarea tensiunii arteriale; 
+c)  starea emoţională. 
+28. Când intervalele între pulsaţiile percepute la artera radială sunt inegale, pulsul se defineşte a fi: 
+a)  filiform; 
+b)  neregulat; 
+c)  slab. 
+29. Valoarea maximă şi minimă a tensiunii arteriale se referă la: 
+a)  parametrii în afara cărora viaţa pacientului este în pericol; 
+b)  presiunea sângelui arterial în timpul sistolei, respectiv diastolei cardiace; 
+c)  o convenţie care stabileşte limitele normale ale presiunii sângelui. 
+30. Tensiunea arterială este determinată de: 
+a)  forţa de contracţie a inimii şi elasticitatea pereţilor arteriali; 
+b)  alimentaţie şi factorii de risc; 
+c)  vârstă şi sex. 
+31. Presiunea arterială se modifică în funcţie de: 
+a)  valoarea glicemiei; 
+b)  rezistenţa vasculară periferică; 
+c)  valoarea temperaturii corporale. 4 
+32. Tensiunea arterială diferenţială este: 
+a)  diferenţa dintre valorile tensiunii arteriale sistolice şi diastolic 
+b)  diferenţa de tensiune individuală; 
+c)  diferenţa tensională în cadrul ritmului circadian. 
+33. Pentru a obţine o valoare corectă a tensiunii arteriale, aceasta va determinată: 
+a)  înainte de mese; 
+b)  dimineaţa după somn, la sculare; 
+c)  în repaus. 
+34. În îngrijirile bolnavului cu afecţiuni digestive, apar în cadrul dimensiunii bio-fiziologice următorii termeni: 
+a)  anorexie = refuzul mâncării; 
+b)  malnutriţie = digestie deficitară din mai multe puncte de vedere 
+c)  malabsorbţie = sindrom în cadrul unor boli ce se manifestă cu diaree şi absorbţie intestinală deficitară; 
+d)  bulimie = ingestie a unor cantităţi excesive de alimente. 
+35. Termenul medical pentru scăderea apetitului este: 
+a)  caşexie; 
+b)  anorexie; 
+c)  inapetenţă. 
+36. Polifagia reprezintă: 
+a)  nevoia exagerată de a mânca fără senzaţie de saţietate; 
+b)  senzaţia exagerată de foame cu ingestie mică de alimente; 
+c)  lipsa senzaţiei de foame. 
+37. Arsura retrosternală care uneori înlocuieşte durerea, are caracter ritmic, periodic (cauza fiind hiperaciditate
+a) , se numeşte: 
+a)  meteorism; 
+b)  regurcitaţie; 
+c)  eructaţie; 
+d)  pirozis. 
+38. Care din următorii termeni sunt factori psihologici ce pot influenţa satisfacerea nevoii de a bea şi a mânca: 
+a)  climatul; 
+b)  anxietatea; 
+c)  religia. 
+39. Asistenta medicală calculează necesarul de calorii/24 ore în funcţie de: 
+a)  activitatea şi vârsta individului; 
+b)  vârstă, în exclusivitate; 
+c)  perioadele de activitate sau repaus. 
+40. Insuficienţa aportului alimentar şi lichidian, determină tulburări: 
+a)  la nivelul funcţionării tuturor aparatelor organismului; 
+b)  la nivelul funcţionării tuturor sistemelor organismului; 
+c)  numai la nivelul funcţionării aparatului cardio-vascular. 
+41. În alimentaţia neadecvată în deficit, ca problemă de dependenţă, care din următoarele formulări sunt manifestări de dependenţă: 
+a)  disfagia, anorexia; 
+b)  consum redus de lichide şi săruri minerale; 
+c)  polifagia. 5 
+42. În îngrijirea pacientului cu alimentaţie neadecvată în surplus, asistenta medicală îşi propune următoarele obiective: 
+a)  pacientul să desfăşoare o activitate fizică crescută; 
+b)  pacientul să fie echilibrat psihic; 
+c)  pacientul să aibă o stare de bine, fără vărsături şi greţuri. 
+43. Care din următoarele formulări pot fi intervenţii ale asistentei medicale în susţinerea obiectivului ca pacientul să fie echilibrat hidroelectrolitic: 
+a)  efectuarea bilanţului lichidelor ingerate şi eliminate; 
+b)  conştientizarea pacientului asupra importanţei regimului alimentar; 
+c)  asigurarea unui climat cald, confortabil. 
+44. Alimentaţia neadecvată - ca problemă de dependenţă - se poate manifesta prin: 
+a)  deficit; 
+b)  surplus; 
+c)  greţuri, vărsături; 
+d)  disfagie. 
+45. Nevoile calorice ale unei persoane cu activitate uşoară sunt de: 
+a)  35-40 cal/kg corp/24 h; 
+b)  40-4-5 cal/kg corp/24 h; 
+c)  25 cal/kg corp/24 h; 
+d)  45-60 cal/kg corp/24 h. 
+46. Diureza reprezintă: 
+a)  eliminarea din organism a substanţelor inutile provenite din metabolism; 
+b)  cantitatea de urină eliminată din organism în 24 h; 
+c)  actul prin care urina acumulată în vezică este eliminată sub forma emisiunilor urinare. 
+47. Care din următoarele formulări sunt corecte, cu referire la caracterele urinei, când este prezentă o ingestie mare de lichide: 
+a)  densitate crescută 1020-1040, culoare deschisă, poliurie; 
+b)  densitate scăzută 1001-1002, culoare deschisă, oligurie; 
+c)  densitate normală 1015-1020, culoare închisă, anurie; 
+d)  densitate scăzută 1001-1002, culoare deschisă, poliurie. 
+48. Evaluarea eliminării scaunelor ar trebui să includă observaţii asupra: 
+a)  obiceiurilor alimentare; 
+b)  regularităţii scaunelor; 
+c)  uşurinţei defecării; 
+d)  perioadei de zi sau noapte; 
+e)  culorii, mirosului, consistenţei. 
+49. Care din enunţurile de mai jos nu se referă la cantitatea de urină: 
+a)  polakiurie; 
+b)  oligurie; 
+c)  disurie; 
+d)  poliurie; 
+e)  anurie. 
+50. Tratamentul oliguriei include: 
+a)  asigurarea unei hidratări adecvate; 
+b)  măsurarea densităţii urinare; 
+c)  folosirea de soluţii intravenoase; 
+d)  măsuri de prevenire a deshidratării. 6 
+51. Excreţia deşeurilor din organism se efectuează: 
+a)  prin piele; 
+b)  prin aparatul renal; 
+c)  prin aparatul genital feminin; 
+d)  prin aparatul cardiovascular; 
+e)  prin aparatul respirator. 
+52. Menţinerea constantă a compoziţiei mediului intern se realizează prin: 
+a)  diureză; 
+b)  hematemeză; 
+c)  procesul de homeostazie; 
+d)  melenă. 
+53. Printre factorii biologici care influenţează satisfacerea nevoii de a elimina se numără: 
+a)  vârsta; 
+b)  programul de eliminare intestinală; 
+c)  educaţia şi cultura. 
+54. Sursele de dificultate în cazul nesatisfacerii nevoii de a elimina, pot fi: 
+a)  lipsa de control a sfmcterelor; 
+b)  spasmele vezicale; 
+c)  poluarea apei; 
+d)  alimentele alterate. 
+55. Aspectul „ca zeama de orez" a scaunului diareic, se poate întâlni în: 
+a)  gastrita cronică; 
+b)  intoxicaţii; 
+c)  ulcerul gastro-intestinal; 
+d)  apendicită acută. 
+56. Scaunul în constipaţie poate lua aspectul: 
+a)  unor bile dure de mărimea măslinelor; 
+b)  unor bile conglomerate; 
+c)  de zeamă de pepene. 
+57. Pentru ca un pacient cu constipaţie să aibă un tranzit intestinal în limite fiziologice, asistenta medicală intervine: 
+a)  determinând pacientul să efectueze exerciţii fizice cu regularitate; 
+b)  administrând laxative, la indicaţia medicului; 
+c)  efectuând la nevoie o clismă evacuatoare simplă. 
+58. Hemoragia digestivă superioară se exteriorizează prin: 
+a)  hemoptizie şi hematemeza; 
+b)  hematemeza şi melenă; 
+c)  hematurie şi melenă. 
+59. Care din următoarele definiţii caracterizează ileusul: 
+a)  oprirea tranzitului intestinal pentru materii fecale şi gaze; 
+b)  constipaţie, scaun la interval de 6-7 zile; 
+c)  eliminarea frecventă a gazelor intestinale. 7 
+60. Culoarea scaunului în caz de melenă este: 
+a)  roşu deschis; 
+b)  negru ca păcura; 
+c)  maron-verzui. 
+61. Prima menstruaţie se numeşte: 
+a)  menarhă; 
+b)  amenoree; 
+c)  oligomenoree. 
+62. Menţinerea independenţei mişcării corpului şi a bunei posturi este determinată de integritatea: 
+a)  aparatului locomotor; 
+b)  sistemului nervos; 
+c)  aparatului vestibular. 
+63. Tonusul muscular şi mişcările fine sunt reglate de către: 
+a)  sistemul nervos; 
+b)  aparatul vestibular; 
+c)  aparatul cardiovascular; 
+d)  aparatul digestiv. 
+64. Printre factorii sociologici care influenţează satisfacerea nevoii de a se mişca şi a avea o bună postură, se află şi: 
+a)  vârsta şi dezvoltarea; 
+b)  rolurile sociale; 
+c)  organizarea socială. 
+65. În ortostatism, braţele vor fi: 
+a)  sprijinite; 
+b)  pe lângă corp; 
+c)  în balans continuu. 
+66. Care din următoarele mişcări sunt de flexie, extensie: 
+a)  mişcări de apropiere sau îndepărtate a două segmente apropiate; 
+b)  mişcări de îndepărtare faţă de axul median al corpului; 
+c)  mişcări de apropiere faţă de axul median al corpului. 
+67. Mişcarea realizată în jurul axului care trece prin lungul segmetului care se deplasează, se numeşte: 
+a)  mişcare de pronaţie; 
+b)  mişcare de rotaţie; 
+c)  mişcare de supinaţie; 
+d)  mişcare de circumducţie. 
+68. Pentru menţinerea independenţei mişcării, intervenţiile asistentei medicale pot fi: 
+a)  stabilirea împreună cu pacientul a nevoii de exerciţii fizice; 
+b)  învăţarea pacientului să folosească tehnici de destindere, de relaxare; 
+c)  schimbarea poziţiei pacientului la fiecare 3 ore. 
+69. Anchiloza este tradusă prin: 
+a)  diminuarea sau imposibilitatea mişcării unei articulaţii; 
+b)  ulceraţie a pielii; 
+c)  scăderea forţei musculare. 
+70. Atrofia musculară este: 
+a)  mărirea de volum a unui muşchi; 
+b)  scăderea forţei musculare; 
+c)  diminuarea volumului unui muşchi, a contractibilităţii sale. 8 
+71. Ticurile sunt: 
+a)  vorbire precipitată; 
+b)  mişcări convulsive, involuntare ale ochilor, gurii, a unui braţ; 
+c)  contracţii involuntare a mai multor muşchi. 
+72. Pentru pacientul cu mişcări necoordonate, cu boală Parkinson, deficitul senzorial este sursă de dificultate: 
+a)  de ordin fizic; 
+b)  de ordin psihologic; 
+c)  de ordin sociologic. 
+73. Prin akinezie se înţelege: 
+a)  mers propulsiv; 
+b)  faţă rigidă; 
+c)  lipsă sau diminuare a mişcărilor normale; 
+d)  tulburări de coordonare. 
+74. Somnul se traduce prin: 
+a)  formă particulară de odihnă; 
+b)  absenţa stării de veghe; 
+c)  diminuarea valorilor tensiunii arteriale şi a respiraţiei; 
+d)  diminuarea metabolismului bazai. 
+75. Câte tipuri de somn se cunosc şi care sunt ele: 
+a)  două = somnul lent şi somnul rapid; 
+b)  patru = somnul lent, paradoxal, clasic, ortodox; 
+c)  trei = somnul paradoxal, clasic. 
+76. Nevoia de a dormi şi a se odihni variază în funcţie de: 
+a)  vârstă; 
+b)  activitate şi deprinderi legate de somn; 
+c)  starea de anxietate; 
+d)  sex; 
+e)  capacitatea de a se destinde. 
+77. Programul de activitate şi locul de odihnă sunt factori ce influenţează satisfacerea nevoii de somn: 
+a)  biologici; 
+b)  psihologici; 
+c)  sociologici. 
+78. Insomnia se defineşte ca o dificultate: 
+a)  de a bea; 
+b)  de a se mişca şi a lua poziţii comode; 
+c)  de a dormi sau de a se odihni dormind. 
+79. Pavorul nocturn, ca manifestare de dependenţă se caracterizează prin: 
+a)  stare de spaimă intensă, în timpul somnului, mai frecventă la copii; 
+b)  micţiuni de urină necontrolată; 
+c)  oboseală marcată; 
+d)  diminuarea puterii de concentraţie. 
+80. Starea de letargie, ca manifestare de dependenţă în hipersomnie înseamnă: 
+a)  comportament verbal şi non verbal lent, greoi; 
+b)  hipersomnie continuă, mai profundă, cu funcţii vitale diminuate; 
+c)  diaforeză, dureri menstruale, stare de disconfort. 9 
+81. Dependenţa în satisfacerea nevoii de a dormi şi a se odihni, la pacientul cu oboseală, se manifestă prin: 
+a)  tegumente palide, transpiraţii reci; 
+b)  astenie; 
+c)  puls rar lent, slab bătut; 
+d)  faţă palidă şi ochi încercănaţi. 
+82. Nesatisfacerea nevoii manifestată prin oboseală, determină MD a celorlalte nevoi fundamentale, de exemplu: 
+a)  dezinteres pentru măsurile de igienă; 
+b)  vulnerabilitate în faţa pericolelor; 
+c)  comunicare ineficace la nivelul afectiv şi intelectual; 
+d)  narcolepsie. 
+83. Coşmarurile ce apar ca manifestare de dependenţă la pacientul cu insomnie, sunt: 
+a)  vise penibile cu trezire bruscă din somn şi adormire cu greutate; 
+b)  aţipiri în timpul zilei; 
+c)  perioade de somn perturbant; 
+d)  stări de iritabilitate. 
+84. Purtarea de îmbrăcăminte contribuie la: 
+a)  pierderea imaginii de sine; 
+b)  expresia corporală; 
+c)  comunicare. 
+85. Factorii biologici care influenţează satisfacerea nevoii de a se îmbrăca şi dezbrăca, sunt următorii: 
+a)  credinţa; 
+b)  emoţiile; 
+c)  vârsta; 
+d)  activitatea. 
+86. Clima, statutul social şi munca, fac parte din grupul factorilor de influenţă: 
+a)  biologică; 
+b)  psihologică; 
+c)  socio-culturală. 
+87. Capacitatea fizică de îmbrăcare şi dezbrăcare este reprezentată de: 
+a)  mobilitatea articulară; 
+b)  tonusul muscular; 
+c)  maturitatea psiho-motorie. 
+88. Purtarea de obiecte semnificative pune în evidenţă: 
+a)  rangul social; 
+b)  însemnătatea personală; 
+c)  funcţia religioasă; 
+d)  toate enunţurile sunt false. 
+89. Problema de dependenţă în satisfacerea nevoii, este creată de imposibilitatea de a se îmbrăca şi dezbrăca, şi se manifestă prin: 
+a)  dezbrăcare continuă; 
+b)  dezinteres fată de ţinută; 
+c)  refuz de a se îmbrăca şi dezbrăca; 
+d)  dificultate de a se îmbrăca şi dezbrăca; 
+e)  incapacitate de a se îmbrăca şi dezbrăca; f) toate manifestările sunt adevărate. 10 
+90. Factorii psihologici care influenţează satisfacerea nevoii de a se îmbrăca şi dezbrăca sunt: 
+a)  credinţa şi emoţiile; 
+b)  munca, talia, statura; 
+c)  credinţa şi cultura. 
+91. Obstacolele care împiedică mobilitatea membrelor superioare, pot avea ca surse de dificultate: 
+a)  lezarea fizică, slăbirea, sărăcia; 
+b)  insuficienţa cunoştinţelor, stresul, hipotonia musculară; 
+c)  hipertonia musculară, aparatul gipsat, absenţa membrului superior. 
+92. Menţinerea independenţei nevoii se poate realiza prin alegerea îmbrăcămintei corespunzătoare: 
+a)  climei; 
+b)  vârstei; 
+c)  T° mediului; 
+d)  activităţii; 
+e)  calităţii materialelor; f) exigenţei în intimitate. 
+93. La un pacient cu dificultate de a se îmbrăca şi dezbrăca, unul din obiectivele de îngrijire propuse, se referă la posibilitatea de a se îmbrăca şi dezbrăca singur, într-un termen dat. Asistenta medicală intervine în acest scop, prin: 
+a)  identificarea capacităţii şi limitelor fizice ale pacientului; 
+b)  executarea zilnică a exerciţiilor de motricitate; 
+c)  evaluarea gradului de confuzie; 
+d)  explicarea gesturilor ce se cer efectuate. 
+94. Care din următoarele formulări sunt false: 
+a)  din punct de vedere al psihiatrilor, vestimentaţia este un semn de sănătate; 
+b)  îmbrăcămintea bizară, stridentă poate exprima o boală psihică; 
+c)  îmbrăcămintea atestă integritatea individului; 
+d)  îmbrăcămintea protejează intimitatea sexuală; 
+e)  emoţiile nu influenţează satisfacerea nevoii. 
+95. În vederea obţinerii unei stări de bine, indivizii îşi aleg vestimentaţiile în funcţie de: 
+a)  temperatura corpului; 
+b)  talie şi statură; 
+c)  activitate; 
+d)  starea psihică. 
+96. Ca urmare a producerii de căldură în organism, rezultat al proceselor oxidative, are loc: 
+a)  termogeneza; 
+b)  termoliza; 
+c)  a şi b. 
+97. Termoliza, adică pierderea de căldură din organism, se realizează: 
+a)  prin vasoconstricţie, vasodilataţie; 
+b)  prin piele, plămâni, rinichi; 
+c)  numai prin rinichi. 
+98. Factorii biologici care influenţează satisfacerea nevoii de a menţine temperatura corpului în limite normale pot fi şi: 
+a)  anxietatea, emoţiile puternice; 
+b)  alimentaţia, ingestia în special de proteine; 
+c)  vârsta şi sexul. 11 
+99. Asistenta medicală învaţă pacientul, când temperatura mediului ambiant este crescută, pentru menţinerea independenţei în satisfacerea nevoii să: 
+a)  consume lichide şi alimente reci; 
+b)  poarte încălţăminte călduroasă; 
+c)  reducă alimentele cu valoare calorică mare. 
+100. Hipertermia, ca problemă de dependenţă, se manifestă cu: 
+a)  febră ridicată, continuă; 
+b)  piele roşie caldă, umedă; 
+c)  sindrom febril. 
+101. În evoluţia unei febre, se disting 3 perioade: 
+a)  perioada iniţială; 
+b)  perioada de stare; 
+c)  perioada de declin; 
+d)  perioada mixtă, combinativă. 
+102. La un pacient cu hipertermie, asistenta medicală stabileşte ca obiective de îngrijire, următoarele: 
+a)  pacientul să nu prezinte tulburări de vorbire; 
+b)  pacientul să fie echilibrat hidroelectrolitic; 
+c)  pacientul să-şi păstreze integre tegumentele; 
+d)  pacientul să nu fie apatic. 
+103. Piloerecţia se traduce prin: 
+a)  piele cianotică; 
+b)  piele cu aspect „de găină" şi senzaţie de frig; 
+c)  erupţie cu macule, papule, vezicule. 
+104. La pacientul care prezintă hipotermie, se administrează lichide: 
+a)  numai foarte calde; 
+b)  alcoolice; 
+c)  uşor călduţe, în cantităţi mici, la intervale regulate de timp. 
+105. Nou-născutul şi copilul mic, au termoreglarea fragilă din cauza: 
+a)  imaturităţii centrului reglator; 
+b)  hidratării insuficiente; 
+c)  greutăţii necorespunzătoare; 
+d)  temperaturii mediului ambiant. 
+106. In caz de hipertermie, apar probleme, manifestări şi la nivelul celorlalte nevoi fundamentale: 
+a)  dispnee; 
+b)  poliurie; 
+c)  inapetenţă. 
+107. Planul de îngrijire a unui pacient cu hipertermie, va evalua zilnic prin activitatea asistentei medicale: 
+a)  temperatura corporală; 
+b)  aspectul scaunului; 
+c)  aspectul tegumentelor. 
+108. Când temperatura mediului ambiant creşte peste 25°C se produc următoarele fenomene la nivelul organismului: 
+a)  vasoconstricţie periferică; 
+b)  inhibare a activităţilor glandelor sudoripare; 
+c)  vasodilataţie periferică. 12 
+109. La persoanele vârstnice, pierderile de căldură sunt mai mari datorită: 
+a)  reducerii proceselor oxidative; 
+b)  neadaptării organismului; 
+c)  climatului. 
+110. Pentru a-şi îndeplini rolurile cunoscute, pielea trebuie să fie: 
+a)  curată; 
+b)  sănătoasă; 
+c)  îngrijită. 
+111. Factorii biologici care influenţează nevoia de a menţine tegumentele curate sunt: 
+a)  emoţiile şi educaţia; 
+b)  alimentaţia; 
+c)  temperatura corpului. 
+112. Ca manifestare de independenţă, pielea va fi: 
+a)  curată, netedă, catifelată; 
+b)  uşor deshidratată; 
+c)  cu prurit; 
+d)  elastică, pigmentată normal. 
+113. Pot fi manifestări de independenţă şi următoarele: 
+a)  pierderea imaginii de sine; 
+b)  deprinderile igienice satisfăcute; 
+c)  culoarea galbenă a dinţilor. 
+114. Care din următoarele enunţuri pot fi considerate probleme de dependenţă în satisfacerea nevoii: 
+a)  lezarea fizică; 
+b)  carenţele de igienă; 
+c)  alterarea tegumentelor şi fanerelor; 
+d)  lipsa de cunoaştere. 
+115. Lipsa de curăţenie determină o serie de neplăceri nu numai individului dar şi celor din jurul său. Care sunt acestea: 
+a)  sentiment de respingere; 
+b)  halena fetidă; 
+c)  comunicare ineficace la nivel afectiv şi intelectual; 
+d)  dezinteres pentru modul cum arată. 
+116. Între intervenţiile asistentei medicale privind pacientul cu carenţe igienice se găsesc şi următoarele: 
+a)  efectuează toaleta cavităţii bucale la pacienţii comatoşi; 
+b)  alege măsuri pentru prevenirea infecţiilor nasocomiale; 
+c)  ajută pacientul să-şi efectueze toaleta zilnică; 
+d)  efectuează toaleta pe regiuni, la nevoie. 
+117. Murdăria acumulată la nivelul pielii produce: 
+a)  cruste ce pot degenera în ulceraţii; 
+b)  hematoame; 
+c)  hipotrofie musculară; 
+d)  anchiloze. 
+118. Ulceraţiile pielii se caracterizează prin: 
+a)  acnee şi prurit; 
+b)  pierdere de substanţă rezultând dintr-un proces patologic ce acţionează asupra pielii; 
+c)  dilatarea unor vene superficiale. 13 
+119. Surse de dificultate de ordin psihologic care influenţează satisfacerea nevoii sunt: 
+a)  exerciţiile fizice; 
+b)  curentul şi organizarea socială; 
+c)  emoţiile şi educaţia. 
+120. Factorii care influenţează satisfacerea nevoii de a evita pericolele sunt: 
+a)  factorii biologici; 
+b)  factorii psihologici; 
+c)  factorii sociologici; 
+d)  numai a şi b. 121.Mecanismul de apărare este un factor de influenţă: 
+a)  psihologic; 
+b)  biologic; 
+c)  sociologic. 122.Practicarea unor religii este o preocupare ideologică care permite individului să-şi menţină: 
+a)  o bună postură; 
+b)  o securitate psihologică; 
+c)  o securitate sociologică. 
+123. Ca manifestări de independenţă în menţinerea securităţii fizice se întâlnesc: 
+a)  măsuri de prevenire a infecţiilor şi bolilor; 
+b)  măsuri de prevenire a agresiunilor fizice; 
+c)  metode de destindere, de relaxare; 
+d)  măsuri de protecţie socială. 124.Pentru menţinerea unui mediu sănătos, asistenta medicală intervine: 
+a)  educând pacientul pentru evitarea poluării atmosferei cu praf; 
+b)  efectuând imunizările obligatorii; 
+c)  educând pacientul pentru prevenirea unor accidente. 
+
+
+125.  Dezechilibrul ca sursă de dificultate de ordin fizic poate fi reprezentat de: 
+a)  durere; 
+b)  dezechilibru metabolic; 
+c)  dezechilibru electrolitic; 
+d)  poluare; 
+e)  surmenaj. 
+
+
+126.  Când este modificată/alterată nevoia, comunicarea este: 
+a)  eficace la nivel intelectual; 
+b)  ineficace la nivel senzorial; 
+c)  ineficace la nivel senzoro-afectiv şi intelectual. 
+127. Alterarea integrităţii fizice se manifestă prin următoarele semne inflamatorii: 
+a)  durere şi căldură locală; 
+b)  tumefacţie; 
+c)  roşeaţă locală; 
+d)  limitarea mişcărilor segmentului afectat; 
+e)  toate enunţurile sunt adevărate. 
+128. Care din următoarele sunt semne de insecuritate patologică: 
+a)  agitaţia; 
+b)  agresivitatea; 
+c)  frica. 14 
+129. Pacientul să fie echilibrat psihic, este un obiectiv de îngrijire susţinut de următoarele intervenţii ale asistentei medicale: 
+a)  administrează tratamentul medicamentos antiinfecţios; 
+b)  furnizează mijloace de comunicare adecvate stării pacientului; 
+c)  alege procedee de investigaţie cu risc minim de infecţie; 
+d)  favorizează adaptarea pacientului la noul mediu. 
+130. Comunicarea, nevoia fiinţei umane de a schimba informaţii cu semenii săi, pune în mişcare un proces: 
+a)  verbal; 
+b)  nonverbal; 
+c)  dinamic. 
+131. Modul de comunicare nonverbal foloseşte: 
+a)  limbajul verbal; 
+b)  limbajul corpului; 
+c)  ambele enunţuri nu sunt reale. 
+132. Independenţa în satisfacerea nevoii presupune: 
+a)  integritatea individului; 
+b)  integritatea organelor de simţ; 
+c)  dezvoltarea intelectuală corespunzătoare. 
+133. Factorii biologici ce influenţează satisfacerea nevoii sunt: 
+a)  inteligenţa; 
+b)  percepţia şi emoţiile; 
+c)  integritatea organelor de simţ. 
+134. Anturajul este determinat în satisfacerea nevoii. Ce fel de factor de influenţă este: 
+a)  factor sociologic; 
+b)  factor psihologic; 
+c)  factor biologic. 
+135. Care din următoarele sunt manifestări de independenţă de ordin biologic: 
+a)  fineţe gustativă şi a mirosului; 
+b)  limbaj clar, precis; 
+c)  apartenenţa la grupuri de diverse interese; 
+d)  utilizarea adecvată a mecanismelor de adaptare. 
+136. Intervenţiile asistentei medicale pentru menţinerea independenţei nevoii sunt următoarele, cu două excepţii: 
+a)  explorează împreună cu pacientul mijloacele de comunicare; 
+b)  învaţă pacientul să menţină integritatea; 
+c)  asigură un mediu de securitate; 
+d)  asigură îngrijiri relative la perturbarea senzorială. 
+137. Sursele de dificultate de ordin fizic care determină dependenţa în satisfacerea nevoii pot fi: 
+a)  conflicte, eşec; 
+b)  droguri; 
+c)  alcoolism; 
+d)  anxietate; 
+e)  tulburări circulatorii cerebrale; f) tulburări de gândire. 
+
+
+138.  Diminuarea auzului se traduce prin: 
+a)  surditate; 
+b)  hipoacuzie; 
+c)  cecitate. 15 
+139. Comunicarea ineficace la nivelul senzorial se poate manifesta prin următoarele reacţii afective în insuficienţă sau exces: 
+a)  nelinişte, anxietate; 
+b)  halucinaţii; 
+c)  izolare, singurătate; 
+d)  afazie, dizartrie. 
+140. Nevoia de a acţiona conform propriilor credinţe şi valori este influenţată în satisfacerea ei de următorii factori sociologici în afară de: 
+a)  gesturi corporale; 
+b)  atitudini corporale; 
+c)  emoţii; 
+d)  cultura; 
+e)  apartenenţa 
+141. „Credinţele" sunt: 
+a)  convingeri personale ale individului faţă de realitate; 
+b)  ansamblu de ceremonii religioase; 
+c)  forme ale conştiinţei sociale. 
+142. Valorile sunt formate de: 
+a)  participări la fapte de caritate; 
+b)  ansambluri de credinţe şi atitudini care reflectă ceea ce este dorit, dar şi benefic individului; 
+c)  ansambluri de reguli de conduită într-o societate. 
+
+
+143.  Pentru menţinerea independenţei nevoii, asistenta medicală intervine: 
+a)  planificând împreună cu pacientul activităţi religioase; 
+b)  ajutându-1 să identifice cauza frustrării; 
+c)  determinând pacientul să-şi exprime propriile convingeri şi valori. 
+144. „Frustrarea" se manifestă la un individ care prezintă: 
+a)  sentiment de inutilitate; 
+b)  senzaţie de pierdere a libertăţii de acţiune; 
+c)  sentiment dureros; 
+d)  autopedepsire; 
+e)  autoacuzare. 
+145. Manifestările de depresie în „culpabilitate" sunt următoarele cu excepţia: 
+a)  mişcări lente, poziţie curbă; 
+b)  plâns, insomnie; 
+c)  furie împotriva lui Dumnezeu; 
+d)  tahicardie, hiperventilaţie. 
+146. Capacitatea individului de a fi ocupat şi a se realiza este: 
+a)  unică şi necesară pe tot parcursul vieţii; 
+b)  comună unui grup profesional; 
+c)  specifică pe grupe de vârstă. 
+147. Activitatea dominantă a copilului mic este: 
+a)  somnul; 
+b)  jocul; 
+c)  învăţătura. 
+148. Care este vârsta la care activitatea dominantă este învăţătura, dar şi participarea la jocuri este prezentă: 
+a)  adolescenţa; 
+b)  preadolescenta; 
+c)  copilăria. 16 
+
+
+149.  Intre factorii biologici ce influenţează satisfacerea nevoii se întâlnesc: 
+a)  emoţiile; 
+b)  cultura; 
+c)  constituţia şi capacităţile fizice. 
+150. Satisfacerea nevoii se manifestă prin: 
+a)  bucurie, autocritică; 
+b)  integritate fizică şi psihică; 
+c)  descurajare; 
+d)  somnolenţă, pasivitate. 
+151. „Ambiţia" se defineşte în felul următor: 
+a)  dragostea faţă de muncă; 
+b)  apartenenţa la o grupare socială; 
+c)  dorinţa arzătoare de a realiza cât mai mult în activitatea depusă. 
+152. Surse de dificultate ale „devalorizării" sunt: 
+a)  tulburările de gândire; 
+b)  diminuarea unei funcţii; 
+c)  eşecul profesional. 
+153. Care din următorii factori, influenţează satisfacerea nevoii de a se recrea: 
+a)  emoţiile; 
+b)  durerea; 
+c)  vârsta; 
+d)  cultura; 
+e)  lezarea integrităţii fizice. 
+154. „Satisfacţia" este: 
+a)  o manifestare de independenţă; 
+b)  un sentiment de mulţumire, de plăcere; 
+c)  o manifestare de dependenţă. 
+155. Pentru menţinerea independenţei nevoii, asistenta medicală: 
+a)  câştigă încrederea pacientului şi îl ajută să depăşească momentele dificile; 
+b)  îl învaţă tehnici de relaxare; 
+c)  explorează gusturile şi interesul pacientului pentru activităţi recreative. 
+156. „Plictiseala" reprezintă: 
+a)  impresia de vid, de tristeţe, de dezinteres pentru activităţi sau evenimente curente ale vieţii; 
+b)  lipsa de interes faţă de activităţile obişnuite, zilnice; 
+c)  starea de relaxare, de încetare a unei tensiuni nervoase. 
+
+
+157.  Rolurile şi organizarea socială fac parte din grupul factorilor: 
+a)  biologici; 
+b)  psihologici; 
+c)  sociologici. 
+158. „Obsesia" faţă de problemele personale ale pacientului înseamnă: 
+a)  preocupare în permanenţă în legătură cu problemele sociale, care au prioritate faţă de activitatea depusă, în vederea realizări 
+b)  stare de deznădejde; 
+c)  stare de dependenţă fizică. 
+159. „Neputinţa" problemă de dependenţă, se manifestă prin: 
+a)  apatie; 
+b)  lipsă de ambiţie; 
+c)  eşec profesional; 
+d)  agresivitate; 
+e)  sentiment de inferioritate. 17 
+160. Ce obiective prioritare îşi propune asistenta medicală la un pacient cu „neputinţă": 
+a)  pacientul să fie conştient de propria valoare; 
+b)  pacientul să-şi recapete încrederea şi stima de sine; 
+c)  pacientul să fie echilibrat fizic. 
+161. „Învăţarea" este o problemă comună a: 
+a)  pedagogiei; 
+b)  psihologiei; 
+c)  eticii; 
+d)  sociologiei. 
+162. Individul va obţine un sentiment de siguranţă după ce a dobândit pentru menţinerea sănătăţii: 
+a)  cunoştinţe; 
+b)  atitudini; 
+c)  deprinderi. 
+163. Un factor psihologic care influenţează satisfacerea nevoii de a învăţa este şi: 
+a)  mediul ambiant; 
+b)  motivarea; 
+c)  capacitatea fizică. 
+164. Intervenţiile asistentei medicale pentru menţinerea independenţei nevoii se referă la: 
+a)  elaborarea de obiective de studiu, împreună cu bolnavul; 
+b)  organizarea de activităţi educative pentru sănătate; 
+c)  conştientizarea bolnavului asupra propriei responsabilităţi privind sănătatea; 
+d)  identificarea obiceiurilor şi deprinderilor greşite ale bolnavului. 
+165. „Ignoranţa" — lipsa de cunoştinţe, priceperi, deprinderi pentru menţinerea sau recuperarea sănătăţii, se manifestă cu: 
+a)  nesiguranţă şi frică de necunoscut; 
+b)  tulburări de memorie; 
+c)  tulburări de gândire; 
+d)  nerespectarea sfaturilor medicale în tratarea şi prevenirea îmbolnăvirilor.
+`
+
+      const answers_raw = `
+1. b 2. a,b 3. a,b 4. c 5. b 6. a 7. a 8. c 9. a 10. c 11. c 12. a 13. c 14. a 15. b 16. c 17. b 18. a,c,d,e 19. b 20. c 21. c 22. c 23. a 24. b 25. b 26. b 27. a,c 28. b 29. b 30. a 31. b 32. a 33. c 34. a,c 35. c 36. a 37. d 38. b 39. a 40. a,b 41. a,b 42. a,b 43. a,b 44. a,b,c,d 45. a 46. b 47. d 48. b,c,e 49. c 50. a,b,c,d 51. a,b,c,e 52. c 53. a,b 54. a,b 55. b 56. a,b 57. a,b,c 58. b 59. a 60. b 61. a 62. a,b,c 63. a,b 64. b,c 65. b 66. a 67. b 68. a,b 69. a 70. c 71. b 72. a 73. c 74. a,b,c,d 75. a 76. a,b 77. c 78. c 79. a 80. b 81. a,b,c,d 82. a,b,c 83. a 84. b,c 85. c,d 86. c 87. a,b,c 88. a,b,c 89. f 90. a 91. c 92. a,b,c,d 93. a,b 94. e 95. b,c 96. a 97. a,b 98. b,c 99. a,c 100. a,b,c 101. a,b,c 102. b 103. b 104. c 105. a 106. a,c 107. a,c 108. c 109. a 110. a,b,c 111. b,c 112. a,d 113. b 114. b,c 115. a,b,c,d 116. a,c,d 117. a 118. b 119. c 120. a,b,c 121. b 122. b 123. a,b 124. a 125. a,b,c 126. c 127. e 128. a,b,c 129. b,d 130. a,b,c 131. b 132. a,b,c 133. c 134. b 135. a,b 136. c,d 137. b,c,e 138. b 139. a,b,c 140. a,b,c 141. a 142. b 143. a,c 144. a,b 145. a 146. a 147. b 148. b 149. c 150. a,b 151. c 152. a,b,c 153. a,c,d 154. a,b 155. c 156. a 157. c 158. a 159. a,b,c 160. b 161. a,b,c,d 162. a,b,c 163. b 164. a,b 165. a,b,c,d
+`
+
+const q_regex = new RegExp('^(?=[0-9]+\. )', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+
+  var split_answers = answers_raw.trim().split(new RegExp('([0-9]+\. )', 'g')).map(function(s) { return s.trim() }); 
+
+  console.log(split_answers);
+
+  function find_answer(q_number) {
+    for (i = 0; i < split_answers.length; i++) {
+      if (split_answers[i] === `${q_number}.`) {
+        return split_answers[i + 1];
+      }
+    }
+
+    console.log("No answer for "+ q_number);
+  }
+
+
+
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const number = split[0].split('.')[0].trim();
+    const answer = find_answer(number);
+    const question = split.join('<br/>').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
