@@ -1,0 +1,704 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+
+256. Despre TAG sunt adevarate afirmatiile cu exceptia:
+A. Sunt esteri ai glicerolului cu acizii grasi
+B. Sunt compusi hidrofobi, nepolari
+C. Pot fi utilizati ca sursa de energie metabolica
+D. Depozitele de TAG se pot forma numai in tesutul adipos
+E. TAG depozitati in tesutul adipos sufera continuu procesele de lipoliza si reesterificare
+D
+
+257. Acizii biliari:
+A. Sunt constutuenti ai membranelor celulare
+B. Sunt produsi de metabolizare ai colesterolului
+C. Deriva de la un compus iptetic, estran
+D. Sunt steroizi C27
+E. Acizii biliari primari se sintetizeaza in intestin iar cei secundari in ficat
+B
+
+258. Afirmatia adevarata despre fosfolipide este:
+A. Reprezinta forma de depozitare a excesului caloric
+B. Nu contin fosfor in structura
+C. Nu intra in structura membranelor celulare
+D. Deriva de la acizi fosfatidici
+E. Sunt compusi puternic hidrofobi
+D
+
+259. Afirmatiile urmatoare sunt false cu exceptia:
+A. In celula hepatica, acidul colic si chenodezoxicolic se conjuga cu taurina si glicocolul
+B. Produsii de conjugare ai acizilor biliari sunt acizi mai slabi ca acizii biliari
+C. Colesterolul este un steroid derivat C24 din acidul colanic
+D. Acizii grasi sunt competenti ai majoritatii lipidelor nesaponifiabile
+E. Acizii grasi nesaturati sunt solizi
+A
+
+260. Degradarea oxidativa completa a unui acid gras pana la CO2 si H20 cuprinde urmatoarele
+etape cu exceptia:
+A. β -oxidarea
+B. Ciclul Krebs
+C. Activarea acizilor grasi
+D. Cetogeneza
+E. Lantul respirator si fosforilarea oxidativa
+D
+
+261. Despre β -oxidarea sunt adevarate afirmatiile cu exceptia:
+A. Are loc in mitocondrie
+B. Reprezinta calea principala de metabolizare a acizilor grasi
+C. Atacul oxidativ al acizilor grasi incepe dupa activarea acestora la tiol-esteri ai coenzimei
+A
+D. Beneficiul energetic net al arderii acidului palmitic este de 131 moli ATP
+E. Transportul acizilor grasi activati din citosol in mitocondrie are loc in prezenta carnitinei
+D
+
+262. Din acetil-CoA se pot sintetiza urmatorii compusi, cu exceptia:
+A. Corpii cetonici
+B. Colesterolul
+C. Acizii grasi
+D. Glicogenul
+E. Citrat
+D
+
+263. Enzima reglatorie a biosintezei colesterolului este:
+A. HMG¬CoA sintaza mitocondriala
+B. HMG¬CoA sintaza citosolica
+C. HMG¬CoA liaza
+D. HMG¬CoA reductaza
+E. Nici una dintre variantele anterioare nu este corecta
+D
+
+264. Afirmatiile urmatoare sunt adevarate cu exceptia:
+A. Prioritatea metabolica in inanitie a organismului este asigurarea glucozei necesare
+pentru creier si eritrocit
+B. Acizii grasi nu pot fi transformati in glucoza deoarece acetil-CoA nu pot fi transformati in
+piruvat
+C. Aproximativ 85% din depozitele de energie sunt reprezentate de glicogen
+D. In post prelungit creste concentratia sanguina a corpilor cetonici
+E. Ficatul detine rolul principal in sinteza de novo a acidului palmitic
+B
+
+265. In cetogeneza sunt implicate urmatoarele enzime cu exceptia:
+A. HMG¬CoA sintaza
+B. HMG¬CoA litaza
+C. - hidroxibutirat β dehidrogenaza
+D. β -cetoacilCoA tiolaza
+E. β -cetotiolaza
+D
+
+267. Despre acid gras sintaza este adevarata afirmatia:
+A. Este enzima implicata in activarea acizilor grasi
+B. Este enzima organizata ca un sistem multienzimatic implicata in transportul acizilor grasi
+activati din citosol in mitocondrie in vederea β -oxidarii
+C. Pe o molecula dimerica de acid gras sintaza se afla in curs de formare simultan, doua
+molecule de acid palmitic
+D. Este activa numai sub forma de tetramer
+E. Sinteza de novo prin acid gras sintaza duce la formarea acidului stearic
+C
+
+268. Afirmatia adevarata despre catabolismul colesterolului este:
+A. Are loc in toate tipurile de celule
+B. Are loc doar in ficat
+C. Produsul final al catabolismului este acetil¬CoA
+D. Colesterolul nu poate fi degradat de organismul uman , fiind eliminat ca atare
+E. Produsul final al catabolismului este bilirubina
+B
+
+269. O molecula de acid palmitic sintetizata in ficat va fi transportata de urmatoarele particule
+lipoproteice pe traseul parcurs de ficat catre tesutul adipos:
+A. Chilomicroni → VLDL → LDL
+B. VLDL → IDL → LDL
+C. LDL → VLDL → HDL
+D. HDL → IDL → LDL
+E. Chilomicroni → IDL → LDL
+B
+
+270. Afirmatiile urmatoare despre biosinteza trigliceridelor sunt adevarate, cu exceptia:
+A. Transformarea acizilor grasi in triacilgliceroli implica acilarea celor trei agrupari hidroxil
+ale glicerolului
+B. Acizii grasi sunt transformati mai intai, in citosol, in derivati activi, acil-CoA
+C. Calea monoacilglicerol functioneaza in toate tesuturile
+D. Calea glicerol-fosfatului are loc majoritar in ficat si tesutul adipos
+E. Lipogeneza (sinteza triacilglicerolilor in tesutul adipos) este dependenta de glicemie si
+insulinemie
+C
+
+271. Care dintre afirmatiile urmatoare despre biosinteza colesterolului este falsa:
+A. Are loc majoritar in citoplasma celulelor hepatice si intestinale
+B. Se sintetizeaza din glicerol
+C. Se sintetizeaza din acetil-CoA rezultata din glicoliza sau β - oxidare
+D. Etapa reglatorie este catalizata de HMG¬CoA reductaza
+E. Reglarea concentratiei de HMG-CoA reductazei se realizeaza prin reglarea vitezei de
+sinteza si degradare
+B
+
+272. Lipoproteinele pot fi separeate prin:
+A. Ultracentrifugare
+B. Chemiluminometrie
+C. Spectrofotometrie
+D. Spectroflorimetrie
+E. Titrare
+A
+
+273. Lipoproteinele cu cel mai mare continut de triacilgliceroli sunt urmatoarele cu exceptia:
+A. Chilomicroni nascanzi
+B. Chilomicroni remanenti
+C. VLDL
+D. LDL
+E. VLDL remanente
+D
+
+274. Afirmatiile urmatoare despre apoproteine sunt adevarate, cu exceptia:
+A. Sunt specifice diferiterol clase de lipoproteine
+B. Sunt liganzi pentru receptori celulari
+C. Sunt cofactori pentru enzimele implicate in metabolizarea lipoproteinelor
+D. HDL contine majoritar apoproteina B-100
+E. Apoproteina B-48 se sintetizeaza la nivelul mucoasei digestive pe baza aceleasi gene
+care sta la baza sintetazei apo-B100 din ficat
+D
+
+275. Formele de transport ale lipidelor in organism sunt urmatoarele cu exceptia:
+A. Chilomicronii pentru lipidele exogene
+B. VLDL pentru lipidele endogene
+C. HDL pentru lipidele endogene
+D. Albuminele serice pentru acizii grasi mobilizati din rezervele tesutului adipos
+E. LDL pentru lipide exogene
+E
+
+276. Enzimele implicate in metabolizarea lipoproteinelor plasmatice sunt urmatoarele, cu
+exceptia:
+A. Lipoprotein lipaza
+B. Acilglicerol lipaza hepatica
+C. Fosfolipaza A2
+D. Lecitincolesterol acil transferaza (LCAT)
+E. acil-CoA-colesterol acil transferaza (ACAT)
+C
+
+277. Afirmatia falsa despre chilomicroni este urmatoarea:
+A. Chilomicronii sunt sintetizati in celulele mucoasei intestinale si se incorporeaza cu
+lipidele endogene
+B. Au dimensiuni mari si densitate mai mica a serului
+C. Confera plasmei aspect lactescent deoarece reflecta lumina
+D. Chilomicronii primari curpind apo-B48
+E. Dupa 6-7 ore de la ingestia de grasimi chilomicronii dispar din sange iar plasma se
+clarifica
+A
+
+278. VLDL:
+A. Sunt sintetizate in intestin unde inglobeaza lipidele exogene
+B. Sunt sintetizate in ficat unde inglobeaza lipidele endogene
+C. Contin majoritar colesterol
+D. Reprezinta fractiunea de colesterol ‘bun’ , fiind un factor antiaterogen
+E. Perturbarea color de sinteza si export a VLDL, are drept consecinta, acumularea
+grasimilor in ficat (infiltratia grasa a ficatului, steatoza)
+B
+
+279. HDL fata de LDL:
+A. Transporta colesterolul de la ficat la tesuturi fapt ce contribuie la dezvoltarea
+aterosclerozei
+B. Transporta colesterolul de la tesuturile periferice la ficat pentru catabolizare si excretie
+C. Se asociaza cu un risc aterogenic crescut
+D. Poate duce la acumularea de foam cells, macroface ce contin mult colesterol
+E. Este un factor pro-aterogen
+B
+
+280. Acizii biliari sunt cu exceptia:
+A. Acidul chenodezoxicolic
+B. Acidul dezoxicolic
+C. Acidul litocolic
+D. Acidul colic
+E. Acidul 10 α hidroxicolanic
+E
+
+281. Enzima reglatorie a sintezei acizilor grasi este:
+A. Acid gras sintaza
+B. acetil¬CoA carboxilaza
+C. Acid gras¬CoA desaturaza
+D. Acid gras¬CoA sintetaza
+E. Dehidrogenaza
+A
+
+282. Indicati fractiunea care nu se separa la electroforeza lipoproteinelor
+A. β -lipoproteine
+B. α -lipoproteine
+C. Acizi grasi neesterificati
+D. Chilomicroni
+E. pre- β -lipoproteine
+C
+
+283. In hiperlipoproteinemia de tip I sunt adevarate aspectele cu exceptia:
+A. Lipidograma cuprinde o banda intensa in regiunea α -lipoproteinelor
+B. Trigliceridemia este crescuta
+C. Serul are aspect laptos
+D. Boala se manifesta prin hepatosplenomegalie
+E. Au loc depuneri de xantoame
+A
+
+284. Sunt procese catabolice, cu exceptia:
+A. Lipoliza
+B. Degradarea oxidativa a acizilor grasi
+C. Oxidarea acizilor grasi in peroxizomi
+D. Biosinteza triacilglicerolilor
+E. Biosinteza acizilor biliari
+D
+
+285. Sunt lipoproteine, cu exceptia
+A. VLDL
+B. Chilomicroni
+C. LDL
+D. Sfingolipide
+E. HDL
+D
+
+286. Etapele biosintezei colesterolului sunt urmatoarele cu exceptia:
+A. Formarea de acetil-CoA
+B. Formarea de hidroxil-metil-glutaril-CoA
+C. Formarea de ‘izopren biologic activ’
+D. Formarea de scualen prin condensarea a 6 unitati izoprenice
+E. Transformarea lanosterolului in colesterol
+A
+
+287. Este adevarata despre LDL afirmatia, cu exceptia:
+A. Se formeaza in plasma din VLDL
+B. Are rolul de a furniza colesterol diferitelor tesuturi
+C. Se mai numeste si ‘colesterol bun’
+D. La separarea prin electroforeza, migreaza dupa chilomicroni
+E. Prezinta receptori specifici pe membrana celulara
+C
+
+288. Din clasa eicosanozilor fac parte, cu exceptia:
+A. Prostaglandinele
+B. Tromboxanii
+C. Leucotrienele
+D. Prostacilina
+E. Ciclooxigenaza
+E
+
+289. Afirmatia incorecta referitoare la lipide este:
+A. Nu sunt produsi de policondensare
+B. Se dizolva in compusi organici polari
+C. Nu sunt principala forma de depozitare a excesului de rezerve energetice din organism
+D. Sunt constituenti ai membranelor celulare si subcelulare
+E. Pot fi polare sau nepolare
+C
+
+290. Acizii grasi:
+A. Au o catena liniara saturata sau nesaturata
+B. Au caracter amfipatic
+C. Au un numar par de atomi de C
+D. Acidul arahidonic este folosit la sinteza eicosanoizilor
+E. Adevarate toate afirmatiile
+E
+
+291. Despre lipoliza este falsa afirmatia:
+A. In adipocit e reglata de glucagon, adrenalina, ACTH, TSH, insulina
+B. Este controlata de cantitatea de AMPc din tesutul adipos
+C. Este inhibata de insulina
+D. Duce la formarea de acizi grasi liberi in plasma
+E. Cafeaua determina scaderea continutului de acizi grasi liberi in plasma
+E
+
+292. Degradarea acizilor grasi:
+A. Duce la formarea de acetil-CoA
+B. Are loc in mitocondrie
+C. Genereaza ATP
+D. Cuprinde 3 etape
+E. Toate afirmatiile sunt corecte
+E
+
+293. Lipoproteinele - afirmatia falsa este:
+A. Sunt complexe lipo-proteice implicate in transportul lipidelor in organism
+B. Proteinele din structura lor se numesc apoproteine
+C. Chilomicronii se intorc in ficat sub forma de chilomicroni remanenti
+D. HDL este ‘colesterolul bun’
+E. LDL este ‘colesterolul bun’
+E
+
+294. Legatura intre ciclul acizilor tricarboxilici si ciclul ureogenetic se face prin intermediul
+A. α -cetoglutaratului
+B. Acidului maleic
+C. Acidului asparctic
+D. Acidului fumaric
+E. Oxalacetatului
+C
+
+295. Colinesteraza serica este inhibata de:
+A. Sulfamide
+B. Antibiotice
+C. Insecticide organofosforice
+D. Peniciline
+E. Antimicotice
+B
+
+296. Lipaza pancreatica:
+A. Hidrolizeaza triacilglicerolii la pH acid
+B. Hidrolizeaza triacilglicerolii la pH alcalin
+C. Hidrolizeaza esterii colesterolilor
+D. Hidrolizeaza fosfolipidele
+E. Este implicata in etapele finale ale degradarii intestinale a peptidelor de mici dimensiuni
+B
+
+297. Afirmatia adevarata este despre particulele HDL:
+A. Contin fractia de ‘colesterol bun’ deoarece asigura transportul colesterolului de la
+tesuturi spre ficat
+B. Contin fractia de ‘colesterol bun’ deoarece asigura transportul colesterolului catre
+tesuturi
+C. Au cel mai scazut continut de proteine
+D. La electroforeza migreaza in fractia pre-beta
+E. Dintre particulele lipoproteice au cel mai mare continut de triacilgliceroli
+A
+
+298. Afirmatia falsa despre sinteza triacilglicerolilor in eritrocit:
+A. Foloseste exclusiv acizii grasi sintetizati de catre eritrocit
+B. Foloseste acizii grasi de origine exogena
+C. Triacilglicerolii sintetizati la acest nivel sunt inclusi in structura chilomicronilor
+D. Sinteza triacilglicerolilor se face printr-o secventa numita calea glicerolfosfatului
+E. Necesita participarea unor acil gras transferaze
+A
+
+299. Glicerolul rezultat in urma hidrolizei triacilglicerolilor in tesutul adipos:
+A. Este convertit in adipocit la glucoza
+B. Este reutilizat in totalitate pentru sinteza de triacilgliceroli in adipocit
+C. Este extretat, fiind un ‘deseu’ metabolic
+D. Este eliminat in circulatie si captat de ficat care il va folosi ca substrat gluconeogenetic
+E. In circulatie este folosit pentru reestificarea acizilor grasi liberi
+D
+
+300. Despre acizii biliari este adevarata informatia:
+A. Cei secundari sunt sintetizati in ficat
+B. Doar acizii biliari primari sunt conjugati cu glicina si taurina
+C. Acizii colic si chenodezoxicoli sunt acizi biliari primari
+D. Contin in molecula un nucleu steranic cu 27 de atomi de carbon
+E. Nu pot fi reabsorbiti la nivel intestinal
+C
+
+301. Afirmatia falsa despre acizii biliari:
+A. Sunt sintetizati in ficat din colesterol
+B. Reprezinta calea majora de eliminare a colesterolului din organism
+C. Contribuie la digestia si absorbtia lipidelor din alimente
+D. Acidul dexozicolic este un acid primar
+E. Se pot conjuga cu glicina si taurina
+D
+
+302. Care idntre urmatorii compusi este corp cetonic:
+A. acetiacetil¬CoA
+B. Acetona
+C. Acidul piruvic
+D. Acidul lactic
+E. Dihidroxiacetona
+B
+
+303. Toate afirmatiile urmatoare despre triacilgliceroli sunt adevarate cu exceptia:
+A. Sunt compusi hidrofobi
+B. Sunt depozitati in helatocite
+C. Enzima ce controleaza degradarea lor in adipocit este lipaza hormon sensibila
+D. In eritrocit sunt sintetizati pe calea monoacilglicerolului
+E. In adipocit sunt sintetizati pe calea glicerol fosfatului
+B
+
+304. Particulele VLDL:
+A. Transporta catre tesuturile extrahepatice lipide endogene
+B. Sunt sintetizate in hepatocite
+C. Sunt bogate in triacilgliceroli
+D. In circulatie sunt catabolizate de lipaza hormon sensibila
+E. Inhibarea biogenezei particulelor VLDL determina hepatosteatoza (‘ficat gras’)
+D
+
+305. Chilomicronii:
+A. Asigura transportul lipidelor exogene de la intestin catre tesuturile extraintestinale
+B. Au cel mai mare continut de triacilgliceroli
+C. Sunt catabolizati in circulatie sub actiunea lipoprotein lipazei
+D. Contin triacilgliceroli sintetizati pe calea glicerol fosfatului
+E. Inhibarea biogenezei chilomicronilor conduce la acumularea de lipide in enterocite
+(steatoza intestinala)
+D
+
+306. Este acid gras saturat:
+A. Acid oleic
+B. Acid arahidonic
+C. Acid miristic
+D. Acid linoleic
+E. Acid cervonic
+C
+
+307. La lecine restul acil nesaturat din pozitia 2 provine de la:
+A. Acidul linoleic sau acidul oleic
+B. Acidul cervonic sau acidul caproic
+C. Acidul arahidonic dau acidul plamitic
+D. Acidul linoleic sau acidul arahidonic
+E. Acidul nervonic sau acidul palmitoleic
+D
+
+308. Lipidele:
+A. Sunt compusi hidrofobi
+B. Intra in alcatuirea membranelor celulare
+C. Reprezinta o importanta sursa de energie pentru organism
+D. Sunt depozitate la nivelul tesutului adipos sub forma de TAG
+E. Toate sunt adevarate
+E
+
+309. Corpii cetonici:
+A. Sunt sintetizati in mitocondriile hepatocitelor
+B. Sunt sintetizati in citosolul hepatocitelor
+C. Sinteza lor scade in gestatie tarzie
+D. Sinteza lor creste in conditii de alimentatie normala
+E. Nu sunt substante osmotic active
+A
+
+310. Triacilglicerolii:
+A. Cei de origine adipocitara sunt degradati de lipaza hormone sensibila
+B. Cei din alimentatie sunt degradati de lipaza pancreatica
+C. Pot fi sintetizati de la monoacilglicerol
+D. Pot fi sintetizati de la glicerol fosfat
+E. Sunt corecte toate variantele
+E
+
+311. Colesterolul:
+A. Intra in structura membranelor celulare
+B. Este precursor in siteza steroizilor
+C. Este precursor al acizilor biliari
+D. Este folosti la sinteza vitaminei D3
+E. Toate afirmatiile sunt adevarate
+E
+
+312. Lipoproteinele:
+A. Transporta doar colesterolul exogen
+B. Transporta doar colesterolul endogen
+C. Transporta si TAG catre tesuturi
+D. Cuprind doar HDL si LDL
+E. Nu prezinta semnificatie biochimica
+C
+
+313. Acizii biliari:
+A. Sunt primari si secundari
+B. Acizii colic si litocolic sunt primari
+C. Acizii chenodezoxicolic si dezoxicolic sunt secundari
+D. Chenodezoxicolic si litocolic sunt primari
+E. Colic si dezoxicolic sunt secundari
+A
+
+314. Arderea acizilor grasi cuprinde urmatoarele etape:
+A. -oxidarea, Ciclul Krebs, β lantul respirator
+B. β -oxidarea, fosforilarea oxidativa
+C. Ciclul Krebs, fosforilarea la nivel de substrat
+D. β -oxidarea, lantul respirator
+E. Activarea acizilor grasi si lantul respirator
+A
+
+315. Despre lecitine este falsa afirmatia:
+A. Se gasesc in proportia cea mai mare in structurile lipoproteice membranare
+B. Cuprind restul fosfatidil legat la colina
+C. Curprind restul fosfatidil legat de etanolamina
+D. Au caracter amfipatic
+E. Au proprietati tensioative puternice
+C
+
+316. Toate afirmatiile despre gangliozide sunt adevarate, cu exceptia:
+A. Sunt glicolipide prezente in cantitati mici in toate tesuturile
+B. Cuprind o ceramida legata la un oligozaharid
+C. Apartin lipidelor nesaponifiabile
+D. Pot cuprinde unul, doua sau trei resturi de acid sialic in molecula
+E. Componenta glucidica se gaseste totdeauna pe fata externa a membranelor
+C
+
+317. Oxidarea acidului lignoceric (acid gras saturat cu 24 de atomi de carbon) pana la stadiul de
+acetil¬CoA se face prin cate runde de β -oxidare:
+A. 8 runde
+B. 9 runde
+C. 10 runde
+D. 11 runde
+E. 12 runde
+D
+
+318. In cazul procesului de β -oxidare eliminarea unei unitati de acetil¬CoA este rezultatul
+actiunii secventiale a urmatoarelor enzime:
+A. Dehidrogenaza, hidrataza, dehidrogenaza, tiolaza (tiokinaza)
+B. Dehidrogenaza, dehidrogenaza, hidrataza, tiolaza
+C. Hidrataza, dehidrogenaza, tiolaza, dehidrogenaza
+D. Tiolaza, dehidrogenaza, dehidrogenaza, hidrataza
+E. Dehidrogenaza, tiolaza, dehidrogenaza, hidrataza
+A
+
+319. Procesul de β -oxidare al acizilor grasi nu depinde de nici una dintre urmatoarele vitamine
+cu exceptia:
+A. Vitamina A
+B. Vitamina E
+C. Vitamina B6
+D. Vitamina B2
+E. Vitamina B12
+D
+
+320. Afirmatia adevarata despre lipoprotein lipaza:
+A. Este implicata in digestia lipidelor
+B. Actioneaza asupra triacilglicerolilor si elibereaza acizi grasi si monoacilgliceroli
+C. Actioneaza in tesutul adipos
+D. Este enzima reglatorie a sintezei acizilor grasi
+E. Este indusa de insulina
+E
+
+321. In deficienta de carnitina este afectat procesul de:
+A. Biosinteza a acizilor grasi
+B. -oxidare β a acizilor grasi
+C. β -oxidare a corpilor cetonici
+D. Gluconeogeneza
+E. Sinteza a acizilor grasi
+B
+
+322. Beneficiul net in ATP al transformarii unei molecule de acid palmitic la acetil¬CoA este egal
+cu:
+A. 37
+B. 33
+C. 36
+D. 35
+E. 32
+B
+
+323. Deficienta apo B48 este asociata cu acumularea de:
+A. Triacilgliceroli in ficat
+B. Colesterol in ficat
+C. Triacilgliceroli in enterocite
+D. Colesterol in adipocite
+E. Triacilgliceroli in adipocite
+C
+
+324. Unitatile cu 2 atomi de carbon (acetil) trec din mitosol in citosol in vederea sintezei unei
+molecule de colesterol sub forma de:
+A. acetil¬CoA
+B. Acetat
+C. CDP-acetil
+D. Citrat
+E. Izocitrat
+D
+
+325. Rolul enzimei malice in biosinteza acizilor grasi:
+A. Genereaza in mitosol NADPH, H+
+B. Genereaza in citosol NADH, H+
+C. Genereaza in mitosol NADH, H+
+D. Genereaza in citosol NADPH, H+
+E. Nici unul dintre raspunsurile anterioare nu este corect
+D
+
+326. Acidul palmitic:
+A. Are 16 atomi de C
+B. Are 14 atomi de C
+C. Are o dubla legatura
+D. Are doua duble legaturi
+E. Are 2 grupari -COOH
+A
+
+327. Despre acizii grasi este falsa afirmatia:
+A. Sunt componenti ai majoritatii lipidelor saponifiabile
+B. Sunt acizi monocarboxilixi alifatici cu catena saturata sau nesaturata
+C. Cuprind un numar par de atomi de C
+D. Acizii grasi saturati pana la C8 sunt lichizi
+E. Acizii nesaturati sunt solizi
+E
+
+328. Acid gras sintaza:
+A. Este inactiva ca dimer
+B. Catalizeaza sinteza acidului palmitic
+C. Pe o molecula dimerica de acid gras sintaza se poate forma numai o molecula de acid
+palmitic
+D. Nu curpinde grupari -SH
+E. Catalizeaza etapa cheie, reglatoare a biosintezei acidului palmitic
+B
+
+329. In legatura cu procesul de hidroliza a triacilglicerolilor este falsa afirmatia:
+A. Are loc in etape, pana la glicerol si acizi grasi
+B. Catecolaminele sunt factori majori lipolitici
+C. Glucagonul este un factor antilipolitic
+D. Insulina are actiune lipogenetica
+E. Cafeina si teofilina sunt catori antilipolitici
+C
+
+330. β -oxidarea:
+A. Activarea acizilor grasi are loc in mitocondrii
+B. Beneficiul net in ATP al arderii unei molecule de palmitil-CoA este de 131 de molecule
+C. Beneficiul net in ATP al arderii unei molecule de palmitil-CoA este de 129 de molecule
+D. Are loc in citosol
+E. Nu necesita consum de ATP
+C
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

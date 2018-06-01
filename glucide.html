@@ -1,0 +1,660 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+
+
+187. Referitor la digestia glucidelor afirmatiile urmatoare sunt adevarate, cu exceptia:
+A. Figestia glucidelor reprezinta procesul hidrolitic prin care glucidele ingerate sunt
+transformate in monozaharide
+B. Digestia amidonului incepe in cavitatea bucala in prezenta amilazei salivare
+C. Unul dintre produsii de hidroliza partiala ai amidonului este lactoza
+D. Maltoza este hidrolizata la maltaza
+E. Deficitul de lactoza duce la intoleranta la lactoza
+C
+
+188. Faza anabolica spre deosebire de faza catabolica:
+A. Are loc in perioadele interprandiale sau in cursul unei activitati fizice sau intelectuale
+intense
+B. Este caracterizata prin abundenta de substrate energogene
+C. Foloseste rezervele de glicogen drept combustibil energogen
+D. Foloseste rezervele de trigliceroli drept combustibil energogen
+E. Nu poate utiliza glucoza drept combustibil energogen
+B
+
+189. Procesul de degradare totala a glucozei curpinde urmatoarele etape, cu exceptia:
+A. Glicoliza aeroba
+B. Decarboxilarea oxiditiva a piruvatului
+C. Ciclu urogenetic
+D. Ciclul Krebs
+E. Lantul respirator si fosforilarea oxidativa
+C
+
+190. Despre glicoliza sunt adevarate urmatoarele afirmatii cu exceptia
+A. Este prima etapa in degradarea aeroba sau anaeroba
+B. Este un proces puternic exergonic
+C. Are loc in mitocondrie
+D. Este singura modalitate de producere a ATP in celulele fara mitocondrii
+E. Este procesul prin care glucoza este oxidata la acid piruvic
+C
+
+191. Fosforilarea glucozo-6-fosfat:
+A. Este ultima reactie din glicoliza aeroba
+B. Reprezinta conditia necesara pentru ca glucoza sa poata ramane in celula
+C. Nu necesita consum de ATP
+D. Este o reactie reversibila
+E. Este catalizata de piruvatkinaza
+B
+
+192. Urmatoarele afirmatii despre glucokinaza sunt adevarate, cu exceptia
+A. Este o enzima alosterica
+B. Utilizeaza exclusiv glucoza
+C. Are un mic, afinitate KM mare pentru glucoza
+D. Glucokinaza hepatica este activa numai in conditiile unui aport masiv de glucoza
+E. Catalizeaza reactia de fosforilare a glucozei la glucozo-6-fosfat din ficat
+C
+
+193. Urmatorii compusi sunt inhibitori ai enzimei 6-fosfofructo-1-kinaza, cu exceptia
+A. Citratul
+B. Fosfenolpiruvatul
+C. 1,3 - bifosfoglicerat
+D. Fructozo - 1,6-bifosfatul
+E. ATP
+D
+
+194. 2,3-bifosfogliceratul:
+A. Este un ester bifosforic esential in exercitarea functiei de transportator de oxigen a
+hemoglobinei
+B. Este prezent in eritrocit la concentratii echimoleculare cu hemoglobina
+C. Creste afinitatea hemoglobinei pentru oxigen
+D. Favorizeaza oxigenarea tesuturilor
+E. Deficitele enzimatice din glicola pot duce fie la cresterea, fie la scaderea concentratiei de
+2,3-bifosfogliceratului
+C
+
+195. Afirmatiile urmatoare sunt adevarate, cu exceptia:
+A. In conditii de aerobioza, piruvatul, este convertit la acetil¬ CoA care va servi ca substrat
+al ciclului Krebs
+B. Castigul energetic net al glicolizei este de 2 moli ATP
+C. Enzimele implicate in decarboxilarea oxiditiva a piruvatului alcatuiesc un sistem
+multienzimatic
+D. Oxidarea unui mol de acetil¬CoA in ciclul Krebs furnizeaza 24 moli ATP
+E. Bilantul oxidarii complete a unui mol de glucoza pana la CO2 si H20 este de 36 moli
+ATP
+D
+
+196. Despre suntul pentozo-fosfatilor sunt adevarate urmatoarele afirmatii cu exceptia:
+A. Presupune formarea de NADPH si pentoze
+B. Reprezinta o cale alternativa de metabolizare a glucozei
+C. Are loc numai in mitocondriile hepatocitelor
+D. Viteza suntului creste in perioadele de crestere rapida, care necesita biosinteza de
+proteine si acizi nucleici
+E. Procesul de biosinteza a acizilor grasi reprezinta principalul consumator al NADPH-ului
+rezultat in sunt
+C
+
+197. Despre gluconeogeneza sunt adevarate urmatoarele afirmatii, cu exceptia:
+A. Presupune sinteza ‘’de novo’’ a glucozei din compusi neglucidici
+B. Are loc majoritar in ficat si cortexul renal
+C. Materia prima este reprezentata de lactat, glicerol si aminoacizii glucoformatori
+D. Consta in parcurgerea inversa a etapelor de glicoliza, reactiile fiind catalizaqte de
+aceleasi enzime
+E. Reglarea gluconeogenezei se poate face ata alosteric cat si hormonal
+D
+
+198. Etapa limitanta de viteza a Ciclului Krebs este:
+A. Etapa catalizata de izocitrat dehidrogenaza
+B. Etapa de formare a citratului
+C. Condensarea acetil¬CoA cu oxaloacetat
+D. Oxidarea succinatului la fumarat
+E. Ultima reactie a Ciclului Krebs, reactia in care are loc formarea oxaloacetatului
+A
+
+199. Afirmatia adevarata despre succinil¬CoA
+A. Este intermediar al ciclului ureogenetic
+B. Nu are caracter macroergic
+C. Este precursor al biosintezei hemului
+D. Este produsul final al tuturor β − oxidarii acizilor grasi
+E. Comportamentul celular in care se gaseste acest metabolit este citosolul
+C
+
+200. Care dintre afirmatiile de mai jos despre glicogenoliza este falsa:
+A. Reprezinta degradarea glicogenuluiu
+B. Presupune desfacerea enzimatica atat a legaturilor 1,4 glicozidice din structura
+glicogenului cat si a celor 1,6
+C. Reactia de desfacere a legaturilor 1,4-glicozidice este catalizata de glicogen fosforilaza
+D. Etapa limitanta de viteza in degradarea glicogenului este etapa fosforolitica
+E. Glicogenfosforilaza este inactivata in forma fosforilata
+E
+
+201. Reactiile anaplerotice:
+A. Reprezinta reactiile care permit cresterea concentratiei intermediarilor ciclului Krebs
+B. Reprezinta reactiile care consuma intermediarii Ciclului Krebs
+C. Determina scaderea vitezei de oxidare a acetil¬CoA
+D. Cea mai importanta reactia anaplerotica este catalizata de piruvat carboxiligaza al carui
+efector alosteric negativ este acetil¬CoA
+E. Nu necesita consum de ATP
+A
+
+202. Despre metabolismul glicogenului sunt adevarate urmatoarele afirmatii cu exceptia:
+A. Glicogenul reprezinta forma de depozitare a excesului de lipide
+B. Depozitele de glicogen se gasesc majoritar in ficat si muschi
+C. Ficatul utilizeaza depozitele de glicogen in scopul mentinerii glicemiei
+D. Glicogenoliza reprezinta procesul de degradare al glicogenului
+E. Depozitele de glicogen se formeaza in faza anabolica a organismului
+A
+
+203. Urmatoarele enzime sunt implicate in procese ale fazei anabolice, cu exceptia:
+A. Piruvat kinaza
+B. FF-1-kinaza
+C. Glucokinaza
+D. Piruvat dehidrogenaza
+E. Piruvat carboxiligaqza
+E
+
+204. Prin calea pentozo-fosfatilor se obstine, in primul rand:
+A. NADP
+B. NADH+ H+
+C. NADPH+ H+
+D. F ADH2
+E. F AD+
+C
+
+205. Pot fi substrate pentru gluconeogeneza, cu exceptia
+A. Lactat
+B. Glicerol
+C. Acetona
+D. Alanina
+E. Oxaloacetat
+E
+
+206. Sunt procese anabolice, cu exceptia
+A. Glicozlia
+B. Decarboxilarea oxidativa a acidului piruvic
+C. Glicogenogeneza
+D. Gluconeogeneza
+E. Calea pentozo-fosfatilor
+D
+
+207. Enzima reglatorie a glicolizei este:
+A. Aldolaza
+B. 6-fosfofructo-1-kinaza
+C. Fosfoglicerat kinaza
+D. Enolaza
+E. Gliceraldehid-3-fosfat dehidrogenaza
+B
+
+208. Prin arderea unui mol de glucoza se obtin
+A. 25 de moli de ATP
+B. 35 de moli de ATP
+C. 45 de moli de ATP
+D. 38 de moli de ATP
+E. 20 de moli de ATP
+D
+
+209. Care dintre urmatoarele transformari are loc in mitocondrie
+A. fructozo-6-fosfat→ fructozo-1,6-bifosfat
+B. Piruvst → acetil CoA
+C. Glucozo-6-fosfat → glucoza
+D. Fosfoenolpiruvat → piruvat
+E. Glucozo → glucozo-6-fosfat
+B
+
+210. Sunt cai metabolice antagonice ce au loc in acelasi compartiment celular:
+A. Glicogenoliza si gliconeogeneza
+B. Glicoliza si gluconeogeneza
+C. -oxidarea si sinteza β acizilor grasi
+D. Glicoliza si gluconeogeneza
+E. Suntul pentozofosfatilor si calea acidului glucuronic
+A
+
+211. Au receptori intracelulari, cu o exceptie:
+A. Tiroxina
+B. Insulina
+C. Progesteron
+D. Cortizolul
+E. Estradionul
+B
+
+212. Este dizaharid nereducator:
+A. Malotza
+B. Celobioza
+C. Zaharoza
+D. Lactoza
+E. Amiloza
+C
+
+213. Afirmatia adevarata despre glicogen este:
+A. Este un polizaharid neramificat
+B. Este puternic hidrofob
+C. Este format de depozitarea glucidelor la organismele animale
+D. Prin hidroliza elibereaza glucoza si galactoza
+E. Se gaseste exclusiv in ficat
+C
+
+214. Acidul glucuronic:
+A. Este un compus greu hidrosolubil
+B. Este utilizat de organism pentru conjugarea doar a substantelor exogene in vederea
+eliminarii din organism
+C. Este sintetizat din glucoza
+D. Nu este implicat in catabolismul hemului
+E. Este sintetizaqt din galactoza
+C
+
+215. Despre suntul pentozofosfatilor este falsa afirmatia:
+A. Are loc in mitosol
+B. Genereaza NADPH
+C. Genereaza pentoze
+D. Nu consuma O2
+E. Nu produce ATP
+A
+
+216. Reactiile anaplerotice:
+A. Sunt reactii care cresc concentratia intermediarilor Ciclului Krebs
+B. Reactia de formare a oxaloacetatului din piruvat este o reactie anaplerotica
+C. Reactia de formare a succinil-CoA este o reactie anaplerotica
+D. Reactia de formare a este o reactie α − cetoglutaratului anaplerotica
+E. toate afirmatiile sunt adevarate
+E
+
+217. Piruvatu:
+A. Se formeaza in glicoliza anaeroba
+B. Reprezinta forma ionizanta a ciclului piruvic
+C. In conditii de aerobioza este degradat prin decarboxilare la acetil-CoA
+D. Trecerea sa in lactat este catalizata de lactat dehidrogenaza
+E. Toate afirmatiile sunt adevarate
+E
+
+218. Fructoza:
+A. Nu poate fi substrat pentru hexokinaza
+B. Intra in structura glicogenului
+C. Este mai rapid metabolizat decat glucoza
+D. Este folosita pentru sinteza lactozei
+E. Intoleranta la fructoza apara datorita cresterii activitatii aldolazei B
+C
+
+219. Enzimele regratorii ale ciclului Krebs sunt:
+A. Citrat sintaza, izocitrat dehidrogenaza, α − cetoglutarat dehidrogenzaza
+B. Citrat sintaza, piruvat dehidrogenaza, aconitaza
+C. Succinat tiokinaza, glucokinaza, lmalat dehidrogenaza
+D. Succinat dehidrogenaza, izocitrat dehidrogenaza, α − cetoglutarat dehidrogenzaza
+E. 6-fofofructokinaza, malat dehidrogenaza, citrat sintaza
+A
+
+220. Gluconeogeneza, afirmatii corecte:
+A. Proces prin care se sintetizeaza fructoza din compusi neglucidici
+B. Are loc in principal in ficat si rinichi
+C. Are loc in faza anabolica
+D. Este maxima la 4-6 ore de la ultima masa
+E. Are 3 etape specifice, reversibile
+B
+
+221. Sunt substrate pentru gluconeogeneza toti compusii cu o exceptie:
+A. Alanina
+B. Lactat
+C. Piruvat
+D. Acetl¬CoA
+E. Glicerol
+D
+
+222. Hormonii reglatori ai glucogenezei sunt cu exceptia:
+A. Insulina
+B. Glucagonul
+C. Adrenalina
+D. Glucocorticoizii
+E. Testosteronul
+E
+
+223. Suntul pentozo fosfatilor:
+A. E o cale alternativa de degradare a glucozei
+B. Implica doua etape makore: oxidativa si neoxidativa
+C. Nu consuma O2
+D. Produce NADPH necesar biosintezei reductive
+E. Toate afirmatiile sunt adevarate
+E
+
+224. Afirmatia adevarata despre glicogen:
+A. Este forma de depozitare a excesului de glucide in organism
+B. Este un heteropolizaharid
+C. Defosforilarea lui este prima etapa in procesul de degradare
+D. Glicogen fosforilaza kinaza este enzima reglatorie
+E. Glicogenoliza este declansata in muschi de actiunea glucagonului
+A
+
+225. Glucokinaza:
+A. Este localizata exclusiv la nivel hepatic
+B. Are afinitate mica pentru glucoza
+C. Are un pentru glucoza mai mic decat Km cel al hexokinazei
+D. Are specificitate mica, putand fosforila si alte monozaharuri
+E. Functioneaza cu V max doar in perioadele post prandiale
+C
+
+226. Fosfoglucomutaza este enzima ce catalizeaza transformarea glucozo-6- fostat in:
+A. Glucozo-1-fostat
+B. Fructozo-6-fosfat
+C. Acid-6-fosfogluconic
+D. Glucoza
+E. Fructozo-1-6-bifosfat
+A
+
+227. Prin condensarea unei molecule de manozamina cu o molecula de acid piruvic rezulta:
+A. NANA
+B. Acid sialic
+C. Acid neuraminic
+D. Aminozahar
+E. Acid malic
+C
+
+228. Despre reactia de fosforilare a glucozei este adevarata afimratia:
+A. Este reversibila
+B. Este catalizata in ficat de glucokinaza
+C. Decurge in prezenta Ca2+
+D. Prezinta un al enzimei KM foarte mic ¬0,1 mM
+E. Decurge in prezenta de GMP ca donator de grupari fosfat
+B
+
+229. Referitor la PG afirmatiile urmatoare sunt adevarate cu exceptia:
+A. Se gasesc in cartilagoo, tendoane, piele, lichid sinovial
+B. In PG, polizaharidele sunt constituite din unitati monozaharidice
+C. Sunt biomolecule care contin fragmente heteropolizaharidice repetabile
+D. Fragmentele glucidice ale PG se mai numesc si GAG
+E. Au caracter hidrofil puternic
+B
+
+230. Complexul piruvat dehidrogenazei:
+A. Catalizeaza conversia ireversibila a piruvatului la acetil¬CoA
+B. Catalizeaza conversia reversibila a piruvatului la acetil¬CoA
+C. Este localizat in citosol
+D. Este un complex multienzimatic
+E. Necesita prezenta unei singure coenzime (acidul lipoic)
+A
+
+231. Care din urmatorii compusi nu poate fi folosit ca substrat in glucogeneza:
+A. acetil¬CoA
+B. Glicerol
+C. Alanina
+D. Glicina
+E. Acid lactic
+A
+
+232. Enzima reglatorie a glicogenolizei este:
+A. Enzima de deramificare
+B. Glicogen fosforilaza kinaza
+C. Glicogen fosforilaza
+D. Fosfogluco mutaza
+E. Fosfoprotein fosfataza
+C
+
+233. Afirmatia adevarata despre glicoliza este:
+A. Enzima reglatorie este 6-fosfofructo-1-kinaza
+B. Enzima reglatorie este hexokinaza
+C. Produsul final este intotdeauna acidul lactic
+D. Consuma 4 moli de ATP pentru o molecula de glucoza degradata
+E. In anaerobioza se produc 2 moli de ATP pentru fiecare molecula de glucoza degradata
+A
+
+234. Identificati afimratia adevarata:
+A. Fosforilarea glucozei este necesara doar pentru intrarea in glicoliza
+B. Fosforilarea glucozei este o reactie reversibila
+C. Esterul fosforic poate traversa liber membrana celulara
+D. Prin fosforilare glucoza este sechestrata intracelular
+E. Glucokinaza este distribuita in toate tesuturile
+D
+
+235. Gluconeogeneza:
+A. Permite sinteza de glucoza din acizii grasi rezultati din hidroliza triacilgliceriolilor
+B. Este o secventa metabolica inalt consumatoare de ATP si F ADH2
+C. Nu consuma NADPH
+D. Se deruleaza exclusiv in citosol
+E. Este exact inversul glicolizei
+C
+
+236. Alegeti afirmatia adevarata despre acidul lactic:
+A. Este produsul final al glicolizei aerobe
+B. Nu poate fi utilizat ca substrat gluconeogenetic
+C. Glicoliza eritrocitara produce exclusiv acid lactic
+D. Provine din acidul piruvic prin reducerea cu NADPH
+E. Acumularea in exces nu are consecinte grave asupra organismului, acidul lactic fiind
+lipsit de toxicitate
+C
+
+237. Alegeti afirmatia falsa despre ciclul Krebs:
+A. Este o secventa metabolica ciclica mitosolica
+B. Este secventa finala, comuna pentru degradarea glucidelor, lipidelor si aminoacizilor
+C. Nu consuma direct oxigen
+D. Functioneaza si in aerobioza si in anaerobioza
+E. Este initiat prin condensarea acetil¬CoA cu oxaloacetat
+D
+
+238. Alegeti afirmatia adevarata despre glicoliza eritrocitara:
+A. Are ca produs final piruvatul
+B. Are ca produs final lactatul care este reutilizat de eritrocit pentru sinteza de glucoza
+C. Are ca produs final lactatul care este eliberat in circulatie, captat de ficat si folosit ca
+substrat gluconeogenetic
+D. Eritrocitul nu deruleaza glicoliza deoarece nu poseda mitocondrii
+E. Eritrocitul nu este dependent de glicoliza deoarece poate degrada si alte monozaharuri
+C
+
+239. Despre amidon este falsa afirmatia:
+A. In amiloza resturile glucozil se leaga prin legaturi α − (1, 4) − glucozidice
+B. In amilopectina resturile glucozil se leaga prin legaturi α − (1, 4) − glucozidice si
+α − (1, 6) − glucozidice
+C. Amiloza este solubila in apa
+D. Amilopectina este insolubila in apa
+E. La hidroliza amilozei rezulta micelii care dau cu iodul o coloratie albastra
+C
+
+240. Glucoza este necesara furnizarii urmatorilor compusi, cu exceptia:
+A. Acizi uronici
+B. NADPH
+C. Pentoze
+D. Aminoacizi esentiali
+E. Glicerol si acetil-CoA
+D
+
+241. Este dezoxizahar:
+A. D-Arabinoza
+B. D-eritroza
+C. L-fucoza
+D. D-sorboza
+E. D-ribuloza
+C
+
+242. Afectarea functiei exocrine a pancreasului duce la disconfort dupa ingestia crescuta de
+carbohidrati. Care dintre urmatorii compusi se vor digera cu dificultate:
+A. Amidonul
+B. Lactoza
+C. Fibrele vegetale
+D. Sucroza
+E. Maltoza
+A
+
+243. Normal degradarea glicogenului produce:
+A. Mai multa glucoza decat glucoza 1-fosfat
+B. Mai multa glucoza 1-fosfat decat glucoza
+C. Cantitati egale de glucoza si glucoza 1-fosfat
+D. Nici glucoza si nici glucoza 1-fosfat
+E. Doar glucoza 1-fosfat
+B
+
+244. Un pacient cu diabet tip I si-a neglijat injectiile cu insulina in ultimele 72 ore si nici nu a
+mancat prea mult. In aceste conditii care dintre exemple descriu cel mai bine activitatea
+enzimelor hepatice implicate in metabolismul glicogenului:
+Glicogen sintaza Fosforilaza kinaza Glicogen fosforilaza
+A. Active Active Active
+B. Active Active Inactiva
+C. Active Inactiva Inactiva
+D. Inactiva Inactiva Inactiva
+E. Inactiva Active Active
+E
+
+245. Au caracter reducator:
+A. Amidonul, glicogenul, zaharoza
+B. Lactoza, maltoza, amidonul
+C. Glicogenul, izolmaltoza, zaharoza
+D. Surcroza, amilopectina, amiloza
+E. Glucoza, fructoza, zaharoza
+B
+
+246. Degradarea totala a glucozei presupune urmatoarele etape:
+A. Glicoliza, ciclul Krebs
+B. Glicoliza, decarboxilarea piruvatului
+C. Ciclul Krebs si fosforilarea oxidativa
+D. Glicoliza, decarboxilarea piruvatului, Ciclul Krebs, fosforilarea oxidative
+E. glicoliza , decarboxilarea piruvatului, Ciclul Krebs
+D
+
+247. Gluconeogeneza:
+A. Are loc exclusiv in ficat si creier
+B. Are rol in exclusivitate in rinichi si muschi
+C. Poate avea loc si in conditiile unui aport normal de flucoza, insa cu viteza redusa
+D. Este procesul de formare a glucozei din glucoza
+E. Este inactivata de insulina
+C
+
+248. Sinteza glucozei din surse neglucidice:
+A. Poarta numele de gluconeogeneza
+B. Are loc exclusiv prin parcurgerea in sens invers a glicolizei
+C. Este catalizata de 3 enzime proprii bidirectionate
+D. Nu consuma ATP
+E. Are loc in citosol
+A
+
+249. Fructozo-1,6 - bisfosfataza
+A. Este o enzima reglata covalent
+B. Este stimulata de AMP si fructozo-1,6-bisfosfat
+C. Este stimulata de ATP si fructozo-2,6-bisfosfat
+D. Este inhibata de AMP, glucozo-1,6-bisfosfat
+E. Este o enzima din calea glicolizei
+D
+
+250. In Ciclul Krebs
+A. Se consuma 1 mol ATP
+B. Se elimina 2 molecule de H2O
+C. Se consuma 1 mol de acetil CoA
+D. Se consuma 2 molecule de H2O
+E. Se formeaza 2 moli de ATP
+D
+
+251. Enzimele reglatorii ale Ciclului Krebs sunt:
+A. Citrat sintaza, izocitrat dehidrogenaza, etoglutarat α − c dehidrogenaza
+B. Citrat sintaza, succinat dehidrogenaza, malat hidrogenaza
+C. Izocitrat dehidrogenaza, succinat dehidrogenaza, malat dehidrogenaza
+D. Citrat sintaza, izocitrat dehidrogenaza, succinat dehidrogenaza
+E. Malat dehidrogenaza, fumaraza, aconitaza
+A
+
+252. Referitor la Ciclul Krebs este falsa afirmatia:
+A. Are loc in mitosol
+B. Are loc in citosol
+C. Este o cale amfibolica
+D. Este o cale de degradare oxidativa a acetil-CoA si reducere a NAD+ , FAD
+E. Se elimina 2 molecule de CO2
+B
+
+253. Urmatoarele enzime pot folosi in vivo piruvatul ca substrat cu o exceptie
+A. Piruvat carboxilaza
+B. Piruvat dehidrogenaza
+C. Lactat dehidrogenaza
+D. GPT
+E. Piruvat kinaza
+E
+
+254. Nu pot fi utilizati ca substrate in gluconeogeneza urmatorii compusi cu exceptia
+A. acetil¬CoA
+B. acetoacetil-CoA
+C. palmitoil-CoA
+D. Alanina
+E. stearoil-CoA
+D
+
+255. Despre glicogenogeneza sunt adevarate urmatoarele afirmatii cu exceptia:
+A. Enzima limitanta de viteza este glicogen sintaza
+B. Enzima limitanta de viteza este glicogen fosforilaza
+C. Ramificarea glicogenului se realizeaza sub actiunea enzimei de ramificare
+D. Este un proces consumator de energie
+E. Este un proces citosolic
+B
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

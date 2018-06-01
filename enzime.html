@@ -1,0 +1,835 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+
+70. Toate afirmatiile urmatoare sunt adevarate cu exceptia:
+A. Enzimele sunt catalizatori ai reactiilor chimice care au loc in organismele vii
+B. Enzimele sunt proteine
+C. Ca urmare a scaderii energiei activare enzimele asigura viteze mari reactiilor catalizate
+D. Enzimele nu prezinta specificitate de substrat
+E. Enzimele prezinta specificitate stereochimica
+D
+
+71. Izoenzimele reprezinta:
+A. Aceeasi enzima ce catalizeaza reactii diferite
+B. Enzimele cu localizari tisulare diferite ce catalizeaza aceeasi reactie
+C. Enzimele identice structural ce catalizeaza cu aceeasi viteza o reactie biochimica
+D. Enzime codificate cu aceeasi gena
+E. Enzimele cu aceeasi localizare tisulara, dar care catalizeaza reactii diferite
+B
+
+72. In ceea ce priveste enzimele alosterice sunt adevarate afirmatiile, cu exceptia:
+A. Sunt enzime reglatoare ale etapelor cheie din caile metabolice
+B. Catalizeaza reactii ireversibile
+C. Au structura cuaternara, numarul monomerilor din oligomeri fiind par
+D. Monomerii coopereaza in fixarea substratului
+E. Reglarea alosterica se face cu consum mare de energie
+E
+
+73. Care dintre urmatoarele afirmatii este adevarata:
+A. Pentru a fi eficienta o enzima trebuie sa fie prezenta in aceeasi concentratie cu
+substratul sau
+B. Activitatea enzimei este independenta de pH
+C. Viteza reactiilor enzimateice nu este influentata de temperatura
+D. Prin fosforilarea unei enzime se determina activarea acesteia
+E. Proenzimele (zimogenii) sunt formele inactive ale unei enzime, activarea acestora
+urmans sa se faca la locul de actiune
+E
+
+74. Lactatdehidrogenaza (LDH):
+A. Are 5 izoenzime
+B. Este un dimer
+C. Lanturile H si M ale izoenzimelor LDH sunt codificate de aceeasi gena
+D. Catalizeaza o reactie ireversibila din glicoliza anaeroba
+E. Izoenzimele H4 si H3M sunt caracteristice ficatului si muschilor scheletici
+A
+
+75. Urmatoarele afirmatii despre inhibitia competitiva sunt adevarate, cu exceptia:
+A. Este un tip de inhibitie reversibila
+B. Intre substrat si inhibitor in cazul prezentei simultane in mediu are loc o competitie
+pentru fixarea pe enzima
+C. Inhibitorii competitivi sunt compusi cu structura apropiata de cea a substratului
+D. Nu se modifiva Vmax in timp ce afinitatea enzimei pentru substrat scade
+E. Se modifica Vmax in timp ce KM ramane constant
+D
+
+76. Care dintre urmatoarele afirmatii este falsa:
+A. Succinat dehidrogenaza, enzima ce catalizeaza transformarea acidului succinic in acid
+fumaric este inhibata competitiv de acidukl malonic
+B. Efectul anticoagulant al antitrombinei III este mediat de heparina
+C. Lactat dehidrogenaza prezinta specificitate stereochimica
+D. De raportul De Rittis intre GOT/GPT creste peste 1,3 in afectiuni hepatice
+E. Ornirincarbamiltransferaza (OCT) este o enzima organospecifica
+D
+
+77. Enzimele:
+A. Au centrul catalitic identic cu centrul de legare al substratului
+B. Sunt biocatalizatori
+C. Centrul activ este o structura plana
+D. Leaga substratul ireversibil
+E. Activitatea lor nu este influentata de concentratia de substrat
+B
+
+78. Sunt proprietati comune pentru catalizatorii anorganici si enzime, cu exceptia:
+A. Cresc mult viteza de producere a reactiilor chimice
+B. Nu se consuma in reactie
+C. Scad energia de activare a reactiilor
+D. Isi pot regla biosinteza si activitatea
+E. Nu modifica echilibrele chimice
+D
+
+79. Nu prezinta specificitate larga:
+A. Pepsina
+B. Chimotripsina
+C. Lipazele
+D. Ureeaza
+E. Tripsina
+D
+
+80. Factorii care influenteaza viteza unei reactii enzimatice sunt, cu exceptia:
+A. Temperatura
+B. Structura primara
+C. pH-ul
+D. Concentratia de substrat
+E. Concentratia enzimeik
+B
+
+81. Nu este adevarat despre inhibitia competitiva:
+A. Substratul si inhibitorul competitiv sunt analogi structurali
+B. Enzima leaga inhibitorul in acelasi loc ca si substratul
+C. Afinitatea pentru substrat a enzimei nu este modificata
+D. Creste valoarea lui Km
+E. Vmax ramane constant
+C
+
+82. Inhibitorul competitiv:
+A. Nu este analog structural al substratului
+B. Se leaga la un situs distinct de centrul catalitic al enzimei
+C. Se leaga covalent la centru catalitic al enzimei
+D. Nu modifica valoarea lui Km
+E. Se leaga necovalent la centrul catalitic al enzimei
+E
+
+83. Referitor la izoenzime este falsa afirmatia:
+A. Pot avea afinitati diferite fata de substrat
+B. Reactiile catalizate de acestea sunt reversibile, ΔG0 fiind pozitiv
+C. Catalizeaza aceeasi reactiem dar difera prin structura, localizare tisulara, proprietati
+catalitice
+D. Pot avea specificitati distincte pentru coenzime
+E. Lactat dehidrogenaza, transaminazele sunt izoenzime
+E
+
+84. Lactat dehidrogenaza:
+A. Catalizeaza o reactie ireversibila
+B. Are 4 izoenzime
+C. Este un dimmer
+D. Este implicata in glicoliza anaeroba
+E. LDH5 creste in infarct miocardic
+D
+
+85. Creatin kinaza:
+A. Cresterea activitatii in ser a izoformei MB indica lezarea hepatocitului
+B. Este formata din 2 subunitati: M si B
+C. Este localizata extracelular
+D. Prezinta 2 izoenzime
+E. Concentratii serice crescute se remarca in hepatita virala
+B
+
+86. Conversia unei enzime din forma nefosforilata in cea fosforilata:
+A. Determina activarea enzimei
+B. Este catalizata de o protein kinaza
+C. Este semnalizata de ficat prin insulina
+D. Are loc post prandial
+E. Are loc pe resturi de Tyr din structura proteinei
+B
+
+87. Viteza unei reactii enzimatice:
+A. Poate creste in prezenta unor modulatori aloesterici
+B. Este independenta de temperatura
+C. Nu variaza in functie de concentratia enzimei
+D. Nu variaza in functie de concentratia substratului
+E. Nu este influentata de pH
+A
+
+88. Aspectul sigmoidal al curbei de oxigenare a hemoglobinei se explica prin
+A. Structura cuaternara ce contine 4 subunitati identice
+B. Functionarea independenta a fiecareia dintre cele 4 subunitati
+C. Legarea cooperativa a oxigenului
+D. Structura cuaternara particulara in care intre subunitati erxista legaturi covalente
+E. Cresterea afinitatii pentru oxigen odata cu scaderea presiunii partiale a oxigenului
+C
+
+89. Afirmatia falsa despre un inhibitor competitiv este:
+A. Este un analog structural al substratului
+B. Se leaga covalent la centrul catalitic activ al enzimei
+C. Sub actiunea Km creste
+D. Vmax nu se modifica
+E. Se leaga reversibil la enzima
+B
+
+90. Un inhibitor necompetitiv:
+A. Este asemanator structural cu substratul enzimei
+B. Se leaga la centrul catalitic activ al enzimei
+C. Determina scaderea Km a enzimei
+D. Determina scaderea Vmax
+E. Se leaga covalent la enzima la nivelul unui situs distinct de centrul catalitic activ
+D
+
+91. In organism, in conditii fiziologice, activarea enzimelor este influentata de urmatorii factori cu
+exceptia:
+A. Temperatura
+B. pH-ul
+C. Concentratia substratului
+D. Concentratia efectorilor alosterici
+E. Concentratia ionilor de mercur
+E
+
+92. Despre izoenzimele lactat dehidrogenazei este adevarata afirmatia:
+A. Toate cele cinci izoenzime contin minim un lant de tip H
+B. Toate cele cinci izoenzime contin minim un lant de tip M
+C. Monomerii sunt asociati intre ei prin legaturi covalente
+D. Activitatea serica a LDH1 creste in infarctul miocardic
+E. LDH5 este predominanta in muschi si catalizeaza reactia lactat → piruvat
+D
+
+93. Despre creatifosfo kinaza (creatin kinaza) sunt false toate afirmatiile cu o exceptie:
+A. Prezinta 4 izoenzime
+B. Cresterea activitatii serice a izoenzimei CK-MB este intalnita in cazul accidentelor
+insotite de ruptura unor muschi scheletici
+C. Prezinta 3 izoenzime fiecare fiind formata din 3 subunitati
+D. In conditii de repaus permite sinteza compusului macroergic fosfocreatina
+E. Cresterea activitatii serice a izoenzime CK-MM indica un infarct miocardic acut
+D
+
+94. Afirmatia adevarata despre izoenzime este:
+A. Difera doar prin distributia tisulara
+B. Difera doar prin valoarea Km
+C. Difera doar prin masa moleculara
+D. Difera doar prin Vmax
+E. Toate raspunsurile anterioare sunt false
+E
+
+95. Afirmatiile despre icterul neonatal sunt adevarate cu exceptia:
+A. Una din cauze este hemoliza accelerata
+B. Nou-nascutii prezinta o ‘imaturitate’ a ficatului de a prelua, conjuga si excreta bilirubina
+C. Se sintetizeaza UDP-glucuronat in concentratie mare
+D. Fenobarbitalul are efect favorabil, datorita faptului ca are capacitatea sa induca
+metabolizarea bilirubinei
+E. Concentratia bilirubinei este crescuta comparativ cu cea a omului adult
+C
+
+96. Concentratia de fosfataza alcalina nu este crescuta in:
+A. Colestaza prin obstructie biliara
+B. Rahitism prin carenta vitaminei D
+C. Metastaze hapatice
+D. Trimestrul I al sarcinii
+E. Trimestrul III al sarcinii
+D
+
+97. Afirmatia adevarata despre structura de tip α − helix :
+A. Este un element de structura tertiara
+B. Apare foarte rar in proteine
+C. Nu exista structura proteinelor globulare
+D. Este un element de structura secundara
+E. Este specific doar ptoteinelor fibrilare
+D
+
+98. Care din urmatoarele afirmatii este o caracteristica comuna a enzimelor alosterice:
+A. Sunt alcatuite dintr-o singura subunitate
+B. Respecta cinetica Michaelis-Menten
+C. Nu catalizeaza etapele reglatorii ale cailor metabolice
+D. Activitatea lor este modulata de efectori alosterici
+E. De regula sunt plasate la finalul cailor metabolice pe care le regleaza
+D
+
+99. Care dintre urmatoarele enzime catalizeaza o reactie de transaminare:
+A. LDH
+B. Fosfataza alcalina
+C. Fosfataza acida
+D. GOT
+E. Creatin kinaza
+D
+
+100. Reactia de transaminare reprezinta transferul unei grupari amino:
+A. De pe un cetoacid pe un aminoacid
+B. De pe un aminoacid pe un alt aminoacid
+C. De pe un aminoacid pe o baza azotata
+D. De pe un aminoacid pe un cetoacid
+E. De pe o baza azotata pe un cetoacid
+D
+
+101. Referitor la enzime, este adevarata urmatoarea afirmatie:
+A. Asigura viteze mici ale reactiilor chimice din organism
+B. Fara exceptie sunt de natura glucidica
+C. Au structura strict proteica
+D. Din punct de vedere chimic sunt de natura proteica
+E. Pentru a-si exercita actiunea necesita obligatoriu prezenta cofactorilor
+D
+
+102. Inhibitia competitiva:
+A. Inhibitorul se leaga covalent la enzima
+B. Inhibitorul se leaga slab la centrul catalitic activ al enzimei
+C. Creste viteza de reactie
+D. Creste KM
+E. Creste afinitatea enzimei pentru substrat
+B
+
+103. Referitor la inhibitia necompetitiva este falsa afirmatia:
+A. Afinitatea enzimei pentru substrat nu se modigfica
+B. Substratul si inhibitorul sunt analogi structurali
+C. nu se modifica in prezenta KM inhibitorului
+D. Viteza de reactie scade
+E. Afinitatea enzimei pentru substrat nu se modifica
+B
+
+104. Referitor la izoenzime sunt adevarate urmatoarele:
+A. Catalizeaza aceeasi reactie
+B. Difera prin masa moleculara, structura
+C. Pot avea specificitati diferite pentru conezime
+D. Pot avea afinitati diferite fata de acelasi substrat
+E. Toate sunt adevarate
+E
+
+105. Reductazele:
+A. Catalizeaza transferul de hidrogen de la o coenzima redusa la un acceptor
+B. Catalizeaza transferul de echivalenti reducatori de la un substrat la dioxigen
+C. Catalizeaza transferul de echivalenti reducatori de la un substrat la un peroxid
+D. Catalizeaza reactii de hidroliza
+E. Catalizeaza reactii de izomerizare
+A
+Hormoni
+
+132. Toate informatiile urmatoare sunt adevarate cu exceptia:
+A. Denumirea de hormon este atribuita oricarui compus chimic, elaborat si secretat de o
+celula care afecteaza activitatea altei celule
+B. Hormonii paracrini sunt secretati de o celula si actioneaza asupra celulelor invecinate,
+fara a ajunge in torentul circulator
+C. Hormonii endocrini circula intre celula secretorie si tesutul tinta prin sange
+D. O celula poate fi tinta actiunii unui singur hormon
+E. Interactiunea hormon-receptor este asemanatoare interactiunii unui substrat cu centrul
+activ enzimatic
+D
+
+133. Mecanismul de actiune al hormonilor peptidici si a catecolaminelor implica urmatoarele
+componente, cu exceptia
+A. Proteinele G
+B. Receptorul hormonal
+C. Receptorul intracelular
+D. Mesager prim
+E. Mesager secund
+C
+
+134. Proteinele G:
+A. Au proprietatea de a lega nucleotide cu citozina
+B. Reprezinta o familie de proteine heterotrimerice cu structura H2L2
+C. Forma inactiva a unei proteine G este GDP- αβγ
+D. Subunitatea γ confera individualitatea unei proteine G
+E. Proteina Gi , cu subunitatea αi activeaza activitatea adenilat citazei
+C
+
+135. Urmatoarele afirmatii despre hormonii tiroidieni sunt adevarate, cu exceptia:
+A. Sunt produsi de glanda tiroida
+B. Sunt derivati iodurati ai unui compus ipotetic, derivat de la tirozina, tironina
+C. Circula in plasma fixati de TBG si de albumina
+D. Controleaza metabolismul oxidativ, prin care se obtine ATP
+E. T3 este mai bogat in iod, dar mai putin activ biologic
+E
+
+136. Hemostazia calciului extracelular este asigurata de urmatorii hormoni, cu exceptia:
+A. Hormonul paratiroidian
+B. Calcitonina
+C. Calcitriol
+D. Glucagon
+E. 1,25-dihidroxi-colecalciferol
+D
+
+137. Insulina:
+A. Este hormonul fazei catabolice a metabolismului
+B. Princpipalul factor reglator al secretiei de insulina este glicemia
+C. Este formata din doua lanturi grele si doua usoare, unite prin punti de sulf
+D. Inhiba glicoliza
+E. In tesutul adipos, insulina inhiba lipoproteinlipaza
+B
+
+138. Urmatoarele afirmatii despre catecolamine sunt adevarate, cu exceptia:
+A. Se formeaza din tirozina
+B. Catabolismul catecolaminelor are loc cu participarea a doua enzime: catecol-O-metil
+transferaza (COMT) si monoamin oxidaza (MAO)
+C. La nivelul musculaturii scheletice inhiba glicogenboliza
+D. In tesutul adipos stimuleaza lipoliza
+E. Transformarea tirozinei in adrenalina are loc in patru etape
+C
+
+139. Care dintre urmatorii hormoni nu deriva din colesterol
+A. Cortisolul
+B. Aldosterona
+C. Hormonii tiroidieni
+D. Dehidroepiandrosterona
+E. Androstendiona
+C
+
+140. Afirmatia falsa despre aldosterona:
+A. Participa la mentinerea homeostaziei hidrice si electrolitice
+B. Precursorul aldosteronei este colesterolul
+C. Sintreza de aldosterona nu implica hidroxilare la C17
+D. Tesutul principal tinta pentru aldosterona este rinichiul
+E. Controlul secretiei de aldosterona se realizeaza prin mecanisme comune cortisolului
+E
+
+141. Dezvoltarea si functia secretoare a organelor sexuale masculine sunt controlate printr-un
+mecanism de feed-back negativ la care participa urmatorii hormoni, cu exceptia:
+A. Hormonul luteinizant (LH)
+B. Hormonul foliculostimulant (FSH)
+C. Hormonul eliberator hipotalamic
+D. Hormonul paratiroidian
+E. Testosterona circulanta
+D
+
+142. Prezinta receptori nucleari urmatorii hormoni, cu exceptia:
+A. Hormonii tiroidieni
+B. Catecolaminele
+C. Cortizolul
+D. Testosterona
+E. Progesterona
+B
+
+143. Prezinta receptori membraniari urmatorii hormoni, cu exceptia:
+A. Insulina
+B. Glucagonul
+C. Adrenalina
+D. Aldosterona
+E. Somatostatina
+D
+
+144. Este adevarat despre hormonii care regleaza calcemia, cu exceptia:
+A. PTH este un hormon peptidic
+B. PTH are actiune hipercalcemiant
+C. PTH actioneaza sinergic cu calcitonina
+D. Calcitrionul stimuleaza absorbtia calciului si fosfatilor
+E. Calcitrionul prezinta receptor nucelar
+C
+
+145. Este hormon liposolubil non-steroidiam
+A. Pregnenolona
+B. Parathormonul
+C. Tiroxina
+D. Cortizolul
+E. Estradiolul
+C
+
+146. Sunt mesangeri secunzi
+A. Ca2+
+B. DAG
+C. IP 3
+D. AMPc
+E. Toti
+E
+
+147. Se sintetizeaza din colesterol:
+A. Hormonii tiroidieni
+B. Aldosteronul si parathormonul
+C. Aldostendionul si progesteronul
+D. Estrogenii si catecolaminele
+E. Angiostensina
+C
+
+148. Hormoni lipofili steroidici sunt:
+A. Androgenii
+B. Ocitocina
+C. Adrenalina
+D. Insulina
+E. Tiroxina
+
+149. Sinteza corecta a calcitrionului, hormon reglator al calcemiei, este infleuntata de:
+A. PTH, care inhiba activitatea 1 α -hidroxilazei
+B. Cresterea activitatii 24-hidroxilazei de catre PTH
+C. Cresterea concentratiei de PTH
+D. Evitarea expunerii la lumina solara
+E. Cresterea concentratiei de calciu si fosfat in plasma
+C
+
+150. Secretia de insulina este influentata de prezenta mai multor factori, exceptie facand:
+A. Somatostatina
+B. Unele monozaharide cum ar fi fructoza, manoza
+C. Aminoacizi
+D. Agonisti α -adrenergici
+E. Peptidul C
+E.
+
+151. In mecanismul de actiune al hormonilor hidrosolubili, complexul H-R este cuplat de:
+A. Ligandina
+B. O proteina G
+C. Un mesager secund
+D. Un sistem efector
+E. Serumalbumina
+B
+
+152. Precursorul hormonului paratiroidian este sintetizat la nivelul:
+A. Ribozomilor de la nivelul RER
+B. Aparatul Golgi
+C. Lizozomilor
+D. Cisternelor reticulului endoplasmatic
+E. Mitocondriilor
+A
+
+153. In legatura cu efectele biologice ale catecolaminelor este falsa afirmatia:
+A. Stimuleaza gluconeogeneza hepatica
+B. Stimuleaza lipoliza in tesutul adipos
+C. Stimuleaza gligogenosintetaza hepatica
+D. Stimuleaza glicogenoliza hepatica
+E. Stimuleaza glicogenoliza musculara
+C
+
+154. Despre catecolamine este adevarata afirmatia:
+A. Sunt sintetizate in regiunea interna a corticosuprarenalei
+B. Sunt hormoni liposolubili
+C. Sunt catabolizatie la acid vanilmandelic
+D. Precursorul imediat este fenilalanina
+E. Au timp de injumatatire 1-3 h
+C
+
+155. Tireoglobulina:
+A. Este glicoproteina plasmatica ce transporta hormonii tiroidieni
+B. Este o glicoproteina saraca in resturi de tirozina
+C. Este o glicoproteina majora a coloidului foliculilor tiroidieni
+D. Este cel mai activ hormon tiroidian
+E. La nivelul celulelor tinta actioneaza un receptor membranar
+C
+
+156. Feocromocitomul este o tumora ce contine predominant urmatorul tip de celule:
+A. Monocite
+B. Macrophage
+C. Cromfine
+D. Bazofile
+E. Eozinofile
+C
+
+157. Alegeti afirmatia falsa despre insulina:
+A. Este un hormon peptidic secretat sub forma de preprohormon
+B. Este secretat de celulele B( β ) pancreatice
+C. Este principalul hormon hipoglicemiant
+D. Stimuleaza glicogenogeneza hepatica
+E. Actioneaza pe receptori intracelulari
+E
+
+158. Despre testosteron sunt adevarate afirmatiile cu o exceptie:
+A. Este principalul hormon androgen
+B. Este sintetizat in celulele interstitiale Leyding testiculare
+C. In tesuturile periferice este hidrogenay la dihidrotestosteron cu activitate biologica
+crescuta
+D. Actioneaza pe un receptor membranar
+E. In plasma este transportat in forma legata de unele proteine serice
+D
+
+159. Cortizolul:
+A. Este principalul hormon glucocorticoid
+B. Este sintetizat in corticosuprarenala
+C. Stimuleaza glicoligenoliza hepatica
+D. Stimuleaqza lipoliza in tesutul adipos
+E. Are efect hipoglicemiant
+E
+
+160. Toate afirmatiile urmatoare sunt adevarate cu exceptia:
+A. Hormonii tiroidieni sunt transportati in plasma in forma legata de proteine circulante
+B. Aldosteronul si cortizolul actioneaza pe receptori intracelulari
+C. Insulina este un hormon polipeptidic hidrosolubil
+D. Adrenalina este un hormon hidrosolubil ce actioneaza pe un receptor intracelular
+E. Calcitriolul este derivat de la vitamina D3
+D
+
+161. Sunt mesageri secunzi toti compusii de mai jos cu exceptia:
+A. AMP ciclic
+B. Calciul
+C. Calcitonina
+D. IP 3
+E. DAG
+C
+
+162. Care dintre compusii de mai jos este responsabil de medierea intracelulara a actiunii unui
+hormon hidrosolubil:
+A. ATP
+B. GDP
+C. Monoacilglicerolul
+D. AMP ciclic
+E. AMP
+D
+
+163. Despre hormonii hipofizari tropi sunt adevarate afirmatiile cu exceptia:
+A. Sunt sintetizati de catre adenohipofiza
+B. Sunt cinci tipuri de hormoni tropi
+C. Controleaza dezvoltarea si functionarea glandelor endocrine si a altor tesuturi periferice
+D. Sunt hormoni de natura steroidica
+E. Secretia lor este controlata si de catre hipotalamus
+D
+
+164. Prima etapa a sintezei de hormoni steroizi este transformarea:
+A. Colesterol → pregnan
+B. Colesterol → estradiol
+C. Colesterol → testosterona
+D. Colesterol → pregnenolona
+E. Colesterol → estran
+D
+
+165. Despre sinteza hormonilor sterioizi sunt false toate afirmatiile cu o exceptie:
+A. Precursorul comun este colesterolul
+B. Precursorul comun este steranul
+C. Precursorul comun este pregnanul
+D. Precursorul comun este colanul
+E. Precursorul comun este androstanul
+A
+
+166. Despre AMP ciclic sunt adevarate afirmatiile cu exceptia:
+A. Este sintetizat sunt actiunea adenilat ciclazei
+B. Este un mesager secund
+C. Determina activarea protein kinazei A
+D. Este inactivat sub actiunea guanilat ciclazei
+E. Contine un singur rest de acid fosforic in molecula
+D
+
+167. Sunt hormoni hidrosolubili cu o exceptie:
+A. Parathormonul
+B. Calcitonina
+C. Somatostatina
+D. Adrenalina
+E. Estradiolul
+E
+
+168. Au receptori membranari urmatorii hormoni cu exceptia:
+A. Aldosteron
+B. Parathormon
+C. Adrenalina
+D. Hormonul luteinizant (LH)
+E. Calcitonina
+A
+
+169. Dintre urmatorii hormoni: calcitonina (1), calcitriol (2), parathormon (3), aldosteron (4).
+cortizol (5), si glucagon (6) intervin in reglarea calcemiei:
+A. 1, 2, 4.
+B. 1, 2, 3
+C. 2, 3, 5
+D. 1, 4, 6
+E. 2, 3 4
+B
+
+170. Sunt mesageri secunzi cu o exceptie:
+A. AMP ciclic
+B. GMP ciclic
+C. Calcitonina
+D. IP 3
+E. DAG
+C
+
+171. Sunt hormoni liposolubili, cu o exceptie:
+A. Aldosteronul
+B. Testosteronul
+C. Parathormonul
+D. Progesteronul
+E. Tiroxina
+C
+
+172. La nivelul muscular glucagonul determina urmatoarele efecte:
+A. Stimularea glicogenolizei
+B. Stimularea glicolizei
+C. Stimularea lipolizei
+D. Stimularea cetogenezei
+E. Niciuna dintre variantele anterioare nu e corecta
+E
+
+173. Care dintre urmatoarele este o caracteristica generala a mesagerilor chimici:
+A. Sunt secretati de o celula, patrund in sange si actioneaza la distanta asupra celulelor
+tinta
+B. Pentru a atinge un raspuns concordant, fiecare mesager chimic e produs de mai multe
+tipuri de celule
+C. Fiecare mesager se leaga la o proteina receptoare specifica din celula tinta
+D. Mesagerii trebuie sa intre in celula pentru a transmite mesajul
+E. Pentru a transmite mesajul mai departe, fiecare mesager e metabolizat la un mesager
+secund intracelular
+C
+
+174. Receptorii membranari:
+A. Leaga mesagerii lipofili
+B. Leaga mesagerii hidrofili
+C. Sunt totdeaua cuplati cu proteinele de tip G
+D. Au activitate tirozin kinazica
+E. Sunt intotdeauana cuplati cu fosfolipaza C
+B
+
+175. In cazul mecanismelor de actiune al hormonilor nu este mesager secund:
+A. Ca2+
+B. IP 3
+C. AMPc
+D. GMPc
+E. Parathormonul
+E
+
+176. Ce tip de proteina G stimuleaza activitatea adenilat ciclazei:
+A. Gi
+B. Go
+C. Gs
+D. Gp
+E. Gt
+C
+
+177. In deficienta de iod, tiroida secreta ai mult:
+A. T 3
+B. T 1
+C. T 4
+D. T 2
+E. T3 si T4
+A
+
+178. Secretia de insulina este influentata de factorii urmatori cu exceptia:
+A. Aminoacizi
+B. Antagonisti α − andrenergenici
+C. Somatostatina
+D. Fructoza
+E. Glucoza
+B
+
+179. Glucagonul este secretat la nivelul pancreasului de celulele:
+A. D
+B. F
+C. A
+D. B
+E. C
+C
+
+180. Referitor la glucagon este falsa afirmatia:
+A. Exercita actiuni metabolice opuse ale insulinei
+B. Somatostatina inhiba secretia glucagonului
+C. Glucagonul influenteaza metabolismul glucidic in muschi
+D. In diabet si inanitie glucagonemia este crescuta
+E. Tesutul adipos este influentat de secretia glucagonului
+C
+
+181. Hormonii ovarieni nu controleaza:
+A. Ciclul ovarian
+B. Gestatia
+C. Fecundarea
+D. Nasterea
+E. Aparitia caracterelor sexuale principale
+E
+
+182. Melatonina este produs specific al:
+A. Hipofizei
+B. Epifizei
+C. Adenohipofizei
+D. Neurohipofizei
+E. Hipotalamusului
+B
+
+183. Sunt hormoni steroizi:
+A. Calcitrionului, insulina, cortizolul
+B. Estrogenii, androgenii, vitamina D
+C. Glucagonul, ACTH-ul, noradrenalina
+D. Estrogenii, androgenii, ocitocina
+E. Glucocortizonii, mineralocortizonii, prolactina
+B
+
+184. Glucagonul nu influenteaza metabolismul muscular deoarece:
+A. Celulele musculare nu au adenilat ciclaza
+B. Celulele musculare nu au PKA
+C. Celulele musculare nu au proteina G
+D. Celulele musculare nu au GTP
+E. Celulele musculare nu au receptori la glucagon
+E
+
+185. Metabolismul calciului este reglat de:
+A. PTH, calcitonina, calcitriol
+B. Calcitonina, PTH, vitamina D3
+C. PTH, estrogeni, calcitriol
+D. Vitmaina D3 , PTH, calcitriol
+E. Calcitonina, tiroxina, vitamina D3
+A
+
+186. Sunt hormoni glucocorticoizi
+A. Aldosteron si dezoxicorticosterona
+B. Cortizol si corticosterona
+C. Estrqadiol si estrona
+D. Estradiol si testosterona
+E. Estrona si progesterona
+B
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
