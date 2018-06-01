@@ -1,0 +1,664 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+
+1. La pH izoelectric:
+A. Aminoacizii naturali au sarcina electrica pozitiva
+B. Lizina migreaza in camp electric spre anod
+C. Incarcarea electrica a aminoacizilor este zero
+D. Solubilitatea aminoacizilor este minima
+E. Nici una dintre afirmatiile anterioare nu este adevarata
+C
+
+2. Toate afirmatiile urmatoare sunt adevarate, cu exceptia:
+A. Ph-ul izoelectric este pH-ul la care sarcina (+) a aminoacidului este egala cu sarcina (-)
+B. Proprietatile aminoacizilor sunt determinate de proprietatile gruparilor carboxil si amino
+de la C α
+C. Legatura amidica dintre doi aminoacizi este numita legatura peptidica
+D. Legatura peptidica din structura glutationului se stabileste in gruparea amino din pozitia
+a acidului glutamic si gruparea carboxil din pozitia γ α din cisteina
+E. Structura primara a proteinelor precizeaza tipul, numarul si secventa resturilor
+aminoacide din molecula
+D
+
+3. Care dintre afirmatiile urmatoare referitoare la procesul de denaturare proteica este falsa?
+A. Prin denaturare sunt afectate legaturile necovalente din structura unei proteine
+B. Presupune hidroliza legaturilor peptidice
+C. Reprezinta modificarea conformatiei native a proteinelor
+D. Prin denaturare se pierde, partial sau total, activitatea biologica specifica
+E. Ureea si guanidina denatureaza proteinele prin desfacerea legaturilor de hidrongen
+B
+
+4. Toate afirmatiile de mai jos referitoare la structura hemoglobinei sunt corecte cu exceptia:
+A. Hemul este format din Fe2+ si protoporfirina IX
+B. Este o proteina oligomera
+C. Cuprinde 4 lanturi polipeptidice
+D. Protoporfirina IX este un compus aromatic, care in pozitiile 2, 4, 6, si 7 are radical metil
+drept substituent
+E. Hemoglobina lipsita de O2 se numeste deoxigenata
+D
+
+5. Urmatoarele afirmatii sunt false cu exceptia:
+A. Toti aminoacizii au cel putin doua grupari functionale: -NH2 si -COOH
+B. Toti aminoacizii naturali sunt optic activi
+C. Proteinele fibrilare sunt active in apa
+D. In structura proteinelor nu se intalnesc L-aminoacizi
+E. Acidup aspartic si acidul glutamic sunt acizi diaminomonocarrboxil
+A
+
+6. Imunoglobulinele:
+A. Sunt tetrameri cu formula moleculara α2 β2
+B. IgA are structura pentamerica
+C. IgM intervine in raspunsul imun primar
+D. IgE reprezinta principalul tip de imunoglobuline intalnit in secretiile mucoaselor
+E. IgG sunt singurele imunoglobuline ce nu pot traversa placenta
+D
+
+7. Timpul de injumatatire al unei proteine reprezinta
+A. Timpul de viata al proteinei
+B. Timpul in care jumatate din cantitatea proteinei se reinnoieste
+C. Timpul in care proteina isi exercita functia biologica
+D. Timpul necesar degradarii proteinei
+E. Toate afirmatiile de mai sus sunt adevarate
+B
+
+8. Despre ciclul urogenetic este falsa afirmatia:
+A. Unele dintre reactiile ciclului se desfasoara in mitocondriile hepatocitelor, altele in citosol
+B. Formarea unei molecule de uree necesita scindarea a patru legaturi macroenergice
+C. Sinteza carbamilfosfatului necesita consum de energie
+D. Carbamilfosfatul este un intermediar comun pentru ciclul ureogenetic si ciclul Krebs
+E. Pentru ureea formata nu exista un prag de eliminare renala
+D
+
+9. Referitor la creatinina este adevarata afirmatia:
+A. Este produsul de metabolism al creatininei si creatinfosfatului muscular
+B. Reactia in care se formeaza este catalizata de creatinfosfokinaza
+C. Are in structura o legatura fosfatmacroergica
+D. Nu se poate elimina renal
+E. Clearence-ul de creatinina reflecta functia hepatica
+A
+
+10. Despre reactia de transaminare sunt adevarate afirmatiile, cu exceptia
+A. Reactiile de transaminare sunt total reversibile
+B. Coenzima transaminazelor este piridoxalfosfatul
+C. Transaminarea consta in schimbul de grupari amino cu grupari carbonil intre
+α - aminoacizi si β - cetoacizi
+D. Reactia dintre alanina si acidul α - cetoglutaric este catalizata de enzima glutamic
+oxaloacetic transaminaza (GOT)
+E. Ca donori de grupari aminice pot functiona toti aminoacizii
+D
+
+11. referitor la digestia proteinelor afirmatiile urmatoare sunt adevarate, cu exceptia:
+A. Asupra proteinelor alimentare actioneaza peptidazele sintetizate de stomac, intestin si
+pancreas
+B. Majoritatea peptidazelor digestive sunt secretate initial sub forme catalitic inactive
+denumite proenzime sau zimogeni
+C. Pepsina este o endopeptidaza ce are drept proenzima pepsinogenul
+D. Endopeptidazele scideaza legaturile polipeptidice situate la capetele unui lant
+polipeptidic
+E. Enteropeptidaza este o proteaza produsa de celulele intestinale specifice cu rol in
+activarea tripsinogenului
+D
+
+12. Urmatoarele afirmatii despre glutation sunt adevarate cu exceptia:
+A. Este un tripeptid ( γ - glutamil-cisteinil-glicina) cu rol oxidant
+B. Este sintetizat de 2 enzime - glutamil-cisteinil sintetaza si γ glutation sintetaza
+C. Determina oxidarea gruparilor -SH din centrul activ al unor enzime
+D. Sursa principala de glutation este ficatul
+E. In celule se afla in doua fome redusa (GSH) si oxidata (GSSG)
+C
+
+13. Despre clearence-ul de creatinina este falsa afirmatia:
+A. Masoara viteza de filtrare glomerurala a creatininei
+B. Determinarile clearence-ului creatininei la pacientii cu afectiuni renale ofera informatii
+despre starea functionala a nefornilor
+C. Pentru calcularea clearence-ului este necesara numai determinarea de creatinina
+urinara
+D. Este exprimat in mL/minut avand o valoare mai mare la barbati data de femei
+E. Scade odata cu varsta
+C
+
+14. Aminoacizii sunt:
+A. Unitati constituente ale acizilor nucleici
+B. Unitati constituente ale pilizaharidelor
+C. Unitati constituente ale proteinelor
+D. Optic inactvi
+E. Toti specificati de codul genetic
+D
+
+15. Aminoacizii naturali:
+A. Sunt in numar de 20, specificati de codul genetic
+B. Nu sunt proteinogeni
+C. Nu ionizeaza in solutie apoasa
+D. In structura proteinelor nu se intalnesc decat D-aminoacizi
+E. Legatura dintre 2 aminoacizi este de tip aminic
+A
+
+16. Dupa structura pot fi:
+A. Aromatici
+B. Alifatici
+C. Cu sulf
+D. Cu grupari hidroxil
+E. Cu toate punctele anterioare
+E
+
+17. Aminoacizii esentiali:
+A. Sunt aceeasi pentru toate speciile de organisme
+B. Sunt cei 20 aminoacizi stantard (specificati de codul genetic)
+C. Pot fi sintetizati de organism dar in anumite situatii
+D. Existenta lor este determinata de incapacitatea metabolica a unui organism de a
+sintetiza acei aminoacizi
+E. Nu este obligatoriu aportul de oxigen prin alimentatie
+D
+
+18. pH-ul izoelectric este:
+A. pH-ul la care incarcarea electrica a aminoacizilor este egala cu 0
+B. pH-ul la care solubilitatea aminoacizilor este maxima
+C. Punctul in care numarul sarcinilor negative este mai mare decat al celor pozitive
+D. Punctul in care numarul sarcinilor pozitive este mai mare decat al celor negative
+E. pH-ul la care mobilitatea electroforetica a aminoacizilor este maxima
+A
+
+19. Aminoacizii:
+A. Au in structura lor cel putin doua grupari functionale: -Nh2 si - COOH
+B. Nu au caracter amfoter
+C. Sarcina lor neta nu depinde de pH-ul solutiei in care se alfa
+D. Nu isi modifica sarcina la schimbarea pH-ului
+E. Formeaza intre ei doar legaturi necovalente
+A
+
+20. Proteinele:
+A. Sunt produsii de policondensare ai aminoacizilor
+B. Nu au structura cuaternala
+C. Indeplinesc doar rol structural
+D. Nu participa la transportul oxigenului
+E. Nu au grupari prostetice
+A
+
+21. Mioglobina:
+A. Lanturile polipeptidice formeaza structuri secundare de tip β - sheet
+B. Transporta oxigenul la nivel muscular
+C. Are 7 segmente helicoidale
+D. Are miex polar
+E. Are iun invelis hidrofob
+B
+
+22. Structura cuaternara:
+A. E intalnita la proteinele alcatuite din mai multe lanturi peptidice
+B. Legatura dintre protomeri e de tip covalent
+C. Este intalnita la colagen, dar nu la imunoglobuline si hemoglobina
+D. E intalnita doar la enzime
+E. Suprafetele de contact dintre subunitati nu sunt complementare
+A
+
+23. Hemul este o grupare prosterica ce intra in alcatuirea:
+A. Mioglobinei si fibrinogenului
+B. Mioglobinei si citocromilor
+C. Elastinei
+D. Colagenului
+E. Keratinei
+B
+
+24. La degradarea hemoproteinelor succesiunea corecta a intermediarilor este:
+A. Hem, α - hidroxihemina, verdoglobina, biliverdina, bilirubina
+B. Hem, verdoglobina, α - hidroxihemina, biliverdina, bilirubina
+C. α - hidroxihemina, hem, verdoglobina, bilirubina, biliverdina
+D. Hem, α - hidroxihemina, verdoglobina, bilirubina, biliverdina
+E. Hem, verdoglobina, α - hidroxihemina, bilirubina, biliverdina
+A
+
+25. Este aminoacid dicarboxilic:
+A. Metionina
+B. Glutamina
+C. Arginina
+D. Histidina
+E. Glicina
+B
+
+26. Proteina cu cel mai mare procent de structura secundara α este:
+A. Insulina
+B. Mioglobuna
+C. Hemoglobina
+D. Keratina
+E. Fibroina
+D
+
+27. Enzima reglatorie a biosintezei hemului este:
+A. Ferochelataza
+B. δ - aminolevulinat dehidrataza
+C. Porfobilinogen deaminaza
+D. δ - aminolevulinat sintaza
+E. Protoporfibrinogen oxidaza
+D
+
+28. Care din urmatoarele afirmatii referitoare la mioglobina este falsa:
+A. Este proteina abundenta in muschi
+B. Are rol de rezervor tisular de O2
+C. Regiunile elicoidale nu sunt separate de segmentele neelicoidale
+D. Prolina se alfla in 4 puncte de terminare a elicelor
+E. Interiorul moleculei cuprinde aminoacizi cu R nepolar
+C
+
+29. In procesul de coagulare intervin XIII factori, unul din acestia fiind indispensabil coagularii si
+anume factorul:
+A. IV
+B. II
+C. VIII
+D. XIII
+E. V
+A
+
+30. Proteina implicata in depozitarea intracelulara a fierului este:
+A. Hemosiderina
+B. Feritina
+C. Transferina
+D. Citocromii
+E. Mioglobina in celulele musculare
+B
+
+31. Imunoglobulinele:
+A. Sunt glicoproteine cunoscute si sub denumirea de antigene
+B. Nu au structura cuaternara
+C. La electroforeza proteinelor serice migreaza in regiunea gama γ
+D. Sunt tetrameri de tipul L2 M2
+E. Exista 4 clase de imunoglobuline
+C
+
+32. Alegeti afirmatia falsa despre structura primara a proteinelor:
+A. Se mai numeste structura covalenta
+B. Indica succesiunea aminoacizilor in catena polipeptidica
+C. Nu are nicio influneta asupra nivelelor superioare de organizare
+D. Este unica pentru o anumita proteina
+E. Este specificata genetic
+C
+
+33. Afirmatia falsa despre structura cuaternara a proteinelor este:
+A. Defineste modul de asamblare a proteinelor alcatuite din mai multe subunitati
+B. Este intalnita de regula la proteinele reglatorii ale unor secvente metabolice
+C. Monomerii interactioneaza doar prin legaturi necovalente
+D. Structura cuaternara este stablizata prin punti disulfurice formate intre monomeri
+E. Permite reglarea alosterica a activitatii enzimatice
+D
+
+34. Enzima cheie din biosinteza hemului este:
+A. -aminolevulinatsintazδ a
+B. Piruvat kinaza
+C. Glicogen sintaza
+D. succinil-CoA dehidrogenaza
+E. Glutamat dehidrogenaza
+A
+
+35. Toate afirmatiile referitoare la albumina sunt adevarate cu exceptia:
+A. Asigura presiunea coloid osmotica
+B. Transporta hormoni tiroidieni
+C. Are rol in imunitate
+D. Este cea mai abundenta proteina serica
+E. Este sintetizata de ficat
+C
+
+36. Afirmatia falsa comuna pentru hemoglohbina si mioglobina:
+A. Ambele sunt hemoproteine
+B. Ambele au structura cuaternala
+C. Ambele leaga reversibil O2
+D. Ambele au localizare intracelulara
+E. Ambele, prin oxidarea fierului la Fe3+ pierd capacitatea de a lega O2
+B
+
+37. Deficienta tranzitorie a UDP ¬ glucuronil transferazelor hepatice la nou nascut este cauza:
+A. Sindromului Crigler-Najjar de tip I
+B. Sindromului Crigler-Najjar de tip II
+C. Bolii Gilbert
+D. Icterului hepatocelular
+E. Icterului neonatal
+E
+
+38. Ureea este forma de excretie a azotului din:
+A. Aminoacizi
+B. Baze purinice
+C. Baze pirimidinice
+D. Acizi nucleici
+E. Lecitine
+A
+
+39. Afirmatia falsa despre ciclul ureogenetic:
+A. Nu are loc exclusiv in citosol
+B. Nu are loc exclusiv in mitocondrie
+C. Nu consuma ATP
+D. Nu consuma GTP
+E. Transforma amoniacul in uree
+C
+
+40. Enzima care genereaza amoniacul ce intra direct in ciclul ureogenetic este:
+A. Glutaminaza
+B. Glutaminsintetaza
+C. Glutamat dehidrogenaza
+D. GOT
+E. GPT
+C
+
+41. Este adevarata despre Hem afirmatia, cu exceptia:
+A. Contine nucleu tetrapiroic
+B. Fierul este hexacoordinat
+C. Molecula de oxigen este interupusa intre atomul de fier si histidina priximala
+D. Nucleul tetrapirolic este substituit
+E. Ionul de fier este 2+
+C
+
+42. Sunt adevarate urmatoarele enunturi, cu exceptia:
+A. Legarea O2 la mioglobina se face reversibil
+B. Hemoglobina, ca si mioglobina, este o proteina oligomera cu 4 lanturi polipeptidice
+C. Hemoglobina este implicata si in transportul CO2 de la tesuturi la plamani
+D. Heloglobina contine subunitati α si β
+E. Mioglobina si hemoglobina sunt hemoproteine formate dintr-o globina specifica si hem
+B
+
+43. Afinitatea Hb pentru oxigen este influentata de urmatorii factori, cu exceptia:
+A. pH-ul mediului
+B. Concentratia de CO2
+C. Concentratia de 2. BPG (2,3 bifosfoglicerat)
+D. Temperatura
+E. Concentratia de O2
+C
+
+44. Fibrinogenul:
+A. Este o proteina plasmatica sintetizata in ficat
+B. Are rol in coagularea sangelui
+C. Are o structura de tetramer
+D. Subunitatile fibrinogenului sunt asociate intre ele prin punti de sulf
+E. Contine peptide N-terminale -fibrinopeptide - ce au rol in solubilitatea fibrinogenului in
+sange
+C
+
+45. Imunoglobulinele:
+A. Sunt sintetizate de limfocitele B activate
+B. Au in structura 4 lanturi peptidice, 2 lanturi grele si 2 lanturi usoare
+C. Sunt proteina plasmatice numite si antigeni
+D. Lanturile usoare si grele sunt unite prin punti disulfurice
+E. Nu toate sunt implicate in functia de aparare a organismului
+C
+
+46. Despre IgM sunt adevarate cu exceptia:
+A. Se gasesc in plasma (in cant mici)
+B. Au o greutate moleculara mare, deoarece au o structura pentamerica
+C. Are 2 situsuri de combinare, leaga puternic antigeni mari
+D. Se sintetizeaza la primul contact cu antigenul (raspuns imun primar)
+E. Este prima Ig sintetizata de fat
+C
+
+47. Sunt aminoacizi esentiali, cu exceptia:
+A. Leu
+B. Lys
+C. Hys
+D. Val
+E. Ala
+E
+
+48. Despre structura proteinelor sunt adevarate, cu exceptia:
+A. Structura primara este codificata genetic
+B. Structura cuaternara este rezultatul asamblarii mai multor catene polipeptidice
+C. Structura tertiara se formeaza ca urmare a legaturilor aparute doar intre radicalii
+hidrocarbonati
+D. Structura secundara este de tip α - helix sau β foaie plisata
+E. Hemoglobina contine cele patru tipuri de structuri
+C
+
+49. Nu este adevarat despre glutation:
+A. Este un tripeptid numit α -glutamil-cistenil-glicina
+B. Functioneaza ca un sistem redoxputand exista in forma redusa (GSH) si/sau oxidata
+(GSSG)
+C. Participa, alaturi de alti compusi la neutralizarea substantelor nocive endogene sau
+exogene
+D. Participa la transformarea methemoglobinei Hb( Fe3. in hemoglobina Hb( Fe2+ )
+E. Este implicat in procesul de biosinteza a acidului ascorbic
+A
+
+50. Despre urmatoarele peptide sunt adevarate urmatoarele informatii, cu exceptia:
+A. Oxitocina exercita actiune contractila asupra musculaturii netede din uter
+B. Angiotensina II are rol hipertensiv
+C. Corticotropina controleaza dezvoltarea cortexului adrenalelor
+D. Parathormonul si calcitonina sunt peptide ce participa la reglarea calciului
+E. Encefalinele participa la homeostazia osmolaritatii si a volumului fluidului extracelular
+E
+
+51. Care din urmatoarele grupe de aminoacizi contin radicali hidroxil in structura:
+A. Aspartat, glutamat si serina
+B. Serina, treonina si tirozina
+C. Treonina, fenilalanina si arginina
+D. Lizina, arginina si prolina
+E. Alanina, aspargina si serina
+B
+
+52. Care dintre urmatoarele indica secventa corecta de atomi legati covalent dintr-un peptid:
+A. -N-C-C-N-C-C-N-C-C
+B. -N-C-O-N-C-O-N-C-OC.
+-N-C-C-O-N-C-C-O-N-C-C-OD.
+-N-H-C-C-N-H-C-C-N-H-C-CE.
+-N-H-C-O-H-N-H-C-O-H-N-H-C-CC
+
+53. La un individ, structurile primare ale enzimelor ce catalizeaza aceeasi reactie:
+A. Sunt aceleasi, de la un tip de celula la altul chiar daca difera cantitatea
+B. Sunt aceleasi pe parcursul intregii vieti a individului
+C. Sunt identice daca enzimele sunt paraloge
+D. Sunt identice la toti membrii familiei omoloage
+E. Pot fi diferite intre compartimentele aceleasi celule
+B
+
+54. Glicocolul:
+A. Poseda un atom de carbon asimetric
+B. Are caracter amfoter
+C. Are un centru chiralic
+D. Poate roti planul luminii poralizate
+E. Este usor solubil in solutii de solventi nepolari
+B
+
+55. Punctul izoelectric:
+A. Este valoarea pH-ului la care suma sarcinilor negative dintr-un aminoacid este egala cu
+cea a sarcinilor pozitive
+B. La pI migrarea electroforetica este maxima
+C. La pI solubilitatea este maxima
+D. Pentru lizina este 5
+E. Pentru acid aspartic este 10
+A
+
+56. Care din urmatoarele caracterizeaza structura α − helix a proteinelor:
+A. Toate au aceeasi structura primara
+B. Sunt formate in principal din legaturi H formate intre gruparea COO− dintr-un lant
+polipeptidic si hidrogenul amidic dintr-o alta legatura peptidica
+C. Sunt formate in principal din legaturi H formate intre atomul carbonilic dintr-o legatura
+peptidica si atomii de H dintr-un alt aminoacid
+D. Sunt formate de legaturile de H dintre 2 aminoacizi adiacenti din structura primara
+E. Necesita un continut bogat in prolina si glicina
+D
+
+57. Care dintre urmatoarele este o caracteristica a proteinelor globulare:
+A. Aminoacizii hidrofili tind sa fie in interiorul moleculei
+B. Aminoacizii hidrofobi tind sa se orienteze spre exteriorul moleculei
+C. Structura tertiara este formata din interactiunile hidrofobe si electrostatice dintre
+aminoacizi si legaturile de H dintre aminoacizi si H2O
+D. Structurile secundare sunt formate in principal din interactiile hidrofobe dintre aminoacizi
+E. Legaturile covalente disulfurice sunt necesare pentru a mentine proteina intr-o
+conformatie rigida
+C
+
+58. O proteina globulara fosforileaza un substrat. Pe care dintre urmatoarele structuri le contine
+in mod sigur?
+A. Un domeniu actinic
+B. Un domeniu imunoglobulinic
+C. Un domeniu de legare a nucleotidelor
+D. Un domeniu globinic
+E. Un domeniu β − pliere
+C
+
+59. Care este caracteristica structurala a placilor amilodice de la pacientii cu Alzheimer:
+A. Un continut crescut in structuri de tip foaie β − plisata
+B. Un continut crescut in structuri de tip α − helix
+C. Un continut crescut in regiuni neorganizate in structuri de tip α sau β
+D. Legaturi disulfurice intre lanturile polipeptidice
+E. O conformatie nativa saraca in energie
+A
+
+60. Aminoacid heterociciclic este:
+A. Histidina
+B. Treonina
+C. Glutamina
+D. Metionina
+E. Cisteina
+A
+
+61. In structura tertiara a proteinelor nu apar legaturi:
+A. De hidrogen
+B. Ionice
+C. Covalente
+D. Coordonative
+E. Disulfurice
+D
+
+62. Care dintre urmatoarele imunoglobuline sunt sintetizate ca raspuns la primul contact al
+organismului cu antigenul:
+A. IgA
+B. IgG
+C. IgM
+D. IgE
+E. IgD
+C
+
+63. Hemoglobina:
+A. Contine F e3+
+B. Transporta O2, CO2, H+
+C. 2, 3-difosfogliceratul creste afinitatea Hb pentru O2
+D. Curba de oxigenare este hiperbola
+E. Exista doar in forma tensionata (T)
+B
+
+64. Mioglobina:
+A. Are rol in depozitarea si dispersia O2 in muschi
+B. Curba de oxigenare este sigmoida
+C. Leaga O2 la presiune mare
+D. Este un tetramer
+E. Poate lega 3 molecule de oxigen
+A
+
+65. Hemul:
+A. Este un derivat substituit si complexat cu Fe2+ al porfinei
+B. In functie de natura substituentilor exista mai multe clase de hem
+C. Sinteza sa necesita prezenta glicocolului si a succinil -CoA
+D. Biosinteza are loc in toate tesuturile
+E. Sunt adevarate toate informatiile
+E
+
+66. Bilirubina:
+A. Este un produs de degradare a colesterolului
+B. Este un produs de degradare a hemului
+C. Are culoarea verde
+D. In cantitati crescute nu este toxica pentru creier
+E. Cea directa nu este conjugata cu acid glucuronic
+B
+
+67. Icterul neonatal:
+A. E fiziologic
+B. Este determinat de hemoliza accelerate
+C. Este determinata de imaturitatea sistemelor hepatice implicate in preluarea, conjugarea,
+excretia bilirubinei
+D. Dispare dupa aproximativ 7-10 zile de la nastere
+E. Toate afirmatiile sunt corecte
+E
+
+68. Sunt etape ale biosintezei hemului urmatoarele reactii cu exceptia:
+A. Sinteza acidului δ − aminolevulinic
+B. Formarea bilirubinei
+C. Formarea profobilinogenului
+D. Formarea protoporfirinei IX
+E. Unirea protoporfirinei IX cu F e2+
+B
+
+69. Urmatoarele enzime sunt implicate in catabolismul aminoacizilor cu o exceptie:
+A. Glutamat dehidrogenaza
+B. Glutaminaza
+C. Glutamin sintetaza
+D. Glutamat oxalocetat transaminaza
+E. 3 hidroxil, 3 metil glutaril CoA
+E
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
