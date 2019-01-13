@@ -1,0 +1,1220 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+1. Gradele de trecere de la sănătate la boală sunt:
+a. disconfort
+b. boală
+c. incapacitate
+d. invaliditate e.deces
+
+2. Următorii  indicatori  măsoară  nivelul  stării  de sănătate  a  popula iei ca rezultat  al factorilor care o condi ionează:
+a. fertilitatea
+b. asigurarea popula iei cu medici c.speran a de viată fără incapacitate
+d. incidenta
+e. nivelul de cultură generală
+
+3. Ordinea principalelor categorii de factori care condi ionează starea de sănătate in cele mai multe  ri europene este:
+a. factorii biologici, comportamentele, serviciile de sănătate, mediul fizic şi social
+b. mediul fizic şi social, factorii biologici, comportamentele, serviciile de sănătate
+c. serviciile de sănătate, comportamentele, mediul fizic şi social, factorii biologici
+d. comportamentele, mediul fizic şi social, factorii biologici, serviciile de sănătate
+e. comportamentele, factorii biologici, mediul fizic şi social, serviciile de sănătate
+
+4. Medicina socială foloseşte ca metode:
+a. depistarea bolilor în masă
+b. biostatistica
+c. măsurarea prognosticului
+d. educa ia pentru sănătate
+e. măsurarea asocia iilor epidemiologice
+
+DEMOGRAFIE
+
+5. Nivelul natalită ii este influen at de:
+a. structura pe grupe de vârstă a popula iei
+b. fecunditate
+c. nivelul de instruire a mamei
+d. venitul mediu pe membru al  familiei
+e. fertilitate
+
+6. Prima etapă a tranzi iei demografice se caracterizează
+prin:
+a. natalitate mare
+b. natalitate mică
+c. mortalitate mare
+
+
+
+d. mortalitate mică
+e. creşterea rapidă a popula iei
+
+7. Rata de mortalitate infantilă se poate calcula şi prin sumarea ratelor de mortalitate:
+a. precoce + postneonatală
+b. neonatală + postneonatală
+c. precoce + neonatală + postneonatală
+d. mortinatalitate + neonatală + postneonatală
+e. perinatală + neonatală + postneonatală
+
+
+8. "Fatalitatea" pentru o boală dată se referă la:
+a. rata de mortalitate la o popula ie de 100.000 locuitori
+b. rata de mortalitate specifică datorată bolii
+c. un rezultat fatal al oricărei boli
+d. frecven a deceselor printre cazurile de boală
+e. propor ia deceselor datorate bolii din totalul deceselor
+
+9. Piramida vârstelor in forma de urnă exprimă:
+a. natalitate mare
+b. natalitate mică
+c. longevitate mare
+d. longevitate mica
+e. mortalitate mare
+
+10. În anul 1971 s-au înregistrat in jude ul "X", 13.4 născu i mor i la 1000 de născu i vii. Alege i indicatorul care măsoară cel mai bine fenomenul de mai sus:
+a. indicele de mortalitate fetală tardivă
+b. indicele de mortalitate perinatală
+c. indicele de mortalitate neonatală
+d. indicele de mortalitate maternă
+e. indicele de mortalitate neonatală precoce
+
+11. În anul 1971 s-au înregistrat in jude ul "X", 18.8 decese de cauze puerperale la 100 000 de născu i vii. Alege i indicatorul care măsoară cel mai bine fenomenul de mai sus:
+a. indicele de mortalitate fetală tardivă
+b. indicele de mortalitate perinatală
+c. indicele de mortalitate neonatală
+d. indicele de mortalitate maternă
+e. indicele de mortalitate neonatală precoce
+
+12. În anul 1971 s-au înregistrat in jude ul "X", 14.2 decese la copii de până la 28 de zile la 1000 de născu i vii. Alege i indicatorul care măsoară cel mai bine fenomenul de mai sus:
+a. indicele de mortalitate fetală tardivă
+b. indicele de mortalitate perinatală
+c. indicele de mortalitate neonatală
+d. indicele de mortalitate maternă
+e. indicele de mortalitate neonatală precoce
+
+13.  În anul 1971 s-au înregistrat în jude ul "X", 27,6 mor i la fetuşi de peste 28 de săptămâni şi sugari de până la 7 zile la 1000 de născu i. Alege i indicatorul care măsoară cel mai bine fenomenul de mai sus:
+a. indicele de mortalitate fetală tardivă
+b. indicele de mortalitate perinatală
+c. indicele de mortalitate neonatală
+d. indicele de mortalitate maternă
+e. indicele de mortalitate neonatală precoce
+
+
+14. Pentru calculul raportului standardizat al mortalită ii sunt necesare următoarele informa ii:
+a. distribu ia pe grupe de vârstă a popula iei
+b. mortalitatea pe grupe de vârstă din popula ia respectivă
+c. mortalitatea standard pe grupe de vârstă
+d. numărul de decese observate în popula ia respectivă
+e. structura pe grupe de vârstă a popula iei standard
+
+
+15. Identifica i mecanismul principal al îmbătrânirii popula iei în România:
+a. scăderea mortalită ii infantile
+b. scăderea mortalită ii specifice pe grupe de vârstă
+c. scăderea mortalită ii generale
+d. scăderea natalită ii
+e. scăderea mortalită ii prin boli infecto-parazitare
+
+16. Informa iile culese din certificatele medicale constatatoare ale naşterii permit calculul:
+a. ratei natalită ii
+b. ratei de fertilitate generală
+c. mortalită ii perinatale
+d. vârstei mediane la naştere
+e. rangului mediu al noului născut
+
+17. Defini ia născutului viu acceptată de OMS include drept criterii:
+a. durata gesta iei
+b. greutatea la naştere
+c. lungimea la naştere
+d. prezen a respira iei
+e. prezen a bătăilor cordului
+
+18. Într-un oraş cu 100 000 de locuitori, în anul "X" s-au înregistrat 1000 decese de toate cauzele, 300 bolnavi de tuberculoză (din care 200 au fost bărba i) şi au decedat datorită tuberculozei 60 de persoane (din care 50 au fost bărba i). Mortalitatea specifică prin tuberculoză la bărba i a fost:
+a. 0.5‰ b.60/100000
+c. 50/200
+d. 50/300
+e. nu se poate calcula
+
+
+
+
+19. Într-un oraş cu 100000 de locuitori, în anul "X" s-au înregistrat 1000 decese de toate cauzele, 300 bolnavi de tuberculoză  (din care 200 au fost bărba i) şi au decedat datorită tuberculozei 60 de persoane (din care 50 au fost bărba i). Mortalitatea propor ională prin tuberculoză a fost:
+a. 0.5‰
+b. 60/100000
+c. 60/1000
+d. 50/300
+e. nu se poate calcula
+
+
+20. Într-un oraş cu 100 000 de locuitori, in anul "X" s-au înregistrat 1000 decese de toate cauzele, 300 bolnavi de tuberculoză (din care 200 au fost bărba i) şi au decedat datorită tuberculozei 60 de persoane (din care 50 au fost bărba i). Fatalitatea prin tuberculoză la bărba i a fost:
+a. 0.5‰
+b. 60/1000
+c. 50/200
+d. 50/300
+e. nu se poate calcula
+
+
+21. Într-un oraş cu 100 000 de locuitori, in anul "X" s-au înregistrat 1000 decese de toate cauzele, 300 bolnavi de tuberculoză (din care 200 au fost bărba i) şi au decedat datorită tuberculozei 60 de persoane (din care 50 au fost bărba i). Fatalitatea prin tuberculoza a fost:
+a. 0.5‰
+b. 60/1000
+c. 50/200
+d. 60/300
+e. nu se poate calcula
+
+22. Letalitatea prin cancer după localizare la persoanele de 55-59 ani în două popula ii a fost:
+Localizare
+Popula ia “ X”
+Popula ia “Y”
+Plămân
+10.0%
+6.7%
+Sân
+30.0%
+20.0%
+Uter
+25.0%
+16.7%
+Alte localizări
+35.0%
+56.6%
+TOTAL
+100.0%
+100.0%
+Se poate spune că probabilitatea de deces prin cancer de plămân, sân şi uter este mai mare în popula ia "X" decât în popula ia "Y"?
+a. nu, pentru că nu se face deosebirea dintre inciden ă şi prevalen ă
+b. da
+c. nu, pentru că mortalitatea propor ională nu oferă o estimare a riscului de deces
+d. nu, pentru că nu se cunoaşte structura pe grupe de vârstă a celor două popula ii
+e. nu, pentru că nu există un lot martor
+
+
+
+
+23. Pentru calculul ratei standardizate a mortalită ii prin metoda directă sunt necesare următoarele informa ii:
+a. distribu ia pe grupe de vârstă a popula iei
+b. mortalitatea pe grupe de vârstă din popula ia respectivă
+c. mortalitatea standard pe grupe de vârstă
+d. numărul de decese observate în popula ia respectivă
+e. structura pe grupe de vârstă a popula iei standard
+
+24. Pe baza datelor culese numai din certificatele medicale constatatoare ale decesului se poate calcula:
+a. probabilitatea de deces prin HT A
+b. mortalitatea specifică la medici
+c. mortalitatea propo ională prin TBC
+d. speran a de viată la naştere
+e. mortalitatea prin cancer la bărba i
+
+25. În interpretarea evolu iei în timp a mortalită ii printr-o anumită localizare a cancerului, într-o popula ie dată, este necesar să se ia în considerare:
+a. evolu ia fatalită ii
+b. evolu ia tehnicilor de diagnostic
+c. înregistrarea informa iilor
+d. evolu ia structurii pe vârste a popula iei
+e. varia iile în expunerea la factorii de risc
+
+
+26. În cursul unui an calendaristic, într-o popula ie de 1000 locuitori, născu ii vii au înregistrat următoarele greută i la naştere:
+Greutate la naştere
+Nr. cazuri
+ 1000 g
+ 1
+ 1000- 1499 g
+ 3
+ 1500- 1999 g
+ 3
+ 2000- 2499 g
+ 4
+ 2500 g şi peste
+ 7
+Care este indicele brut de natalitate în această popula ie?
+a.   18‰
+b.   11‰
+c.   14‰
+d.   17‰
+e.   7‰
+
+27. Informa iile culese din certificatele medicale constatatoare de deces permit calculul:
+a. letalită ii prin tumori
+b. mortinatalită ii
+c. vârstei medii de deces
+d. ratei brute a mortalită ii
+e. ratei mortalită ii specifice pe cauze
+
+28. Un produs de concep ie care în momentul separării de corpul mamei cântărea 1150 grame şi nu a prezentat semne de via ă, iar mama declară că durata sarcinii a fost de 27 de săptămâni, reprezintă:
+a. născut viu
+b. născut mort
+c. avorton
+d. deces neonatal
+e. deces precoce
+
+
+29. Ratele standardizate ale mortalită ii sunt folosite pentru a:
+a. corecta ratele mortalită ii pentru erori cauzate de înregistrarea incorecta a vârstei la deces
+b. determina numărul observat de decese apărute la fiecare grupă de vârstă
+c. corecta ratele mortalită ii pentru erori cauzate de absen a datelor legate de vârsta la deces
+d. compara mortalitatea la persoane din aceeaşi grupă de vârstă
+e. elimina efectul diferen elor de structură pe grupe de vârstă la compararea ratelor mortalită ii
+
+30. Indicele de mortalitate postneonatală măsoară riscul de deces după prima lună de via ă?
+a. da, pentru că se raportează la născu ii vii
+b. nu, pentru că nu se raportează la decesele 0-1 lună
+c. nu, pentru că nu se raportează la supravie uitorii în vârstă de 1 lună
+d. da, pentru că incidenta şi riscul măsoară evenimentele noi care apar după naştere
+e. da, pentru că amândoi se referă la decesele sugarilor în vârstă de peste o lună
+
+31. În jude ul X indicele brut al mortalită ii generale a fost în 1985 de 12 ‰ în mediul urban  şi  15‰  în  rural.  Atât  pentru  urban  cât  şi  pentru  rural  indicele  mortalită ii standardizate pentru vârstă a fost de 14‰. Explica ia cea mai bună a acestui fenomen este:
+a. în urban şansa de supravie uire este mai mare datorită accesibilită ii crescute
+b. mortalitatea scăzută în urban va avea ca rezultat îmbătrânirea popula iei
+c. mortalitatea scăzută în urban este o consecin ă a faptului că în urban popula ia este mai tânără
+d. mortalitatea generală dintr-un teritoriu (urban sau rural) este puternic influen ată de factorii de mediu
+f. în acest caz standardizarea pentru vârstă produce un artefact ce este nesemnificativ
+
+32. Indicele de 40 decese prin diabet la 1000 de diabetici măsoară:
+a. mortalitatea specifică
+b. letalitatea
+c. fatalitatea
+d. mortalitatea brută
+e. nici unul din cele de mai sus
+
+
+
+Studiu de caz nr.I
+În 2 districte au fost introduse pentru o perioadă de 10 ani registre pentru cazurile de infarct miocardic acut (IMA). În 1987 s-au ob inut următoarele rezultate:
+Districtul A:  - Popula ia 1 milion locuitori
+- Rata brută a mortalită ii 30 decese la 1000 locuitori
+- Mortalitate specifică prin IMA 500 decese la 100000 locuitori
+Districtul B: - Popula ie 1 milion locuitori
+- Rata brută a mortalită ii 25 decese la 1000 locuitori
+- Mortalitatea specifică prin IMA 500 decese la 100000 locuitori
+Dl. În 10 ani, care indicator va evalua cel mai bine eficacitatea ac iunilor de educa ie pentru  sănătate   aplicate  în  cele  2  districte  pentru  combaterea  fumatului,  dezechilibrelor alimentare şi influen ei lor în apari ia IMA?
+a. prevalen a
+b. inciden a
+c. fatalitatea
+d. mortalitatea specifică
+e. letalitatea
+
+
+D2.  În 10 ani ce indicator va evalua cel mai bine progresele terapeutice realizate?
+a. prevalen a
+b. inciden a
+c. fatalitatea
+d. mortalitatea specifică
+e. letalitatea
+
+D3.  Pe baza datelor din enun  care din următoarele afirma ii sunt adevărate?
+a. riscul unui individ de a muri este acelaşi în ambele popula ii
+b. nu se poate calcula letalitatea prin lMA
+c. letalitatea prin lMA este mai mare in districtul B
+d. se poate calcula fatalitatea prin lMA
+e. nu se poate calcula fatalitatea prin lMA
+
+
+D4. După standardizarea după vârstă, s-au ob inut rate ale mortalită ii egale în cele
+2 districte. Se poate conchide că:
+a. letalitatea prin lMA devine identică în cele 2 popula ii
+b. popula ia A este mai îmbătrânită fa ă de popula ia B
+c. nu se poate conchide nimic privind structura pe vârste a celor 2 popula ii
+d. indicii standardiza i nu sunt indici reali, direct observa i în cele 2 popula ii
+e. standardizarea pentru vârstă nu prezintă interes pentru studiul epidemiologiei
+IMA
+
+D5. În anul1988 o epidemie severă de gripă a afectat districtul A. Consecin ă: o
+creştere cu 10% a numărului total de decese fa ă de1987. Popula ia, inciden a, prevalen a
+şi numărul de decese prin IMA au rămas aceleaşi fa ă de 1987. Ce s-a putut constata în
+ 1988 fa ă de 1987 în districtul A?
+a. scăderea fatalită ii prin lMA
+b. scăderea letalită ii prin IMA
+c. o fatalitate prin lMA nemodificată
+d. o letalitate prin lMA nemodificată
+e. o mortalitate specifică prin lMA nemodificată
+
+EPIDEMIOLOGIE
+
+33. Într-o investiga ie a infec iilor stafilococice s-a constatat că inciden a este de 3 ori mai mare la Spitalul "X" decât la Spitalul "Y". Diferen a este semnificativă statistic. Spitalul "Y" impune portul obligatoriu al măştilor faciale, Spitalul "X" neimpunând asemenea port, s-ar trage concluzia că:
+a. există o rela ie între utilizarea măştilor faciale şi inciden a infec iei stafilococice
+b. nu este nici o rela ie între folosirea măştilor faciale şi inciden a infec iei stafilococice
+c. rela ia dintre utilizarea măştilor faciale şi inciden a infec iei stafilococice nu este
+determinată
+d. diferen a este datorată varia iilor întâmplătoare
+e. diferen a de varia ie determină frecven a de 3 ori mai mare
+
+
+34. Un nou vaccin a fost experimentat astfel: 1000 de copii în vârstă de 2 ani selec iona i aleator au primit vaccinul respectiv şi au fost urmări i timp de 10 ani. Dintre aceştia 80% nu au fost afecta i de boală. Care este cea mai corectă concluzie în ceea ce priveşte eficacitatea vaccinului:
+a. vaccinul este excelent dată fiind rata înaltă a imunizării
+b. nici o conc1uzie nu este posibilă, deoarece nu s-au urmărit şi copiii nevaccina i
+c. vaccinul nu este foarte eficient deoarece ar fi trebuit sa producă o rată mai mare
+de imunizare
+d. 80% nu este valoare de încredere şi poate fi combătută
+e. valoarea înregistrată de: 100%-80% = 20%, este rata frecven ei de apari ie a bolii
+
+
+35.  Dintr-o  anchetă  epidemiologică  rezultă  că  frecven a  cazurilor  noi  de  cancer  vezical  la bărba i a fost de 48,0 %000  la fumători şi 24 %000  la nefumători. Riscul relativ al cancerului de vezică la fumători este de:
+a. 48-24
+b. 48/24
+c. 24/48 d.48
+e. nu se poate măsura
+
+36. Un studiu desfăşurat  în Anglia  arată  că  din 224 de familii în care a apărut  un caz de poliomielită, în 56 existau papagali. Într-un alt studiu englezesc din 99 de pacien i chestiona
+i, 30 aveau papagali. Concluzia că există o rela ie între prezen a papagalilor în case şi apari ia poliomielitei la membrii acelei familii este:
+a. corectă
+b. incorectă, deoarece nu se specifică dacă este vorba despre inciden ă sau prevalen ă
+
+
+
+c. incorectă, deoarece ne sunt oferite informa iile sub forma unei frecven e, nu a unui risc
+d. incorectă, deoarece pare să fie imaginea unui fenomen de cohortă
+e. incorectă, deoarece nu există un grup martor sau de compara ie
+
+
+
+
+
+37. Distribu ia pe grupe de vârstă a consumului de alcool, Washington 1951 a fost:
+
+
+
+
+
+
+
+
+
+
+
+χ 2= 49, p< 0,01
+Concluzia: cu cât persoanele îmbătrânesc cu atât tendin a este de a nu renun a la consumul de alcool, este:
+a. corectă
+b. incorectă, deoarece nu se specifică dacă este vorba de inciden ă sau de prevalen ă
+c. incorectă, deoarece se prezintă o rată când ar trebui să fie vorba despre un raport
+d. incorectă, deoarece pare să fie imaginea unui fenomen de cohortă
+e. incorectă, deoarece nu există un grup martor sau de compara ie
+
+38. Într-un spital din M.J. s-a determinat volumul cardiac la 100 de mame care au născut copii prematuri şi la alte 100 martori. Martorii au fost mame cu copii născu i provenind din aceeaşi zonă, împerecherea cu cazurile făcându-se  după: vârstă,  rasă, statutul marital al mamei, sex şi rang pentru copil.
+Un volum cardiac redus s-a găsit la 18 dintre cazuri şi 10 dintre martori, diferen a este
+semnificativă statistică.
+Concluzia că există o asociere între volumul cardiac al mamelor şi prematuritate este:
+a. corectă
+b. incorectă ,deoarece compararea nu se bazează pe rate
+c. incorectă ,deoarece este vorba despre o interpretare improprie a semnifica iei statistice
+d. incorectă, deoarece grupurile de studiu şi de comparat nu sunt asemănătoare pentru
+caracteristici relevante
+e. incorectă ,deoarece existen a unui biais de observa ie sau de interviu poate influen a rezultatul
+
+39. Statisticile serviciului de circula ie au pus în eviden ă faptul că numărul maşinilor de culoare albastră implicate în accidente a fost mai mare decât al maşinilor de alte culori. Concluzia că o persoană care conduce o maşină de culoare albastră are un risc mai mare de accident fa ă de o persoană care conduce o maşină de altă culoare este:
+a. corectă
+b. incorectă, deoarece compara ia nu este bazată pe rate
+c. incorectă, deoarece nu este folosit nici un grup de compara ie ( de control)
+d. incorectă, deoarece nu a fost aplicat nici un test de semnifica ie statistică
+
+
+
+e. incorectă, deoarece este folosită prevalen a în locul inciden ei
+
+40. Într-un studiu efectuat  pe 500 de bolnavi  şi 500 martori,  factorul  de risc suspectat  a fost înregistrat la 400 de cazuri şi la 100 de martori. Inciden a bolii la persoanele cu factorul de risc prezent este:
+a. 80%
+b. 40%
+c. 16%
+d. 20%
+e. nu se poate calcula
+
+41. Epidemie înseamnă:
+a. .o boală care are o rată scăzută de apari ie dar care este constant prezentă într-o comunitate sau regiune
+b. o inciden ă mai mare de 10 la 1000 locuitori
+c. apari ia bolii în exces fa ă de rata aşteptată pentru acea popula ie
+d. bolile respiratorii care apar în mod sezonier
+e. rata anuală de cazuri la 100000 de locuitori
+
+42. Greutatea medie la naştere a primilor născu i de la 23 de femei care au fumat mai mult de un pachet de  igări pe zi în timpul sarcinii a fost cu 200 de grame mai scăzută decât a primilor născu i de la 16 femei care nu au fumat niciodată.  Diferen a a fost statistic semnificativă la nivelul de 5% (p<0.05). Aceasta înseamnă:
+a. fumatul în timpul sarcinii întârzie creşterea fătului
+b. diferen a observată a fost prea mare ca să fi apărut doar din întâmplare
+c. diferen a observată ar fi putut apare din pură întâmplare
+d. numărul cazurilor studiate nu a fost suficient de mare pentru a ob ine un
+rezultat concludent
+e. fumatul în perioada sarcinii nu influen ează creşterea fătului
+
+43. Un studiu efectuat pe 50 de cazuri de boală şi 50 de control, s-a determinat că diferen a găsită  în  raport  cu  un  posibil  factor  etiologic  nu  este  statistic  semnificativă.  Se  poate conchide că:
+a. nu există nici o asociere a factorului cu boala
+b. diferen a poate fi clinic semnificativă
+c. diferen a poate fi rezultatul unei varia ii de eşantion
+d. comparabilitatea cazurilor cu martorii a fost confirmată
+e. interferen a observatorului sau intervievatorului a fost eliminată
+
+44. În urma unui studiu transversal asupra ulcerului gastric într-o comunitate, ulcerul gastric a fost diagnosticat într-o propor ie de 80 la 100000 de bărba i în vârstă de 35-49 ani şi de 90 la 100000 femei de 35-49 ani. Concluzia că la această grupă de vârstă, femeile prezintă un risc mai mare de a contacta ulcerul gastric este:
+a. corectă
+b. incorectă, deoarece nu se face distinc ia între inciden ă şi prevalen ă
+c. incorectă, deoarece au fost utilizate ratele pentru a compara bărba ii cu femeile
+d. incorectă, datorită unui posibil efect de cohortă
+e. incorectă, deoarece nu există nici un grup martor sau de control
+
+
+
+
+
+
+45. Într-un studiu prospectiv asupra unei boli, cohorta selectată ini ial a constat din:
+a. persoane care au boala
+b. persoane fără boală
+c. persoane cu factorul care face obiectul studiului
+d. persoane cu un istoric de familie al bolii
+e. persoane fără factorul care face obiectul studiului
+
+46. Un mare dezavantaj al studiilor retrospective comparativ cu cele prospective este ca:
+a. studiile retrospective costă mai mult şi iau mai mult timp
+b. exista o anume tendin ă în determinarea prezen ei sau absen ei factorului suspectat
+c. exista o anume tendin ă în determinarea prezen ei sau absen ei bolii rezultante
+d. este mai dificil de a ob ine martori
+e. este mai dificil de a asigura comparabilitatea cazurilor şi a martorilor
+
+47. În anu11945, un număr de 1000 de femei care lucrau într-o fabrică de pictat cu radium cadrane de ceas au fost luate in studiu. Inciden a cancerului de os la aceste femei până în
+ 1975 a fost comparată cu aceea înregistrată la 1000 de femei care lucrau ca telefoniste în
+ 1945. 20 de femei de la fabrica de ceasuri şi 4 telefoniste au făcut cancer de os între 1945 şi
+ 1975. Riscul  relativ  de a contacta  cancer  de os de către  muncitoarele  de la fabrica  de ceasuri este:
+a. 2
+b. 4
+c. 5
+d. 8
+e. nu se poate calcula cu aceste date
+
+48. Rezultatele unui studiu asupra prevalen ei obezită ii pe grupe de vârstă au fost:
+
+Grupa de vârstă
+Ponderea obezită ii
+ 20- 40
+ 19%
+ 40- 60
+ 25%
+ 60- 80
+ 15%
+ 80+
+ 5%
+
+Concluzia că, pe măsură ce oamenii îmbătrânesc, ei devin mai graşi, este:
+a. corectă
+b. incorectă, deoarece este necesara o rată
+c. incorectă, deoarece nu se utilizează nici un grup de control sau de compara ie
+d. incorectă, deoarece nici o astfel de concluzie n-ar trebui trasă din datele ob inute dintre un studiu transversal
+e. incorectă, deoarece este utilizată prevalen a în timp ce este necesară inciden a
+
+
+49.  Printre  300  de  decese  prin  otrăviri  accidentale  înregistrate  la  copii,  în oraşul  "A", existau de 5 ori mai mul i copii din familii cu statut socio-economic scăzut decât copii cu statut socio-economic ridicat. Concluzia că otrăvirea accidentală este de 5 ori mai mare la
+
+
+
+copiii defavoriza i socio-economic fa ă de cei favoriza i este:
+a. corectă
+b. incorectă, deoarece studiul şi grupurile nu sunt relevante sau comparabile
+c. incorectă, deoarece există o interpretare improprie a semnifica iei statistice
+d. incorectă, deoarece compara ia nu se bazează pe rate
+e. incorectă, deoarece intervin distorsiuni datorate observatorului
+
+50. For a unei asocia ii între un factor şi o boală este cel mai bine măsurată prin:
+a. perioada de incuba ie
+b. inciden a bolii în popula ia totală
+c. prevalen a factorului
+d. riscul atribuibil
+e. riscul relativ
+
+51. În trecutul familial a 100 pacien i schizofrenici s-a găsit că 45 din aceştia au rămas fără
+unul din părin i înainte de a împlini 18 ani. Dintre 134 de studen i la medicină s-a găsit că
+ 23 şi-au pierdut unul dintre părin i până la aceeaşi vârstă. Pe baza acestei diferen e care este  statistic  semnificativă,  inferen a că  există  o asocia ie cauzală  între pierderea  unuia dintre părin i în copilărie şi schizofrenie este:
+a. corectă
+b. incorectă, deoarece compararea nu este bazată pe rate
+c. incorectă, deoarece grupul de bolnavi şi grupul martorilor nu sunt comparabile
+d. incorectă, deoarece nu a fost exclusă eroarea de observare
+e. nici una din cele de mai sus
+
+52. Pentru determinarea rela iei dintre nivelul seric al sodiului şi hormonul antidiuretic
+(ADH) la pacien ii cu meningită, cel mai adecvat proiect de studiu trebuie:
+a. să măsoare în mod repetat sodiul şi ADH la un pacient
+b. să măsoare sodiul şi ADH la o serie de pacien i
+c. să măsoare sodiul la o serie de pacien i şi ADH la o serie diferită de pacien i
+d. să măsoare ADH la o serie de pacien i şi la un grup martor
+e. nici unul din cele de mai sus
+
+53. În raport cu un studiu cazuri-control un studiu prospectiv:
+a. costă mai mult
+b. este adecvat studiului unei boli rare
+c. se bazează mai pu in pe memoria subiec ilor
+d. permite calculul direct al riscului relativ
+e. poate înregistra distorsiuni datorită pierderilor din studiu
+
+54.  Rezultatele  unui  studiu  epidemiologic  efectuat  în  jude ul  "X"  pentru  măsurarea riscurilor de deces infantil asociate unor factori favorizan i sunt prezentate în tabelul de mai jos:
+
+Nr.crt
+Factorul de risc
+RR de deces 0-1 an
+RA(%)în
+popula ie
+1
+Naştere neasistată
+5.1
+4.8
+2
+HTA în timpul sarcinii
+5.2
+3.2
+
+
+
+
+3
+Vârsta mamei sub 19 ani
+1.7
+4.1
+4
+Travaliu prelungit
+2.5
+2.5
+5
+Familie dezorganizată
+1.9
+1.7
+Primul factor de risc asupra căruia trebuie ac ionat în cadrul unui program de reducere a
+mortalită ii infantile va fi:
+a. factorul 2 pentru că are riscul relativ cu valoarea maximă
+b. factorul 1 pentru că are riscul relativ mai mare decât riscul atribuibil în popula ie
+c. factorul 3 pentru că are riscul atribuibil în popula ie mai mare decât riscul relativ
+d. factorul 4 pentru că are riscul relativ egal cu riscul atribuibil în popula ie
+e. factorul 1 pentru că are riscul atribuibil în popula ie cu valoare maximă
+
+
+
+
+
+55. Asocia iile epidemiologice la nivelul indivizilor pot fi studiate prin anchete:
+a. transversale de tip screening
+b. longitudinale prospective
+c. longitudinale retrospective
+d. de tip cazuri-control
+e. descriptive
+
+56.  Mortalitatea  specifică  prin  cancer  pulmonar  la  medici  este  de  160/100000  la  marii fumători  fa ă  de 8/100000 la nefumători,  iar prevalen a fumatului în masa medicilor de
+80%.  Riscul  de deces  prin cancer  pulmonar  al unui  medic  mare  fumător  fa ă  de unul
+nefumător este de:
+a. 152
+b. 72
+c. 20
+d. 8
+e. nici unul de mai sus
+
+57. Argumente pentru ca un factor să fie considerat "factor cauzal" pentru o boală sunt:
+a. eliminarea factorului să reducă riscul de boală
+b. factorul să fie prezent la toate cazurile de boală
+c. plauzibilitatea rela iei
+d. expunerea la factor trebuie să preceadă apari ia bolii
+e. factorul să fie mai frecvent la bolnavi decât la non-bolnavi
+
+58. Din 1000 de femei cu cancer de sân, 32 erau însărcinate. Se poate conchide:
+a. 3,2% din pacientele cu cancer de sân erau însărcinate
+b. cancerul de sân este o complica ie rară a sarcinii
+c. sarcina este un factor de protec ie pentru cancerul de sân
+d. dacă se standardizează pentru vârstă, putem determina riscul cancerului de sân în timpul sarcinii
+e. sarcina este un factor de rise pentru cancerul de sân
+
+59. Din 250 de persoane (80 bărba i şi 170 femei), participante la un picnic, 112 s-au îmbolnăvit, din care 76 au fost femei şi 36 bărba i.
+a. inciden a pentru sexul masculin a fost 36/112
+
+
+
+b. inciden a pentru sexul masculin a fost 36/80
+c. inciden a pentru sexul feminin a fost 76/112
+d. inciden a pentru sexul feminin a fost 76/170
+e. inciden a generală a a fost 112/250
+
+60. În  tabelul de mai jos sunt prezentate ratele de spitalizare şi de mortalitate prin afec iuni tromboembolice la două loturi de femei :
+
+
+
+Decese
+(la 100 000)
+Rata de spitalizare
+(la 100 000)
+20-34 ani
+35-44 ani
+20-44 ani
+Utilizează
+contraceptive orale
+1,5
+3,9
+47,0
+Nu utilizează
+contraceptive orale
+0,2
+0,5
+5.0
+
+Pe baza acestor date se poate conchide că:
+a.   există o rela ie cauzală între utilizarea contraceptivelor orale şi afec iunile tromboembolice
+b.   mortalitatea prin aceste afec iuni este mai mare în cazul utilizării contraceptivelor, la fiecare grupă de vârstă
+c.   mortalitatea este mai mică la femeile care nu utilizează contraceptive comparativ cu cele care utilizează contraceptive, dovadă fiind şi o rată de spitalizare mai mică
+d.   mortalitatea creşte cu vârsta, indiferent dacă se utilizează sau nu contraceptive orale
+e.   nici o concluzie nu este corectă
+
+61. În  studiul de la Framingham asupra bolii coronariene, la examinarea ini ială 17 persoane din 1000 au fost găsite cu boală coronariană. Această mărime exprimă:
+
+a.   inciden a bolii coronariene
+b.   prevalen a de moment a bolii coronariene
+c.   prevalen a de perioadă a bolii coronariene
+d.   frecven a atacurilor de infarct miocardic
+e.   nici una din acestea
+
+62.Măsura  ob inută prin scăderea ratei îmbolnăvirii ( de obicei inciden ă sau mortalitate) la persoanele neexpuse din rata corespunzătoare la persoanele expuse reprezintă:
+a.   risc relativ
+b.   risc atribuibil
+c.   prevalen a bolii
+d.   frac ia etiologică a riscului
+e.   risc de pierdere din urmărire
+
+63. Epidemiologia este definită clasic ca studiul:
+a.   distribu iei şi determinan ilor bolii în popula iile umane
+b.   distribu iei bolii în popula iile umane
+c.   distribu iei  determinan ilor bolii în popula iile umane
+d.   modelului de organizare a serviciilor medicale
+e.   etiologiei bolilor
+
+
+
+
+
+64. O valoare mare a riscului atribuibil în popula ie ob inută în urma unei anchete de cohortă poate servi pentru:
+a.   măsurarea for ei asocia iei epidemiologice
+b.   sus inerea unei rela ii cauzale între factorul studiat şi efectul observat
+c.   argument pentru ini ierea unei strategii popula ionale de combatere a factorului respectiv
+d.   aprecierea efectului expunerii la nivel individual
+e.   demonstrarea unei diferen e semnificative statistic între riscul bolii la expuşi şi nonexpuşi
+
+65. O valoare mare a riscului relativ ob inută într-o anchetă epidemiologică analitică poate servi, independent de frecven a bolii şi a factorului de risc, pentru:
+a.   măsurarea for ei asocia iei epidemiologice
+b.   sus inerea unei rela ii cauzale între factorul studiat şi efectul observat
+c.   argument pentru ini ierea unei strategii popula ionale de combatere a factorului respectiv
+d.   aprecierea efectului expunerii la nivel individual
+e.   demonstrarea unei diferen e semnificative statistic între riscul bolii la expuşi şi nonexpuşi
+
+Studiu de caz nr. II
+
+E1. Pentru a se studia dacă există o rela ie între utilizarea contraceptivelor orale       ( estro- progestative) şi cancerul de col uterin, a fost urmărit din decembrie 1976 până în ianuarie
+ 1980  un  grup  de femei  între  18  şi 58  de ani,  fără  cancer  de col  în momentul  începerii studiului.   Supravegherea   a   constat   în   principal   din   efectuarea   anuală   a   frotiului Papanicolau, cercetând în paralel utilizarea contraceptivelor prin chestionar.
+
+E1.1. Avem de a face cu o anchetă:
+a.   longitudinală
+b.   prospectivă
+c.   de cohortă
+d.   de epidemiologie analitică
+e.   cazuri-control
+
+E1.2.  În  tabelul  următor  figurează  rezultatele  anchetei  în  func ie  de  durata  utilizării contraceptivelor:
+
+Durata expunerii
+Nu au luat contraceptive
+1-4 ani
+>4 ani
+Inciden a cancerului
+de col uterin
+( la 100 000 )
+32
+96
+…?
+Riscul relativ
+1
+3
+5
+Ave i suficiente elemente pentru a completa tabelul şi a a calcula inciden a cancerului de col
+la femeile care utilizează contraceptive mai mult de 4 ani?
+a.   nu, ar trebui cunoscut numărul de femei care au fost expuse mai mult de 4 ani
+b.   nu, pentru că nu se cunoaşte inciden a la nonexpuse
+c.   nu, ar trebui să se cunoască inciden a cancerului în popula ia generală
+d.   da, inciden a este 160/100000
+e.   nu, ar trebui să se cunoască numărul de fumătoare care nu au fost expuse
+
+
+
+
+
+E1.3. Faptul că  riscul relativ creşte de la 1 la 5 odată  cu creşterea expunerii la factorul studiat:
+
+a.   confirmă ipoteza după care contraceptivele orale sunt un factor de risc pentru cancerul de col
+b.   dovedeşte că utilizarea contraceptivelor orale este cauza cancerului de col
+c.   este un argument în favoarea cauzalită ii
+d.   nu există nici o semnifica ie etiologică în această anchetă
+e.   nu are nimic de a face cu rela ia de cauzalitate
+
+E 1. 4 Cum se putea proceda după părerea dumneavoastră la calculul riscului relativ?
+a.   calculând direct riscul relativ ca raport la două inciden e
+b.   comparând utilizarea de contraceptive de către femeile atinse de cancer de col cu utilizarea contraceptivelor de către cele indemne
+c.   comparând frecven a cancerului la utilizatoare cu cea la nonutilizatoare
+d.   calculând valoarea testului chi pătrat
+e.   utilizând o metodă de aproximare a riscului ( odds-ratio )
+
+SCREENING
+
+66. Validitatea unui indicator de morbiditate exprimă capacitatea sa de :
+a.   a măsura corect frecven a reală a bolii
+b.   a produce rezultate similare când este aplicat de mai mul i investigatori
+c.   a măsura corect frecven a reală a absen ei bolii
+d.   a măsura corect gravitatea bolii
+e.   a măsura probabilitatea  de apari ie a bolii
+
+67. Screeningul are avantajele:
+a.   stabileşte diagnosticul de certitudine al bolilor în fazele oligosimptomatice
+b.   este ieftin
+c.   se poate utiliza în scop prescriptiv
+d.   este bine acceptat de popula ie
+e.   este aplicabil la boli cu prevalen ă foarte mică
+
+68. Un test de screening pentru cancerul de sân a fost administrat la 400 de femei cu biopsie pozitivă pentru cancerul de sân şi la 400 de femei fără cancer de sân. Rezultatele testului au fost pozitive la 100 dintre femeile bolnave şi la 50 dintre femeile nonbolnave. Sensibilitatea testului este:
+a.
+87%
+b.
+67%
+c.
+25%
+d.
+33%
+e.
+12%
+
+69. Un test de screening are o specificitate teoretică de 100%. Aceasta înseamnă că oricare ar fi sensibilitatea:
+a.   valoarea predictivă pozitivă este egală cu 1
+
+
+
+b.   toate persoanele depistate sunt într-adevăr bolnave
+c.   nu sunt falşi negativi
+d.   to i bolnavii sunt depista i
+e.   nu sunt falşi pozitivi
+
+70. Într-un program de depistare a diabetului, pragul de separare pentru testul A a fost stabilit la 160 mg/100 ml, iar pentru testul B la 130mg/100ml.Aceasta ar însemna că:
+a.   sensibilitatea testului A este mai mare decât cea a testului B
+b.   specificitatea testului A este mai mare decât cea a testului B
+c.   numărul de fals-pozitivi este mai mare pentru testul A decât pentru testul B
+d.   numărul de fals-negativi este mai mare pentru testul A decât pentru testul B
+e.   numărul de fals-pozitivi este mai mic pentru testul A decât pentru testul B
+
+71. Un test cu o sensibilitate de 60 % aplicat la 1000 de subiec i, în rândul cărora prevalen a bolii este de 10 %, a eviden iat 200 de presupuşi bolnavi. Care este numărul de fals pozitivi?
+a.
+60
+b.
+40
+c.
+940
+d.
+140
+e.
+100
+
+72.  Care  dintre  următorii  indicatori  de  evaluare  a  unui  test  screening  se  defineşte  ca propor ie a persoanelor bolnave din popula ia supusă  testului identificate corect ca fiind bolnave:
+a.   sensibilitatea
+b.   specificitatea
+c.   valoarea predictivă pozitivă
+d.   valoarea predictivă negativă
+e.   prevalen a
+
+73. Criterii pentru alegerea bolii care să facă obiectul unui screening sunt:
+a.   testul de screening să fie cât mai valid şi reproductibil
+b.   sistemul de sănătate să dispună de facilită ile necesare
+c.   boala să fie decelabilă în stadiu subclinic
+d.   boala să fie frecventă şi/sau gravă
+e.   costul ac iunii şi al urmărilor ei să fie rezonabil pentru bugetul de sănătate
+
+74. Valoarea predictivă a unui rezultat pozitiv în cazul unei probe de screening cu o sensibilitate şi specificitate de respectiv 90%, aplicată unei popula ii de 1000 de persoane cu o prevalen ă a bolii de 20% este:
+a.
+180/260
+b.
+20/740
+c.
+180/200
+d.
+180/800
+e.
+20/200
+
+Studiu de caz nr. III
+
+
+
+S1. 70% din popula ia normală  are o glicemie inferioară  valorii A, în timp ce 85% din diabetici au o glicemie peste valoarea A. Pentru un test de screening se ia valoarea A ca prag de separare  între 2 grupe, considerând  probabil  normali  indivizii  cu glicemia inferioară valorii A şi probabil diabetici indivizii cu glicemia superioară valorii A.
+S1.1. Care este sensibilitatea testului?
+a.
+0,70
+b.
+0,30
+c.
+0,85
+d.
+0,15
+e.
+0,50
+
+S1.2. Care este specificitatea testului?
+
+a.
+0,70
+b.
+0,30
+c.
+0,85
+d.
+0,15
+e.
+0,50
+
+S1.3 Dacă prevalen a P a diabetului este de 5%, care este valoarea predictivă pozitivă, adică probabilitatea unui diabet zaharat real la un individ testat a cărui glicemie depăşeşte pragul A?( precizia calculelor este de 2 zecimale)
+a.   0,13
+b.   0,15
+c.   0,30
+d.   0,50
+e.   0,85
+
+S1.4.   În   aceleaşi   condi ii   (   P=5%),   care   este   valoarea   predictivă   negativă,   adică probabilitatea ca un individ testat a cărui glicemie este sub pragul A să nu fie într-adevăr diabetic? ( precizia calculelor este de 2 zecimale)
+a.
+0,15
+b.
+0,30
+c.
+0,50
+d.
+0,87
+e.
+0,99
+PREVEN  IE
+
+75. Profilaxia primară urmăreşte:
+a.   să evite apari ia bolii la individ
+b.   să reducă inciden a bolii în popula ie
+c.   să schimbe distribu ia factorilor de risc în popula ie
+d.   să evite agravarea bolilor incipiente
+e.   să crească rezisten a specifică şi nespecifică de boală
+
+76.Interesul actual fa ă de profilaxie a fost stimulat de :
+a.   eficacitatea metodelor actuale ale imunoprofilaxiei specifice
+
+
+
+b.   eficacitatea procedeelor terapeutice moderne asupra ameliorării stării de sănătate
+c.   concordan a dintre cheltuielile şi ameliorarea stării de sănătate
+d.   rolul factorilor comportamentali în explicarea modelului actual al morbidită ii
+e.   cunoaşterea cauzelor determinante  ale principalelor boli cronice
+
+77. Prevenirea şi combaterea unei boli la nivelul popula iei presupune:
+a.   cunoaşterea riscurilor asociate unor factori
+b.   cunoaşterea etiologiei bolii
+c.   cunoaşterea prevalen ei factorilor de risc
+d.   existen a unor resurse disponibile
+e.   existen a unor tehnologii preventive/curative
+
+78. Aplicarea unui tratament nou care previne decesul dar care nu determină recuperarea, are drept consecin ă:
+a.   scăderea prevalen ei bolii
+b.   creşterea inciden ei bolii
+c.   creşterea prevalen ei bolii
+d.   scăderea inciden ei bolii
+e.   scăderea inciden ei şi prevalen ei bolii
+
+79. În vederea combaterii îmbolnăvirilor prin TBC care din următoarele măsuri reprezintă
+ac iuni de preven ie primară:
+a. combaterea fumatului
+b. chimioprofilaxie specifică
+c. vaccinare BCG
+d. educa ie pentru sănătate
+e. depistare precoce
+
+80. Scopul final al medicinii preventive este:
+a. să crească probabilitatea de supravie iure la toate vârstele
+b. să crească durata medie a vie ii
+c. să reducă incapacitatea
+d. să crească speran a de via ă la naştere fără incapacitate
+e. să crească anii poten iali de via ă
+
+81. În urma acumulării unor cunoştin e prin educa ie pentru sănătate se realizează:
+a. modificarea eventuală a comportamentului
+b. modificarea obligatorie a comportamentului
+c. creşterea inciden ei
+d. o mai bună cunoaştere a stării de sănătate a colectivită ii
+e. nici unul dintre aceste răspunsuri
+
+82. Principalele strategii preventive în sănătate publică sunt:
+a. strategii bazate pe grupele la risc înalt
+b. strategii bazate pe nivele de prevenire (I, II, III)
+c. strategii bazate pe controlul factorilor de risc comuni mai multor boli
+d. strategii bazate pe popula ia generală
+e. strategii orientate pe grupe de vârstă
+
+
+
+
+
+83. Strategiile bazate pe popula ii la risc înalt au ca avantaje:
+a. motiva ia crescută a individului
+b. beneficiile pentru popula ie sunt foarte mari
+c. raport cost/eficacitate favorabil
+d. schimbă distribu ia factorului de risc în popula ie
+e. raport beneficiu/risc favorabil
+
+MORBIDITATE
+
+84. Datele referitoare la prevalen a unei boli sunt:
+a. func ie de inciden a şi durata bolii
+b. aplicabile în măsurarea riscului de dobândire a bolii
+c. utilizate în planificarea necesarului de servicii şi resurse
+d. utilizate în studierea rolului posibililor factori etiologici
+e. utilizate în măsurarea riscului atribuibil în popula ie
+
+85. Sursa de înregistrare cea mai de încredere în ceea ce priveşte inciden a IMA este:
+a. înregistrarea cazurilor de boală la Direc ia Sanitară
+b. certificatele de deces
+c. absenteismul de la locul de muncă
+d. înregistrarea cazurilor cronice de boală
+e. înregistrarea de la spitale
+
+86. Schimbarea prevalen ei unei boli de la o perioadă de timp la alta poate fi rezultatul modificării în:
+a. inciden ă
+b. riscul relativ
+c. durata bolii
+d. riscul atribuibil
+e. altor factori
+
+87. Datele prezentate în tabelul de mai jos se referă la numărul de copii cu leucemie acută
+care au fost interna i în spitalul „X” în perioada 1960-1974.
+
+Grupe de
+vârstă
+Nr. copii interna i
+Total
+1960-64
+1965-69
+1970-74
+0-4
+5-9
+10-14
+12
+8
+7
+23
+17
+8
+31
+36
+4
+66
+61
+19
+Total
+27
+48
+71
+146
+
+Din tabel rezultă că:
+a.   inciden a bolii scade la copiii de 10-14 ani
+b.   prevalen a anuală a bolii creşte în perioada 1960-1974
+c.   inciden a bolii creşte la copiii 5-9 ani
+d.   numărul copiilor interna i creşte în perioada 1960-1974
+
+
+
+e.   prevalen a bolii scade în perioada 1960-1974
+
+88. Rata inciden ei unei boli este:
+a. rata mortalită ii dacă boala duce rapid la deces
+b. propor ia paturilor de spital ocupate de pacien i cu acea boală
+c. propor ia persoanelor cu acea boală dintr-o popula ie
+d. numărul cazurilor noi de boală pe an dintr-o popula ie
+e. numărul cazurilor noi din fiecare grupă de vârstă spitalizate într-un an
+
+89. Identifica i din exemplele de mai jos care sunt date de prevalen ă:
+a. numărul cazurilor de diabet depistate activ într-o colectivitate de studen i
+b. numărul de internări pentru hipertensiune arterială la o popula ie de 100 000, pe an
+c. numărul total de cazuri de scleroză multiplă la o popula ie de 100 000, pe an
+d. numărul episoadelor de boală la persoanele în vârstă de peste 3 ani, pe an
+e. numărul cazurilor noi de cancer de prostrată la 100 000 de bărba i, pe an
+
+90. Protocolul pentru o anchetă transversală de prevalen ă pe eşantion trebuie să con ină:
+a. calitatea probelor de screening
+b. definirea popula iei
+c. prevenirea non-răspunsurilor
+d. metoda de selec ie a unită ilor de observare
+e. descrierea procedurilor pentru examenele clinice şi paraclinice
+
+91. Principalele componente ale îngrijirilor primare de sănătate sunt:
+a. sănătatea mediului
+b. ocrotirea mamei şi copilului
+c. tratamentul tumorilor benigne
+d. asigurarea cu medicamente esen iale
+e. controlul bolilor endemice
+
+92. Realizarea unui program de planificare familială presupune următoarele tipuri de măsuri:
+a. obligarea familiei la un anumit număr de copii
+b. prevenirea deceselor materne
+c. dreptul femeii de a decide asupra numărului de copii şi a momentului naşterii acestora
+d. punerea la dispozi ia popula iei a mijloacelor contraceptive
+e. combaterea sterilită ii primare
+
+93. Ocrotirea popula iei vârstnice presupune:
+a. existen a unor institu ii specializate
+b. existen a unui personal special pentru îngrijiri la domiciliu
+c. internarea tuturor bătrânilor în institu ii special destinate lor
+d. responsabilitatea exclusivă a familiei pentru îngrijirea familiei
+e. antrenarea vârstnicilor în ac iuni sociale
+
+94. Indicatorul care măsoară într-o serie de varia ie dispersia valorilor individuale fa ă de media lor se numeşte:
+a. coeficient de regresie
+
+
+
+b. eroare standard a mediei
+c. devia ie ( abatere) standard
+d. amplitudine
+e. coeficient de corela ie
+
+95. Delegarea autorită ii presupune şi:
+a. delegarea totală a responsabilită ii
+b. delegarea par ială a responsabilită ii
+c. păstrarea totală a responsabilită ii
+d. păstrarea par ială a responsabilită ii
+e. nici unul din aceste răspunsuri
+
+96. Inegalitatea dintre resurse şi necesită i determină următoarele măsuri:
+a. reducerea volumului presta iilor
+b. stabilirea de priorită i
+c. planificarea
+d. evaluarea activită ii
+e. evaluarea resurselor
+
+97. Sistemul de sănătate este integral privat în  rile:
+a. SUA
+b. Olanda
+c. Marea Britanie
+d. Germania
+e. Nici unul din aceste răspunsuri
+
+98. Din cele 5 componente ale sistemului de sănătate, care influen ează cel mai mult natura sistemului?
+a. producerea şi dezvoltarea de resurse
+b. elaborarea de programe
+c. finan area
+d. managementul
+e. acordarea de servicii
+
+99. Resursele necesare pentru ocrotirea sănătă  ii sunt:
+a. personalul
+b. facilită i sanitare
+c. cadrul legal
+d. timpul
+e. banii
+
+100. Sistemele de sănătate care reuşesc să satisfacă în cea mai mare măsură obiectivul asigurării echită ii serviciilor de sănătate sunt finan ate preponderent prin:
+a. plata directă
+b. asigurări private pentru sănătate
+c. taxe şi impozite na ionale sau locale
+d. organiza ii filantropice şi ajutoare externe
+e. asigurări sociale pentru sănătate
+
+`
+
+      const answers_raw = `
+1abcd;2acd;3e;4abde
+5abcde;6ac;7b;8d;9bc;10a;11d;12c,13b;14acd;
+15d;16de;17de;18e;19c;20c;21d,22c;23be;24c;25bcde;26a;27ac;28b,29e,30c;31c;32c; Studiu de caz nr.I- D1b;D2c; D3ce;D4bd;D5bce
+33a;34b;35b,36e,37d;38a;39b;40e;41c;42a;43a,44b;45b,46d,47c;48d;49d;50e,51c;52e,
+53acde;54e,55abcd,56c;57acde,58a;59bde;60bd,61b;62b;63a;64c;65a; Studiu de caz nrII- E1abcd,E1.2d,E1.3ac;E1.4a
+66ac;67bce;68c;69abc;70bde;71d;72a;73bcde;74a; Studiu de caz nr.III- S1.1c;S1.2a, S1.3a,S1.4e
+75abc;76ad;77acde;78c;79abcd;80d;81a,82abcde,83ace
+84ac;85e,86ac;87ac;88d,89ac;90bcde
+91abde; 92cde;93abe;94c;95a;96bcde,97e,98c;99abde;100ce
+`
+
+const q_regex = new RegExp('^(?=[0-9]+\. )', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+
+  var split_answers = answers_raw.trim().split(new RegExp('([0-9]+)', 'g')).map(function(s) { return s.trim() }); 
+
+  console.log(split_answers);
+
+  function find_answer(q_number) {
+    for (i = 0; i < split_answers.length; i++) {
+      if (split_answers[i] === `${q_number}`) {
+        return split_answers[i + 1];
+      }
+    }
+
+    console.log("No answer for "+ q_number);
+  }
+
+
+
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const number = split[0].split('.')[0].trim();
+    const answer = find_answer(number);
+    const question = split.join('<br/>').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
