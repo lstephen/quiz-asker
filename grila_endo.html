@@ -1,0 +1,428 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+
+1. Secretia de prolactina este inhibata de unul din urmatoarele medicamente
+a. Clorpromazina
+b. Bromocriptina
+c. Metoclopramid
+d. Amitriptilina
+e. Anticonceptionale orale estro-progestative
+b
+
+2. La o femeie de 24 de ani, care dintre semnele clinice si biochimice nu pledeaza pentru
+un prolactinom:
+a. Sindrom amenoree-galactoree
+b. Fertilitate normala
+c. Sa turceasca marita de volum
+d. Prolactina = 250 ng/ml
+e. Sindrom de chiasma optica
+b
+
+3. In timpul sarcinii glanda hipofiza isi poate dubla volumul prin hiperplazia:
+a. Celulelor somatotrope
+b. Celulelor lactotrope
+c. Celulelor corticotrope
+d. Celulelor nesecretante clinic de hormoni
+e. Elementelor tesutului conjunctiv
+b
+
+4. Manifestarea precoce, cea mai frecventa, a hipopituitarismului la copii este :
+a. Intarzierea dezvoltarii sexuale
+b. Ingrosarea vocii
+c. Constipatia
+d. Insuficienta cresterii liniare
+e. Hipotensiunea arteriala
+d
+
+5. O bolnava de 36 de ani care in urmaunei nasteri cu hemoragie masiva (colaps) prezinta:
+absenta instalarii secretiei lactate, crize hipoglicemice, amenoree secundara,
+somnolenta, marirea pilozitatii axilare si pubiene, hipotensiune arteriala, are:
+a. Insuficienta corticosuprarenala cronica primara
+b. Hipotiroidie
+c. Insuficienta adenohipofizara (sindrom Sheehan)
+d. Insulinom
+e. Insuficienta ovariana
+c
+
+6. In diabetul insipid central, urmatoarele afirmatii sunt adevarate cu o exceptie:
+a. Osmolaritatea plasmatica este scazuta
+b. Setea este un mecanism compensator
+c. Osmolaritatea urinara este mult scazuta
+d. In timpul probei de deshidratare, volumul urinar nu scade, iar densitatea urinara
+nu creste peste 1010
+e. Dupa testul cu Desmopresina apare antidiureza
+a
+
+7. TSH-ul este crescut in caz de:
+a. Sindrom Turner
+b. Boala Graves-Basedow
+c. Acromegalie
+d. Adenom toxic tiroidian
+e. Deficit de iod in alimentatie
+e
+
+8. Toate manifestarile urmatoare se pot datora tirotoxicozei, cu o exceptie:
+a. Scadere ponderala cu apetit alimentar pastrat sau crescut
+b. Tahicardie sinusala permanenta
+c. Tremor al extremitatilor
+d. Accelerarea tranzitului intestinal
+e. Tegumente uscate si reci
+e
+
+9. Cauza tireotoxicozei in boala Graves-Basedown presupune:
+a. Stimularea excesiva a tiroidei prin TSH
+b. Functionarea autonoma a celulelor tiroidiene
+c. Anticorpi stimulatori ai receptorilor pentru TSH (TRAb)
+d. Supraproductie de TRH hipotalamic
+e. Sensibilitate crescuta a receptorilor periferici la hormonii tiroidieni
+c
+
+10. Antitiroidienele de sinteza pot avea ca reactii adverse urmatoarele, cu exceptia:
+a. Cresterea in volum a gusii
+b. Hipotiroidism iatrogen
+c. Reactii alergice
+d. Leucopenie cu agranulocitoza
+e. Galactoree
+e
+
+11. O hipotiroidie primara se deosebeste de una secundara prin:
+a. Valoarea TSH-ului
+b. Rezistenta scazuta la frig
+c. Somnolenta
+d. Bradilalie, bradikinezie
+e. Tratamentul de substitutie tiroidiana
+a
+
+12. Iodul radioactiv (131I) este utilizat in urmatoarele situatii, cu exceptia:
+a. Investigarea functiei tiroidiene
+b. Tratamentul bolii Graves-Basedow
+c. Tratamentul adeonomului toxic tiroidian
+d. Tratamentul carcinomului tiroidian nediferentiat
+e. Tratamentul carcinomului tiroidian diferentiat
+d
+
+13. Tiroidita limfocitara cronica (Hashimoto) prezinta urmatoarele caracteristici, cu o
+exceptie:
+a. Se asociaza cu anticorpi antitireoglobulinici si antitireoxidazi (ATPO)
+b. Duce in timp la hipotiroidie
+c. Se suspecteaza la pacienti cu gusa medie ferma, cu suprafata neregulata
+d. Este precedata de o infectie acuta de cai respiratorii superioare
+e. Se diagnposticheaza cu certitudine doar prin punctie
+d
+
+14. Testul de supresie cu Dexametazona 8mg x 2
+a. Boala Cushing
+b. Sindrom Cushing
+c. Sindrom Cushing iatrogen
+d. Boala Addison
+e. Tumori cu secretie ectopica de ACTH
+a
+
+15. O insuficienta corticosuprarenala primara se deosebeste de cea secundara prin
+urmatoarele, cu o exceptie:
+a. Valori mai scazute ale TA in forma primara
+b. Culoarea tegumentelor
+c. Rezistenta la post alimentar mai scazuta in forma secundara
+d. Pilozitate axilara si pubiana
+e. Primele 3 elemente clinice mentionate
+d
+
+16. In hiperaldosteronismul primar intalnim urmatoarele modificari, cu o exceptie:
+a. Hipotensiune arteriala
+b. Renina plasmatica scazuta
+c. Hipopotasemie
+d. Alcaloza
+e. tumora/hiperplazie corticosuprarenala
+a
+
+17. Semnele si simptomele ce apar la pacientii cu boala Addison netratata sunt urmatoarele,
+cu exceptia:
+a. Slabiciune si fatigabilitate
+b. Scadere in greutate
+c. Hipertensiunea arteriala
+d. Hiperkaliemie
+e. Hipoglicemie
+c
+
+18. Efectele biologice directe ale PTH sunt:
+a. Mobilizarea calciului si fosforului din os
+b. Scaderea formarii de 1,25 - sihidroxivitamina D la nivel renal
+c. Scaderea reabsorbtiei calciului la nivelul tubilor renali
+d. Cresterea reabsorbtiei fosforului la nivelul tubilor renali
+e. Absorbtie intestinala crescuta a calciului
+e
+
+19. O femeie in varsta de 60 ani a fost tratata cu succes pentru hiperparatiroidism primar
+prin indepartarea adenomului paratiroidian. Dupa interventia chirurgicala a prezentat o
+perioada prelungita de hipocalcemie care a necestitat tratament continuu cu doze mari
+de calciu si vitamina D. Dupa 2-3 luni, necesarul de calciu si vitamina D a scazut,
+pacienta ramanand normocalcemica fara tratament. Pacienta s-a aflat in urmatoarea
+situatie:
+a. Distrugere accentuata a celorlalte 3 glande paratiroide
+b. Indepartarea gresita a altei glande paratiroide (decat cea cu adenomul)
+c. Pancreatita severa determinata de hiperparatiroidism
+d. Pseudohipoparatiroidism nediagnosticat
+e. Sindromul oaselor ‘avide’ de calciu (hungry bone syndrome)
+e
+
+20. O femeie in varsta de 18 ani este evaluata pentru o amenoree primara. Examinarea
+pelviana este normala, exceptand ca vaginul se termina in ‘deget de manusa’. Cariotipul
+sau este 46XY. Care dintre diagnosticele urmatoare este el mai probabil:
+a. Sindromul andreogenital congenital
+b. Sindromul Turner
+c. Sindromul Kallmann
+d. Sindromul testiculului feminizant
+e. Sindromul ovarelor polichistice
+d
+
+21. Un barbat de 23 ani este evaluat pentru hipogonadism. Care dintre urmatoarele
+elemente gasite ar sugera afectarea testiculara primara, si nu o cauza
+hipotalamo-hipofizara:
+a. Anosmie
+b. Nivelele plasmatice crescute ale gonadotropilor (FSH, LH)
+c. Habitus enucoid
+d. Pierderea libidoului si impotenta
+e. Scaderea numarului si mobilitatii spermatozoizilor (pe spermograma)
+c
+
+22. In sindromul androgenital congenital, suprarenalele sunt:
+a. Hiperplaziate
+b. Atrofiate
+c. Polichistice
+d. Cu necroza hemoragica
+e. Hiperplazie pe o parte si atrofie pe cealalta
+a
+
+23. Testul la vasopresinaface diagnosticul diferential intre:
+a. Diabetul insipid si diabetul zaharat
+b. Insuficienta renala cronica (faza poliurica) si diabetul insipid
+c. Diabetul insipid central si cel nefrogen
+d. Diabetul insipid central si poliuria din hipercalcemie
+e. Diabetul insipid nefrogen si poliuria din hiperaldosteronismul primar
+c
+
+24. Sindromul osteoarticular acromegalic se poate manifesta prin urmatoarele, cu exceptia:
+a. Fracturi spontane sau la traumatisme minime
+b. Accentuarea cifozei toracice
+c. Bombarea sternului
+d. Marirea de volum a extremitatilor
+e. Proeminenta crestelor de insertie musculara
+a
+
+25. Osteoporoza apare in urmatoarele, cu o exceptie:
+a. Sindromul Cushing
+b. Menopauza
+c. Hiperparatiroidismul primar
+d. Hipotiroidie
+e. Sindrom Turner, la pacienta adulta fara substitutie estro-progestativa
+c
+
+26. Sindromul tumoral hipofizar se poate manifesta prin umratoarele semne cu exceptia:
+a. Cefalee
+b. Exoftalmie
+c. Rinorahie (perderea de LCR prin fosele nazale)
+d. Hemianopsie bilaterala
+e. Diabet insipid
+e
+
+27. In timpul corticosuprarenalectomiei unilaterale pentru sindrom Cushing trebuie
+administrat:
+a. ATH i.v.
+b. Hemisuccinat de hidrocortizon i.v.
+c. Hormoni tiroidieni
+d. Adrenalina
+e. Bicarbonat de sodiu
+b
+
+28. Ovarul secreta urmatorii hormoni, cu exceptia:
+a. Dehidroepiandrosteron sulfat
+b. Andrestendion
+c. Estradiol
+d. Testosteron
+e. Progesteron
+a
+
+29. Referitor la TRH, urmatoarele afirmatii sunt corecte, cu exceptia:
+a. Este produs de hipotalamus
+b. Este tripeptid
+c. Stimuleaza secretia de prolactina
+d. Supreseaza secretia de TSH
+e. Este crescut in mixedemul netratat
+d
+
+30. Craniofaringiomul:
+a. Este cea mai frecventa tumora intracraniana a adultului
+b. Este o tumora disembrioplazica, provenita din resturile pungii Rathke
+c. Se insoteste de accelerarea cresterii staturale la copii
+d. Spre deosebire de adeniamele hipofizare, nu prezinta calcificari
+e. Induce pseudopubertate precoce
+b
+
+31. Sindromul de hipofiza izolata se insoteste de cresterea unuia dintre urmatorii hormoni
+adenohipofizari:
+a. ACTH
+b. Prolactina
+c. TSH
+d. LH si FSH
+e. GH
+b
+
+32. Radiocaptarea este crescuta in urmatoarele situatii, mai putin una:
+a. Boala Graves-Basedow
+b. Tireotoxicoza iodica
+c. Adenom toxic tiroidian
+d. Adenom hipifizar secretant de TSH
+e. Gusa endemica
+d
+
+33. Un barbat de 33 ani consulta medicul pentru o exoftalmie unilaterala. Care dintre
+urmatoarele elemente exclude diagnosticul de boala Graves-Basedow:
+a. Absenta gusii
+b. TSH plasmatic normal
+c. RIC tiroidiana normala
+d. fT4 plasmatic normal
+e. Nici unul dintre cele de mai sus
+b
+
+34. Referitor la vitamina D, urmatoarele afirmatii sunt adevarate, mai putin una:
+a. Este sintetizata in piele sub forma de colecalciferol
+b. Este o vitamina hidrosolubila
+c. Activarea ei presupune 2 hidroxilari (hepatica si renala)
+d. Stimuleaza absorbtia intestinala de calciu si fosfor
+e. Exista depoztite de vitamina D si derivati in organism
+b
+
+35. Urmatoarele afirmatii privind tiroidita subacuta sunt adevarate, mai putin una
+a. Este de etiologie virala
+b. Diagnosticul este sustinut de cresterea VSH-ului
+c. Leucocitoza este absenta
+d. RIC este scazuta
+e. Fenomenele de tireotoxicoza impun tratament cu doze mari de antitiroidiene de
+sinteza
+e
+
+36. Leziunile osoase evidentiate radiograficdin hiperparatiroidismul primar se manifesta prin
+urmatoarele, mai putin una:
+a. Demineralizare osoasa neomogena
+b. Reabsorbtie subperiostala
+c. Chiste osoase
+d. Distructia periostului
+e. Subtierea si disparitia laminei dura a dintilor
+e
+
+37. Scaderea fortei musculare este intalnita in:
+a. Sindromul Cushing
+b. Hipertiroidie
+c. Hipercorticism iatrogen (corticoterapie)
+d. Hiperaldosteronismul primar
+e. Toate cele de mai sus
+e
+
+38. In sindromul Nelson pot aparea urmatoarele, cu o exceptie:
+a. Melanodermie
+b. Sindrom de compresie opto-chiasmatica
+c. Valori crescute ale ACTH-ului
+d. Macroadenom hipofizar
+e. Cortizol plasmatic mult crescut
+e
+
+39. Urmarirea ovulatiei la o femeie se poate face prin urmatoarele metode:
+a. Curba temperaturii bazale
+b. Ecografia utero-ovariana
+c. Dozarea LH-ului plasmatic in ziua 14 a ciclului menstrual
+d. Dozarea progesteronului plasmatic in ziua 14 a ciclului menstrual
+e. Dozarea progesteronului plasmatic in ziua 21 a ciclului menstrual
+d
+
+40. Pacientii cu sindromul Cushin prin adenom suprarenal pot prezenta:
+a. Hipotensiune arteriala
+b. Diabet zaharat secundar
+c. Tulburari de camp vizual
+d. Pancreatita acuta
+e. diplopie
+b
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
