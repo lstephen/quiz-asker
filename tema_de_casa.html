@@ -1,0 +1,316 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+1. Kinetoprofilaxia primară pentru adulți are ca obiective generale, cu excepția 
+a) menţinerea capacității de efort 
+b) menţinerea supleţei articulare 
+c) menţinerea unei posturi şi alinieri corecte 
+d) asigurarea creșterii normale și dezvoltării fizice armonioase 
+e) menţinerea forţei şi rezistenţei musculare 
+D
+
+
+2. Contracția izometrică reprezintă 
+a) tehnică kinetică dinamică 
+b) tehnică kinetică statică 
+c) contracția musculară reflexă, necontrolată și necomandată voluntar 
+d) contracția prin care se realizează deplasarea mare a segmentelor
+e) contracția musculară în care lungimea fibrei musculare se modifică foarte mult 
+B
+
+
+3. Dintre caracteristicile mobilizării active voluntare fac parte, cu excepția
+a) este realizată prin contracții musculare reflexe 
+b) este realizată prin contracții musculare izotone, dinamice  
+c) reprezintă fondul oricărui program kinetic profilactic  
+d) se realizează prin contracţie musculară şi prin consum energetic
+e) implică contracția musculară proprie a segmentului mobilizat 
+A
+
+
+4. Contracţia izotonică 
+a) este o contracția musculară în care lungimea fibrei musculare rămâne constantă 
+b) este o contracţie statică prin care se produce modificarea lungimii muşchiului
+c) nu determină producerea mişcării la nivel articular 
+d) se realizează fără deplasarea segmentelor 
+e) se realizează cu deplasarea segmentelor 
+E
+
+
+5. Dintre obiectivele urmărite prin mobilizarea activă fac parte, cu excepția
+a) creşterea sau menţinerea amplitudinii de mişcare  
+b) creşterea sau menţinerea forţei musculare 
+c) asigurarea unei circulaţii anormale sau diminuarea fluxului circulator
+d) menţinerea echilibrului neuroendocrin 
+e) menţinerea sau creşterea ventilaţiei pulmonare 
+C
+
+
+6. Bustul se măsoară între 
+a) vertex şi linia biischiadică 
+b) vertex şi planul plantelor 
+c) vertex şi spinele iliace antero-superioare 
+d) vertex şi crestele iliace  
+e) punctul suprasternal şi linia biischiadică 
+A
+
+
+7. Dintre indicii de apreciere ai stării de nutriție fac parte, cu excepția
+a) Indicele A. Ionescu  
+b) Indicele Brugsch 
+c) Indicele Broca  
+d) Indicele lui Vandervael  
+e) Indicele de masă corporală 
+A
+
+
+
+8. Dintre indicii de armonie ai dezvoltării fizice fac parte, cu excepția 
+a) Indicele Erissmann 
+b) Indicele Quetelet 
+c) Indicele A. Ionescu 
+d) Indicele Amar 
+e) Indicele biacromial 
+B
+
+
+9. Indicele de masă corporală reprezintă 
+a) raportul dintre greutate şi înălțime la pătrat 
+b) raportul dintre bust şi înălțime  
+c) gradul de dezvoltare toracică în raport cu înălțimea  
+d) raportul prin care se diferenţiază tipurile constituţionale 
+e) diferența dintre înălțime și anvergură 
+A
+
+
+10. Perioada de încălzire a organismului din cadrul antrenamentului la efort se caracterizează  prin 
+a) durată fixă de timp, respectiv 20 de minute 
+b) durată de minim 15 de minute 
+c) durată variabilă de timp, putând merge până la 10 minute 
+d) exerciții statice 
+e) reprezintă minutele finale ale antrenamentului 
+E
+
+
+11. Dintre regulile etapei de exerciții aerobice propriu-zise din cadrul antrenamentului la  efort fac parte, cu excepția 
+a) să se întrerupă efortul în cazul apariţiei unor dureri toracice 
+b) să se respire neregulat şi cu amplitudine mică  
+c) exerciţiile să fie ritmice, repetitive 
+d) exerciţiile să fie dinamice  
+e) exercițiile să angreneze în efort cât mai multe grupe musculare 
+B
+
+
+12. Dintre răspunsurile cardiovasculare la efort fizic (efecte imediate) fac parte, cu excepția
+a) creșterea frecvenței cardiace 
+b) creșterea debitului cardiac 
+c) creșterea presiunii arteriale 
+d) diminuarea vasodilatației la nivelul musculaturii activate 
+e) reducerea rezistenței arteriale din musculatura activată  
+D
+
+
+13. Dintre adaptările respiratorii la efortul fizic (efecte tardive) fac parte, cu excepția
+a) creşterea amplitudinii respiraţiilor 
+b) creşterea ventilaţiei pulmonare 
+c) creşterea debitului respirator 
+d) diminuarea mare a valorilor coeficientului respirator în efort maximal  
+e) îmbunătățirea valorilor capacității vitale 
+D
+
+
+14. Dintre obiectivele profilaxiei active la copii cu vârste între 3-5 ani fac parte, cu excepția 
+a) întărirea stării de sănătate 
+b) stimularea proceselor de creştere şi dezvoltare 
+c) stimularea marilor funcțiuni organice 
+d) dezvoltarea instabilității neuromotorii  
+e) dezvoltarea musculaturii pentru asigurarea unei atitudini corporale corecte
+D
+
+
+ 
+15. Dintre obiectivele profilaxiei active la vârsta pubertății fac parte, cu excepția
+a) asigurarea dezvoltării armonioase a corpului 
+b) formarea şi menținerea unei atitudini corporale corecte 
+c) asigurarea unei respirații superficiale 
+d) creşterea mobilității articulațiilor 
+e) creșterea tonusului muscular 
+E
+
+
+16. Dintre obiectivele profilaxiei active la vârsta adolescenței fac parte, cu excepția 
+a) formarea şi menținerea unei atitudini corporale corecte doar în poziția aşezat, singura necesară în  activitățile școlare 
+b) formarea şi menținerea unei atitudini corporale corecte în statică și dinamică
+c) asigurarea dezvoltării armonioase a corpului 
+d) asigurarea unei respirații corecte și complete 
+e) autocorectarea sau profilaxia deficiențelor fizice  
+A
+
+
+17. Dintre modificările apărute la nivelul aparatului mio-artro-kinetic în sarcină fac parte,  cu excepția 
+a) tonus crescut al mușchilor scheletici 
+b) laxitate articulară  
+c) imbibiție edematoasă a simfizelor bazinului 
+d) accentuarea lordozei lombare  
+e) deplasarea centrului de greutate al corpului înainte și în jos  
+A
+
+
+18. Dintre obiectivele profilaxiei active în sarcină fac parte, cu excepția 
+a) formarea autocontrolului postural 
+b) menținerea greutății la valori adecvate lunilor de sarcină 
+c) menținerea capacității de efort 
+d) combaterea tendinței de aplatizare plantară 
+e) asigurarea tulburărilor de circulație venoasă 
+E
+
+
+19. Dintre exercițiile indicate în sarcină fac parte, cu excepția 
+a) exerciții libere 
+b) exerciții de respirație 
+c) exerciții cu încărcături foarte mari 
+d) exerciții de stretching 
+e) exerciții de tonifiere a musculaturii plantare 
+C
+
+
+20. Dintre obiectivele profilaxiei active în lăuzia tardivă fac parte, cu excepția
+a) restabilirea aliniamentului corporal 
+b) revenirea la greutatea normală 
+c) refacerea centurii abdomino-pelvine 
+d) dezechilibrarea bazinului  
+e) reeducarea sinergiei musculare toraco-abdomino-pelviperineale în cadrul respirației 
+D
+
+
+21. Dintre modificările conformației corpului la vârsta a III-a fac parte, cu excepția
+a) scăderea progresivă a taliei  
+b) modificarea proporțiilor corpului 
+c) scăderea masei musculare 
+d) creșterea masei musculare 
+e) accentuarea curburilor coloanei vertebrale
+D
+
+
+ 
+22. Dintre modificările morfo-funcţionale ale persoanelor de vârsta a III-a fac parte, cu  excepția 
+a) modificarea proporțiilor corpului 
+b) scăderea forței musculare 
+c) scăderea masei musculare active  
+d) alterarea reflexelor 
+e) creșterea excitabilității fibrelor nervoase 
+E 
+23. Kinetoprofilaxia la vârsta a III-a are ca obiective, cu excepția 
+a) menținerea / îmbunătățirea capacității funcționale generale 
+b) corectarea posturii 
+c) creșterea capacității funcționale cardiorespiratorii 
+d) îmbunătățirea gradului de autonomie și independență 
+e) asigurarea stărilor depresive 
+E
+
+
+24. Antrenamentul la efort a persoanelor între 15-24 ani trebuie să aibă 
+a) intensitate mică  
+b) intensitate moderată spre viguroasă 
+c) durată de maxim 20 min pe şedință  
+d) durată de maxim 15 min pe şedință 
+e) durată de maxim 10 min pe şedință 
+B
+
+
+
+25. Antrenamentul la efort a persoanelor între 25-65 ani trebuie să aibă 
+a) intensitate foarte mică 
+b) frecvență de maxim 2 zile pe săptămână 
+c) frecvență de maxim 2 zile pe lună 
+d) durată de maxim 5-10 min pe şedință 
+e) frecvență de cel puțin o dată la 2 zile
+E
+
+
+
+
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
