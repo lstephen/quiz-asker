@@ -1,0 +1,804 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+Diagnosticul sarcinii oprite in evolutie se face pe baza:
+1. Dispariția semnelor funcționale
+2. Concordanței între mărimea uterului și durata amenoreei
+3. Hipertrofierea sanilor
+4. Aparitia secretiei lactate
+5. Disparitia metroragiilor
+A, D
+
+
+Tratamentul medicamentos al incontinentei urinare de efort se face cu:
+1. Medicatie colinergica
+2. Antihipertensive pentru a reduce filtrarea renala
+3. Medicatie aniticolinergica
+4. Estrogenii
+5. Toxina boutulinica
+C, D, E
+
+
+In sarcina gemelara examenul obstetrical evidentiaza:
+1. Discordanta intre varsta sarcinii si inaltimea fundului uterin
+2. Auscultatia a trei focare cardiace fetale
+3. Hipertensiune materna
+4. Castigul ponderal matern exagerat
+5. Prezenta a doua focare de auscultatie
+A, D, E
+
+
+Despre incontinenta urinara sunt adevarate urmatoarele afirmatii:
+1. Reprezinta pierderea involuntara de urina
+2. In cazul incontinentei de efort, poate sa fie cauzata de tuse sau stranut
+3. Poate sa fie cauzata de diuretice
+4. Varsta reprezinta un factor important, astfel ca se intalneste mai frecvent la adolescente
+5. Menopauza si lipsa estrogenilor reprezinta un factor favorizant
+A, B, E
+
+
+Printre riscurile materne din sarcina multipla se numara urmatoarele, cu exceptia:
+1. Hipoptensiunea materna
+2. Anemia
+3. Sterilitatea 
+4. Avort sau nastere prematura
+5. Complicatii infectioase
+A, C
+
+Pe parcursul travaliului, in sala de nasteri, se practica:
+1. Cardiotocografia
+2. Palparea Leopold
+3. Auscultatia cu stetoscopul obstetrical a batailor cordului fetal
+4. Ecografie pentru morfologie fetala
+5. Tuseu vaginal
+A, B, C, E
+
+
+
+
+Care din circumstantele enumerate au valoare predictiva in HTA indusa de sarcina?
+1. TA medie mai mare de 85 mm Hg
+2. Diminuarea valorilor TA minime pe parcursul trimestrului II
+3. Cresterea calciuriei
+4. Testul postural negativ
+5. Nivelurile sanguine crescute ale acidului uric
+A, E
+
+
+In cazul endometriozei pelvine, se gasesc implante endometriozice la nivelul:
+1. Fundului de sac vaginal anterior
+2. Uterului 
+3. Ovarelor
+4. Recto-sigmoidului
+5. Fundului de sac vaginal posterior
+A, B, C, E
+
+
+La inspectia sanilor in trimestrul II-III se observa:
+1. Cresterea in volum a sanilor
+2. Hipopigmentarea areolei mamare
+3. Dezvoltarea retelei venoase Haller
+4. Aparitia tuberculilor Montgomery
+5. Vergeturi
+A, C, D, E
+
+
+In functie de momentul diviziunii oului, exista mai multe varietati de monozigoti:
+1. Monoamniotic - monocorial
+2. Monoamniotic - dicorial
+3. Gemeni siamezi
+4. Diamniotic - dicorial
+5. Diamniotic - monocorial
+A, C, D, E
+
+
+Specificati care din afirmatiile de mai jos legate de HTA induse de sarcina nu sunt corecte
+1. HTA indusa de sarcina se manifesta dupa sapt. A 20-a
+2. Sulfatul de magneziu nu este indicat in HTA indusa de sarcina
+3. In formele usoare valorile TA sunt de 170/110 mmHG
+4. Hidralazina este un hipotensor des intalnit in tratamentul HTA induse de sarcina
+5. Diureticele se folosesc in situatii exceptionale
+B, C
+
+
+Primele semne clinice din sarcina extrauterina necomplicata se numera:
+1. Durerea
+2. Tahipneea 
+3. Anomalii de ciclu
+4. Metroragii reduse cu sange negricios
+5. Polipnee
+A, C, D
+
+
+Calcularea varstei gestationale se face pe baza:
+1. Datei ultimei menstruatii + 10 zile + 9 luni
+2. Dimensiunilor sanilor
+3. Datei coitului fecundat + 9 luni
+4. Datei perceperii primelor miscari fetale +4 luni si jumatate la primipare
+5. Dimensiunilor uterului gravid
+A, C, D, E
+
+
+In travaliu tactul vaginal permite urmarirea:
+1. Colului si a segmentului inferior
+2. Ritmului cardiac fetal
+3. Progresia dilatatiei
+4. Progresia prezentatiei
+5. Intensitatea contractiei uterine
+A, C, D
+
+
+Factorii promotori ai prolapsului genital sunt:
+1. Fumatul
+2. Constipatia
+3. Operatia cezariana
+4. Boli pulmonare
+5. Obezitatea
+A, B, D, E
+
+Diagnosticul diferential al fibromului uterin se face cu:
+1. Sarcina
+2. Obezitatea
+3. Chist hepatic voluminos
+4. Chisturi/formatiuni ovariene
+5. Leiomiosarcom 
+A, D, E
+
+
+Criteriile de laborator pentru diagnosticarea bolii inflamatorii pelvine sunt:
+1. Leucocitoza peste 10.000
+2. Scaderea hematocritului
+3. Valori crescute ale proteinei C reactive
+4. Cresterea creatininei
+5. VSH crescut
+A, C, E
+
+
+Sindromul transfuzor-transfuzat:
+1. Apare de obicei in sarcinile dizigotice
+2. Gradul de dezechilibru  hemodinamic intre cei doi feti depinde de numarul si dimensiunile anastomozelor
+3. Transfuzorul este mic, hipotrofic
+4. Transfuzatul dezvolta hidroamnios
+5. In cazuri severe poate fi observat sindromul “stuck-twin”
+B, C, D, E
+
+
+Cardiotocograma urmareste:
+1. Frecventa batailor cordului fetal
+2. Ritmul de baza al cordului fetal
+3. Variabilitatea batailor cordului fetal
+4. Aritmia materna
+5. Variabilitatea batailor cordului matern
+A, B, C
+
+
+Perioadele nasterii sunt:
+1. Stergerea si dilatarea colului uterin
+2. Expulzia fatului
+3. Delivrenta
+4. Lauzia tardiva
+5. Consolidarea hemostazei
+A, B, C, E
+
+Semnele de certitudine ale sarcinii sunt, cu exceptia:
+1. Tumefierea sanilor
+2. Perceperea miscarilor active fetale
+3. Palparea de parti fetale
+4. Amenoreea 
+5. Auscultatia zgomotelor cardiace fetale
+A, D
+
+
+Tabloul clinic al endometriozei cuprinde:
+1. Dismenoreea
+2. Poate asocia simptomatologie neurologica
+3. Hemoragiile vaginale sunt patognomonice
+4. Dispareunia
+5. Tulburari ale ciclului menstrual
+A, D, E
+
+
+La prima consultatie prenatala sunt obligatorii urmatoarele investigatii, cu exceptia:
+1. Biochimie pentru dublu test
+2. Determinarea grupei sangvine si Rh-ului
+3. Determinarea hemoglobinei si a hematocritului
+4. Ecografie de morfologie fetala
+5. Teste serologice pentru depistarea HIV-SIDA
+A, D
+
+
+Abcesele pelvine:
+1. Se asociaza cu hemo-leucograma si fibrinogen in limite normale
+2. Pot sa fie o complicatie / forma severa de boala inflamatorie pelvina
+3. Poate sa aiba ca origime infectii de vecinitate (apendicita, diverticulita)
+4. Pacienta prezinta febra de tip septic, durere pelvina importanta
+5. Diagnosticul se poate stabili clinic, paraclinic si imagistic
+B, C, D, E
+
+
+Diagnosticul de certitudine al placentei praevia se bazeaza pe:
+1. Sangerarea in trimestrul I de sarcina
+2. pH sangelui fetal mai mare de 7.25
+3. Ecografia bidimensionala
+4. Menoragia cu sange negricios
+5. “Semnul saltelei” la tuseul vaginal
+C, E
+
+
+Factorii de risc pentru fibromatoza uterina sunt:
+1. Contraceptivele orale
+2. Steroizii sexuali
+3. Genetici
+4. Fumatul
+5. Carnea rosie
+A, B, C, E
+
+
+Pregatirea gravidei in vederea travaliului consta in:
+1. Gravida nu necesita nicio pregatire pentru travaliu
+2. Toaleta vulvo-perineala
+3. Se recomanda decubit ventral
+4. Nu se recomanda clisma evacuatorie
+5. Se recomanda golirea frecventa a vezicii urinare
+B, E
+
+
+Endometrioza poate duce la infertilitate prin urmatoarele mecanisme:
+1. Aparitia dispareuniei
+2. Alterarea motilitatii tubare
+3. Obstructie cervicala la nivelul uterului
+4. Afectarea functiei ovariene
+5. Aparitia dismenoreei
+A, B, D
+
+
+Fibroamele pot fi localizate:
+1. Intramural
+2. Subtubar
+3. Subseros
+4. Intraperitoneal
+5. Extracapsular
+A, C
+
+
+Cele mai frecvente simptome care insotesc boala inflamatorie pelvina sunt:
+1. Dureri pelvine
+2. Durere ce iradiaza pe membrul inferior
+3. Scurgeri vaginale
+4. Febra
+5. Varsaturi bilioase
+A, C, D
+
+Diagnosticul diferential al sangerarii uterine anormale cuprinde:
+1. Polipul endometrial
+2. Fibromul uterin
+3. Sinerchiile uterine totale
+4. Metroragii disfunctionale
+5. Hiperplazia endometriala
+A, B, D, E
+
+
+Tratamentul medical al endometriozei consta in: 
+1. Estroprogestative (anticonceptionale)
+2. Analogi ai GnRh
+3. Reproducerea unei stari de pseudogestatie (progestative)
+4. Anticoagulante
+5. Excizia prin electrocoagulare a focarelor endometriozice
+A, B, C
+
+
+Sub termenul general de boala inflamatorie pelvina sunt incluse urmatoarele forme anatomoclinice:
+1. Endometrita
+2. Bartolinita
+3. Salpingita
+4. Rectosgmoidita
+5. Abcesele tuboovariene
+A,C, E
+
+
+Pe parcursul sarcinii:
+1. Se recomanda gimnastica medicala usoara
+2. Imbracamintea si incaltamintea sa fie comode
+3. Se recomanda sporturi precum calaria, schiul, atletismul
+4. Sunt permise sporturile usoare
+5. Sunt indicate baile de abur si dusurile fierbinti
+A, B, D
+
+
+Palparea obstetricala (tehnica Leopold):
+1. Se efectueaza in 5 timpi
+2. Se efectueaza in 3 timpi
+3. Permite stabilirea diagnosticului de prezentatie
+4. Determina inaltimea fundului uterin
+5. Permite stabilirea diagnosticului de varietate de pozitie
+A, C, D
+
+Interventiile chirurgicale in cazul fibromului uterin sunt:
+1. Miomectomia
+2. Ablatatia de endometru
+3. Administrarea de ergomet
+4. Histerectomia
+5. Ocluzia / embolizarea arterei uterine - prin radiologie interventionala
+A, B, D, E
+
+
+In primul trimestru de sarcina ecografia arata / masoara:
+1. Prezenta sau absenta sacului ovular
+2. Numarul fetilor
+3. Circumferinta craniana
+4. Lungimea cranio-caudala
+5. Prezenta sau absenta activitatii cardiace fetale
+A, B, D, E
+
+
+Diagnosticul clinic al sarcinii in trimestrul I se bazeaza pe urmatoarele elemente fundamentale, cu exceptia:
+1. Amenoreei
+2. Histerosalpingografiei
+3. Manifestarilor functionale
+4. Histerometriei
+5. Modificarilor organelor genitale
+B, D
+
+
+Care droguri sunt folosite in accesele convulsive eclampsice:
+1. Diazepam
+2. Fenitoina
+3. Sulfat de magneziu
+4. Acid acetilsalicilic
+5. Calciu lactic
+A, B, C
+
+
+Dismenoreea:
+1. Apare frecvent la pacientele cu endometrioza 
+2. Apare la ovulatie
+3. Poate sa fie primara / idiopatica
+4. Este exacerbata de menstruatie in cazul endometriozei
+5. Este un semndal de alarma pentru o patologie genitala maligna
+A, C, D
+
+In tratamentul fibromului uterin se folosesc:
+1. Progestative
+2. Estrogeni conjugati
+3. Anticoagulantele
+4. Dispozitive intrauterine cu eliberare de progesteron 
+5. Analogi GnRH
+A, D, E
+
+
+Diagnosticul diferential al durerii pelvine cuprinde:
+1. Sarcina ectopica
+2. Cistita
+3. Chistul ovarian torsionat
+4. Fibromul uterin
+5. Pancreatita
+A, B, C, D
+
+
+Fibroamele submucoase:
+1. Proemina la nivelul cavitatii uterine
+2. Pot da menstruatii abundente 
+3. Pot fi abordate chirurgical histeroscopic
+4. Se opereaza de electie laparoscopic
+5. Au o rata crescuta de malignizare
+A, B, C
+
+
+Examenul clinic in cazul bolili inflamatorii pelvine releva:
+1. Sensibilitate la palpare in etajul abdominal inferior
+2. Durere in bara in etajul abdominal superior
+3. Leucoree cu aspect purulent
+4. Mobilizarea bimanuala a uterului este dureroasa
+5. Zone axiale sensibile, cu impastarea fundurilor de sac
+A, C, D, E
+
+
+Tratamentul chirurgical al incontinentei urinare de efort cuprinde:
+1. Tratamentul cu estrogeni
+2. Bandelete montate suburetral
+3. Colposuspensia retropubica (ex. Burch)
+4. Histerectomia
+5. Bandelete montate la nivelul jonctiunii uterovezicale
+B, C, E
+
+
+Diagnosticul sarcinii oprite in evolutie se bazeaza pe:
+1. Disparitia semnelor functionale
+2. Lipsa activitatii tubului cardiac primitiv dupa saptamana 8
+3. Dimensiunile uterului sunt mai mari decat cele corespunzatoare duratei de amenoree
+4. Contur neregulat a sacului ovular la ecografie
+5. Cresterea brusca a valorii de HCG
+A, B, D
+
+
+Pelvimetria externa masoara:
+1. Diametrul bispinos
+2. Diametrul biacromial
+3. Diametrul bicrest
+4. Diametrul bitrohanterian
+5. Rombul lui Michaelis
+A, C, D, E
+
+
+In simptomatologia fibromului uterin pot apare:
+1. Hipercalcemie prin productie autonoma de parathormon
+2. Hipermenoree
+3. Dispareunia, dismenoreea
+4. Amenoree secundara
+5. Avorturi recurente
+A, B, C, E
+
+
+Endometrioza extragenitala poate fi localizata:
+1. La nivel intestinal
+2. La nivel vezical
+3. La nivel mamar
+4. La nivel cardiac
+5. La nivelul cicatricelor de laparotomie
+A, B, E
+
+
+In travaliu, operatia cezariana este indicata de la inceput in:
+1. Placenta praevia laterala
+2. Hemoragie abundenta
+3. Multipare
+4. Placenta praevia centrala
+5. Placenta jos inserata
+B, D
+
+Evolutia si complicatiile firbroamelor uterine se caracterizeaza prin:
+1. Cresc in general rapid si pot degenera malign
+2. Pot determina infertilitate
+3. Poate aparea necroza aseptica
+4. In menopazuza isi accentueaza cresterea, din cauza estrogenilor
+5. Torsiunea fibroamelor pediculare
+B, C, E
+
+
+Consultatia obstetricala in trimestrul al III-lea de sarcina trebuie sa includa:
+1. Test de efort
+2. Masurarea inaltimii fundului uterin
+3. Masurarea înălțimii
+4. Manevrele Leopold
+5. Masurarea circumferintei abdominale
+B, D, E
+
+
+Caracteristicile urmatoare sunt specifice pentru hemoragiile din placenta praevia, cu exceptia:
+1. Sangele provine in principal din teritoriul circulator fetal
+2. Pierderea de sange este indolora
+3. Sangele este modificat, de culoare bruna
+4. Exista o corelatie directa intre amploarea sangerarii si starea hemodinamica a gravidei
+5. Nu exista rasunet fetal
+C, E
+
+
+Specificati care dintre afirmatiile de mai jos legate de preeclamsie sunt adevarate:
+1. Cresterea glicemiei
+2. Cresterea acidului uric si a creatininei
+3. Proteinuria sub 0,3 g/24 h reprezinta un semn de severitate al preeclamsiei
+4. Hemodilutie (hematocrit  sub 40%)
+5. Cresterea transaminazelor
+B, E
+
+
+In tratamentul sarcinii ectopice se folosesc:
+1. Methotrexatul
+2. Sulfatul de magneziu
+3. Salpingostomia 
+4. Milligest 
+5. Salpingectomia
+A, C, E
+
+Factorii de risc pentru incontinenta urinara sunt:
+1. Obezitatea 
+2. Abcesul pelvin
+3. Multiparitatea 
+4. Forcepsul
+5. Operatia cezariana 
+A, C, D
+
+
+O gravida este in travaliu cand: 
+1. Colul este inchis si orientat posterior
+2. Local se constata stergerea si dilatarea colului uterin
+3. Se deceleaza contractii uterine neregulate 
+4. Colul este scurtat, permeabil la index
+5. Se deceleaza contractii uterine sistematizate, cu caracter progresiv
+B, E
+
+
+Fibromul uterin:
+1. Este o patologie specifica menopauzei
+2. Este o tumora maligna
+3. Este alcatuit din fibre musculare netede, colagen, elastina
+4. Prezinta pseudocapsula prin care se delimiteaza de miometrul adiacent
+5. In aparitia fibroamelor poate fi implicat factorul ereditar
+C, D, E
+
+
+O sarcina extrauterina poate evolua spre:
+1. Rezorbtia produsului de conceptie cu ameliorarea simptomatologiei
+2. Hematosalpinx 
+3. Ruptura tubara
+4. Nasterea unui fat viu
+5. Existus
+A, B, C, E
+
+
+Conduita in abcesele pelvine presupune:
+1. Antibioterapie cu spectru larg
+2. Dupa abcedare, drenajul colectiei 
+3. Antimicotice 
+4. Doar monitorizare clinica pana la obtinerea antibiogramei
+5. Culdocenteza in cazul abceselor fundului de sac Douglas
+A, B, E
+
+Aportul mare de calciu in formulele speciale pentru prematuri se asociaza cu:
+1. Excretie scazuta a calciului 
+2. Scaderea consistentei fecalelor
+3. Cresterea duratei tranzitului intestinal
+4. Afectarea absorbtiei grasimilor
+5. Cresterea riscului de fracturi
+C, D
+
+
+Scorul LATCH cuprinde urmatoarele criterii de evaluare ale suptului:
+1. Alinierea copilului la san
+2. Prinderea areolei
+3. Cantitatea de lapte/masa
+4. Compresia areolara
+5. Deglutitia copilului 
+A, B, D, E
+
+
+Avantajele alimentatiei naturale pentru mama sunt:
+1. Ajuta involutia rapida dupa nastere si previne hemoragiile din postpartum
+2. Grabeste reaparitia menstruatiei
+3. Creste riscul de anemie si necesarul de fier pentru mama care alapteaza
+4. Protejeaza impotriva cancerului de san si ovar
+5. Creste necesarul de insulina la mamele diabetice
+A, D
+
+
+Se contraindica alaptarea in cazul urmatoarelor infectii materne:
+1. Infectie HIV
+2. Infectie TBC tratata in antecedente
+3. Infectie cu virus herpes simplex cu leziuni active la nivelul sanului 
+4. Infectia cu VHB cu viremie prezenta
+5. Infectia faringiana cu streptococ
+A, C, D
+
+
+Pentru terapia hipovolemiei nou-nascutului se recomanda utilizarea urmatorilor volum-expanderi:
+1. Ser fiziologic (NaCl 0,9%)
+2. Solutie adrenalina
+3. Solutie KCl
+4. Solutie de bicarbonat NaCHO3
+5. Solutie Ringer lactat
+A, E
+
+Se indica initierea alimentatiei enterale a nou-nascutului prematur sanatos in urmatoarele conditii:
+1. Abdomen suplu, depresibil, fara distensie
+2. Zgomote intestinale prezente
+3. Absenta zgomotelor intestinale
+4. Frecventa respiratorie sub 60 respiratii/minut
+5. Prezenta meteorismului abdominal
+A, B, D
+
+
+Indicatiile absolute ale intubatiei endotraheale sunt:
+1. Prezenta lichidului amniotic meconial la nou nascutul cu depresie  respiratorie, hipoton sau cu frecventa cardiaca scazuta
+2. Nou -nascutul la termen sanatos
+3. Hernie diafragmatica diagnosticata antenatal sau suspicionata clinic
+4. Icterul neonatal
+5. Hipotermia
+A, C
+
+
+Cianoza centrala:
+1. Este coloratia albastruie a tegumentelor si mucoaselor
+2. Apare ca urmare a oxigenarii deficitare
+3. Apare doar la nivelul extremitatilor
+4. Apare cand mai mult de 3-5 g/dl din hemoglobina este desaturata
+5. Nu necesita tratament
+A, B, D
+
+
+Nu se recomanda initierea reanimarii neonatale in urmatoarele cazuri:
+1. VG confirmata sub 24 saptamani
+2. GN peste 500 g
+3. Trisomie 21
+4. Anencefalie
+5. Trisomie 13 sau 18 confirmate 
+A, D, E
+
+
+
+
+Se intrerupe alimentatia enterala la nou-nascutul prematur daca apare unul din urmatoarele semne:
+1. Absenta reziduului gastric
+2. Reziduu gastric sanguinolent
+3. Hematochezie
+4. Curba ponderala ascendenta
+5. Indurarea sau edematierea peretelui abdominal
+B, C, E
+
+
+
+
+Aportul proteic foarte crescut (peste 4g/kgc/zi) la nou nascutul prematur:
+1. Induce hiperinsulinism’
+2. Scade riscul de obezitate 
+3. Creste riscul de strabism
+4. Determina scoruri neurologice crescute
+5. Creste riscul de supraponderabilitate si obezitate
+A, C, E
+
+
+Se indica alimentatia prin gavaj continuu la nou-nascutii prematuri:
+1. Sanatosi
+2. Cu detresa respiratorie severa
+3. Cu reflux gastro-esofagian
+4. Cu persistenta reziduului gastric
+5. Care tolereaza gavajul gastric discontinuu
+B, C, D
+
+
+Formulele speciale pentru nou-nascutul prematur pot contine:
+1. Ulei din seminte de susan
+2. Ulei din seminte de bumbac
+3. Ulei de porumb
+4. Ulei de soia
+5. Ulei de floarea soarelui
+C, D, E
+
+
+Criteriile de evaluare a starii de bine a copilului alimentat la san sunt:
+1. Atinge greutatea de la nastere in maxim 2 saptamani
+2. Creste 115-220 g/saptamana pana la 3 luni
+3. Prezinta pana la 5-8 scaune pe zi, cu aspect galben auriu , semiconsistente adesea eliminate in timpul sau imediat dupa alaptare
+4. Are curba ponderala stationara
+5. Prezinta 4-5 mictiuni/zi
+A, B, C
+
+
+
+
+Avantajele alimentatiei naturale pentru copil sunt:
+1. Creste incidenta infectiilor gastrointestinale, respiratorii superioare si otice
+2. Creste riscul obezitatii si al hipercolesterolemiei
+3. Scade incidenta mortii subite la sugar
+4. Scade riscul aparitiei alergiilor
+5. Are efect analgezic
+C, D, E
+
+
+Se initiaza cu prudenta alimentatia enterala minima in urmatoarele situatii:
+1. Nou nascuti la termen, sanatosi
+2. Nou nascuti proveniti din mame tratate cu MgSO4
+3. pH ombilical> 7,30
+4. pH arterial <7,25 pentru o perioada mai mare de 6 ore
+5. Nou-nascuti cateterizati ombilical
+B, D, E
+
+
+Se indica alimentarea prin gavaj discontinuu la:
+1. Nou-nascuti prematuri cu coordonare inadecvata supt/deglutitie
+2. Nou-nascuti prematuri cu sindrom de detresa respiratorie (cu 60-80 resp/min)
+3. Nou-nascuti prematuri cu icter
+4. Nou-nascuti la termen sanatosi
+5. Nou-nascuti postmaturi sanatosi
+A, B
+
+
+Cauzele icterului neonatal fiziologic sunt:
+1. Numarul de eritrocite mai mic
+2. Durata medie de viataa hematiilor mai mica (70-90 de zile)
+3. Clerance plasmatic redus al bilirubinei prin deficit de ligandina hepatica
+4. Activitatea scazuta a enzimei de conjugare
+5. Excretie hepatica accelerata a bilirubinei
+B, C, D
+
+
+Efectele negative ale neinitierii alimentatiei enterale la nou-nascutul bolnav sunt:
+1. Atrofia mucoasei intestinale
+2. Cresterea secretiei postnatale a hormonilor trofici gastrointestinali
+3. Scaderea eficientei sistemului imun intestinal
+4. Scaderea intensitatii raspunsului inflamator intestinal si pulmonar
+5. Risc crescut pentru leziuni pulmonare, neurologice, septicemie
+A, C, E
+
+Prematurul are varsta de gestatie:
+1. <37  saptamani
+2. <258 zile de sarcina
+3. <40 saptamani
+4. <294 zile de sarcina
+5. >260 zile de sarcina
+A, B
+
+
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
