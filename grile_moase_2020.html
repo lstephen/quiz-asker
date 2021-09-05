@@ -764,6 +764,7 @@ function nextQuestion() {
 
   $('#question').html(chosen_q[0]);
   $('#answer').text(chosen_q[1]).css('visibility','hidden');
+  $('#counter').text(qs.length);
 }
 
 function showAnswer() {
@@ -795,6 +796,7 @@ $(document).ready(function() {
         </div>
 
         <div class="col-md">
+          <p><span id="counter">?</span> to go</p>
           <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
         </div>
       </div>
