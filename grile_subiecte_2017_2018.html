@@ -1,0 +1,1152 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Quiz Asker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script>
+      const questions_raw = `
+Diagnosticul sarcinii în trimestrul I se bazează pe: ( Pag. 39, Cartea 2)
+a. Amenoree
+b. Manifestări funcționale
+c. Modificări ale organelor genitale
+d. Mișcări active fetale
+e. Palpare de părți moi fetale
+a, b, c
+
+În sarcină amenoreea: ( Pag. 39, Cartea 2)
+a. Reprezintă principalul semn funcțional de sarcină
+b. E primul semn de sarcină la femeia tânără
+c. Mici sângerări pot persista pe tot parcursul sarcinii
+d. Permite stabilirea vârstei gestaționale
+e. Necesită diagnostic diferențial cu amenoreea din preclimax
+a, b, d, e
+
+Printre manifestările funcționale în sarcină se numără: ( Pag. 39, Cartea 2)
+a. Grețuri, vărsături
+b. Polakiurie
+c. ADHD
+d. Scăderea temperaturii bazale
+e. Hiperestezia areolară
+a, b, e
+
+Printre semnele obiective în primul trimestru de sarcină se numără: ( Pag. 39-40, Cartea 2)
+a. Apariția cloasmei gravidice
+b. Apariția rețelei vasculare Haller
+c. Apariția tuberculilor Montgomery
+d. Mărirea sânilor
+e. Fundul uterin depășește marginea superioară a simfizei pubiene la sfârșitul lunii 4 de sarcină
+a, b, c, d
+
+În sarcină examenul cu valve va evidenția: ( Pag. 40, Cartea 2)
+a. Hiperpigmentarea vulvei
+b. Hiperpigmentarea vaginului
+c. Leucoree mai fluidă în cantitate redusă
+d. Hiperpigmentarea colului
+e. Niciuna din cele de mai sus
+a, b, d
+
+Tușeul vaginal efectuat în sarcină relevă: ( Pag. 40 Cartea 2)
+a. Vagin suplu
+b. Col uterin moale, catifelat
+c. Uter cu consistență dură
+d. Creșterea tonusului uterin corespunde contracțiilor uterine
+e. Flectarea ușoară a corpului pe col
+a, b, d, e
+
+Testele uzuale de sarcină: ( Pag. 40-41, Cartea 2)
+a. Se bazează pe detectarea prezenței HCG în sacul amniotic
+b. Evidențiază HCG în urina femeii gravide
+c. Evidențiază HCG în sângele gravidei
+d. HCG e detectabil din ziua 7 după fecundație
+e. β-HCG permite detectarea precoce a sarcinii patologice
+b, c, d, e
+
+Ecografia de prim trimestru evidențiază( Pag. 42-43, Cartea 2)
+a. Prezența sau absența sacului ovular
+b. Numărul feților
+c. Lungimea cranio-caudală
+d. Sexul fătului
+e. Măsurarea circumferinței abdominale
+a, b, c
+
+Diagnosticul diferențial al măririi în volum al uterului în sarcina se face cu: ( Pag. 44, Cartea 2)
+a. fibromul uterin
+b. tumori ovariene 
+c. rinichi ectopic
+d. tulburări endocrine ale axului hipotalamo-hipofizo-ovarian
+e. convalescență în boli prelungite 
+a, b
+
+Diagnosticul sarcinii oprite în evoluție se bazează pe: ( Pag. 44, Cartea 2)
+a. dispariția semnelor funcționale
+b. creșterea bruscă a volumului de HCG 
+c. dimensiunile uterului sunt mai mari decât cele corespunzătoare duratei de amenoree
+d. contur neregulat a sacului ovular la ecografie
+e. lipsa activității tubului cardiac primitiv după săptămâna 8
+a, d, e
+
+Semnele de certitudine ale sarcinii: ( Pag. 45, Cartea 2)
+ a. apar în ultima parte a trimestrului I
+ b. perceperea mișcărilor active fetale
+ c. palparea de părți fetale 
+ d. auscultația zgomotelor cardiace 
+ c. creșterea în volumul a uterului
+b, c, d
+
+Ecografia de trimestrul II folosește următorii indicatori: ( Pag. 46, Cartea 2)
+a. diametru biparietal 
+b. circumferința craniană 
+c. circumferința abdominală
+d. lungimea cranio-caudală 
+e. evidențierea veziculei ombilicale
+a, b, c
+
+După săptămâna 28 diagnosticul de sarcină trebuie să cuprindă: ( Pag. 46-47, Cartea 2)
+a. vârsta gestațională 
+b. starea fătului 
+c. prezentația și poziția 
+d. patologia maternă asociată sarcinii
+e. niciuna din cele de mai sus
+a, b, c, d
+
+Pentru stabilirea vârstei gestațional se iau în calcul: ( Pag. 47-48, Cartea 2)
+a. data ultimei menstruații 
+b. data coitului fecundant
+c. înălțimea fundului uterin
+d. circumferința abdominală 
+e. apariția primelor mișcări active fetale
+a, b, c, e
+
+Obiectivele consultației prenatale constau în:(pag. 15-16, Cartea 1)
+a. Depistarea factorilor de risc
+b. Supravegherea dezvoltării fetale
+c. Dirijarea condițiilor de igienă a sarcinii 
+d. Pregătirea psihică în vederea nașterii 
+e. Reintegrarea ulterioară în societate a femeii 
+a, b, c, d
+
+Prima consultație prenatală cuprinde: ( pag. 16, Cartea 1)
+a. Examen clinic general 
+b. Investigații paraclinice 
+c. Manevrele Leopold
+d. Ecografie de morfologie fetală
+e. Test non-stress
+a, b
+
+Printre investigațiile paraclinice din sarcină se numără: ( pag. 16-17, Cartea 1)
+a. Determinare grup sangvin şi Rh
+b. Determinare hemoglobină şi hematocrit
+c. Sumar de urină şi urocultură
+d. Determinare glicemie
+e. Histerosalpingografia
+a, b, c, d
+
+Gravidele cu risc obstetrical crescut: (pag. 17-18, cartea 1)
+a. Sunt grupate în 5 categorii 
+b. Gravidele cu risc obstetrical crescut au vârsta sub 18 ani sau peste 40 de ani
+c. Înălțimea sub 1,60 m ridică probleme obstetricale 
+d. Greutatea sub 55 kg. încadrează gravida în risc obstetrical crescut
+e. Izoimunizarea de grup sau Rh încadrează gravida în una din grupele la risc
+b, e
+Scorul de risc încadrează gravidele în: ( pag. 18, Cartea1)
+a. Dă naștere la greșeli de interpretare 
+b. Cuprinde parametrii principali
+c. Riscul mic e cuprins între 0 şi 4
+d. Riscul crescut e cuprins între 4 şi 6
+e. Riscul sever este peste 7
+b, e
+
+Dispensarizarea gravidei cuprinde: ( pag. 18-19, Cartea 1; pag. 376, Cartea 2)
+a. Prima consultație prenatală este în primul trimestru de sarcina 
+b. Bilunar în trimestrul II 
+c. Bilunar în trimestrul III
+d. Sunt necesare 12 consultații în perioada prenatală 
+e. Frecvența consultațiilor prenatale e influențată de evoluția sarcinii 
+a, c, e
+
+În cursul consultației prenatale în trimestrul III: (pagina 19, cartea 1)
+a. se măsoară tensiunea arterială
+b. se urmărește curba ponderală 
+c. se măsoară IFU și circumferință abdominală 
+d. se face pregătire psihologică pentru naștere 
+e. se face radiografie abdominală pentru stabilirea prezentației
+a, b, c, d
+
+Principalele varietăți anatomo-patologice ale sarcinii ectopice sunt: (Pag. 228-229, Cartea 2)
+a. Tubară
+b. Ovariana
+c. cervicală 
+d. vaginală 
+e. infundibulara
+a, b, c
+
+Dintre semnele clinice ale sarcinii extrauterine se numără: ( Pag. 231, Cartea 2)
+a. absența activității cardiace fetale
+b. anomalii de ciclu 
+c. hiperpigmentarea cicatricei ombilicale
+d. tulburări gastro-intestinale
+e. absența sacului ovular intrauterin
+b, c, d
+
+Printre examenele paraclinice folosite în diagnosticul sarcinii extrauterine se numără: ( Pag. 231-234, Cartea 2)
+a. Ultrasonografia transvaginală 
+b. Ecografia Doppler
+c. Culdocenteza
+d. Irigografia
+e. Histerosalpingografia
+a, b, c
+
+Diagnosticul diferențial al sarcinii extrauterine necomplicate se face cu: ( Pag. 237, Cartea 2)
+a.  Hidrosalpinx
+b. chist ovarian
+c. fibrom pediculat
+d. peritonită 
+e. pancreatita acută
+a, b, c
+
+Evoluția sarcinii ectopice tubare unilaterale poate merge spre: ( Pag. 238, Cartea 2)
+a. Avort tubar
+b. Ruptura tubară
+c. oprire spontană în evoluție
+d. nașterea unui făt normal, născut la termen
+e. infertilitate 
+a, b, c
+
+În tratamentul sarcini ectopice se folosesc: ( Pag.  238-239,Cartea 2) 
+a. Methotrexat
+b. Salpingectomia
+c. Salpingostomia
+d. Histerectomia
+e. Sulfat de Magneziu
+a, b, c, d
+
+Monitorizarea frecvenței cardiace fetale în timpul nașterii: ( cartea 2, pagina 102-105)
+a. urmărirea ritmului de bază
+b. apariția bradicardiei ușoare 100-110 b/min reprezintă o problemă 
+c. tahicardia peste 170 de bătăi pe minut e considerată severă 
+d. simpatomimeticele  pot produce tahicardie fetală
+e. fluctuațiile ritmului de bază sunt fiziologice
+a, d, e
+
+Măsurarea pH-ului fetal în timpul nașterii: (pagina 106, cartea 2)
+a. metodă foarte des folosită în România 
+b. dacă pH-ul e între 7,27-7,25 se repetă măsurătoarea în 30 de minute
+c. Dacă pH-ul este peste 7,25 supravegherea poate înceta
+d. daca pH-ul e mai mic de 7,25 o altă probă se prelevează imediat
+e. valori ale saturației de oxigen sub 30% persistente impun extragerea de urgență a fătului
+b, d, e
+
+Examenul lichidului amniotic în timpul nașterii: ( pagina 106, Cartea 2)
+a.  Permite monitorizarea stării fătului in utero
+b. La debut de travaliu mărește riscul de moarte perinatală
+c. Prezența de lichid amniotic meconial nu impune alte metode de supraveghere fetală
+d. Nu toți feții cu lichid amiotic meconial prezintă hipoxie
+e. Sindromul de aspirație de meconium apare mai frecvent la sarcinile premature
+a, b, d
+
+Travaliul reprezintă : ( pagina 63 Cartea 1)
+a. Faza a doua a nașterii 
+b. Faza treia a nașterii 
+c. Ștergere si dilatarea colului uterin 
+d. Contracții uterine sistematizate 
+e. Expulzia fătului 
+a, c, d
+
+Principalii mediatori specifici fazei 0 a nașterii sunt : (pagina 65 cartea 1)
+a. Progesteronul 
+b. Relaxina 
+c. Estrogeni
+d. Prostaglandine
+e. Endotelina 1
+a, b
+
+Principalii mediatori specifici fazei 2 a nașterii sunt : (pagina 65 cartea 1)
+a. Estrogeni
+b. Prostaglandina
+c. Endotelina 1
+d. Oxitocina
+e. Enzima litică
+a, b, c, d
+
+Ștergere și dilatarea colului uterin: (pagina 65 cartea 1)
+a. Faza de latență – între debutul travaiului și dilatația 2cm     
+b. Faza activă – de la 2 centimetri la dilatația completă        
+c. Faza de acelerație – până la dilatație 6-7centrimetri        
+d. Faza de pantă maximă – între 8 si 10cm        
+e. Faza de decelerație – între 1 si 4cm  
+a, b
+
+Delivrența: (pagina 65 cartea 1)
+a. începe de la dilatația completă a colului și se inchie la momentul expulziei placentei 
+b. începe din momentul ștergerii colului și se incheie la momentul expulziei placentei
+c. începe imediat din momentul expulziei fătului și se încheie la momentul expuziei placentei
+d. durează sub 30 de minute
+e. durează în medie 5 – 10 minute 
+c, d, e
+
+Printre fenomenele active care determină expulzia fătului se numară ( pagina 66 cartea 1)
+a. completarea formării segmentului inferior 
+b. formarea pungii apelor și ruperea membranelor 
+c. contracții uterine 
+d. contracții ale musculaturi abdominale 
+e. progresia mobilului fetal 
+c, d
+
+Printre fenomenele pasive care determină expulzia fătului se numară (pagina 66 Cartea 1)
+a. ștergerea și dilatarea colului uterin
+b. dilatarea canalului de naștere 
+c. Modificării plastice ale fatului 
+d. Ruperea membranelor 
+e. Contracții ale presei abdominale 
+a, b, c, d
+
+Poziția : (pagina 66 Cartea 1)
+a. Este definită în raport cu punctul de reper al prezentației și reperele strâmtorii superioare 
+b. Poate fi stângă sau dreaptă
+c. În prezentația craniană flectată, fătul poate fi în pozitie OIS sau OID 
+d. Cea mai frecventă poziție e prezentația craniană flectată este OISA 
+e. În poziția OIS craniul fetal este angajat în diametrul oblic stâng  
+b, c, e
+
+În raport cu planurile bazinului prezentația poate fi: (pagina 67 Cartea 1)
+a. mobilă când nu a luat contact cu planul strâmtorii superioară
+b. aplicată când a luat contact cu planul strâmtorii superioare dar poate fi mobilizată
+c. fixată, când planul diametrului de angajare a depășit planul strâmtorii superioare 
+d. angajată când a luat contact cu planul stramtorii superioară și fătul nu mai poate fi mobilizat  
+e. coborâtă când prezenția se află în excavația pelvină 
+a, b, e
+
+Timpii nașterii sunt: (paginile 67-68 Cartea 1)
+a. timpul 1 : angajarea
+b. timpul 2: coborârea 
+c. timpul 3: rotația internă
+d. timpul 4 : flectarea
+e. timpul 5 deflectarea
+a, b
+
+Pentru diagnosticul de membrane rupte se folosesc: (pagina 71 Cartea 1)
+a. proba torșonului 
+b. proba de cristalizare pe lama
+c. analiza pH-ului vaginal – pH acid crește suspiciunea de rupere a membranelor
+d. proba de albastru de Nil 
+e. proba Zeiwang
+a, b, d, e
+
+Prin tact vaginal în timpul travaliului se urmăresc: (pagina 72 Cartea 1)
+a. Starea colului 
+b. Progresiune dilatației 
+c. Progresiune prezentației
+d. Starea fătului
+e. Variații ale BCF-ului 
+a, b, c
+
+Instrumentarul pentru asistența la naștere cuprinde : (pagina 74 Cartea 1)
+a. Două pense Pean
+b. O foarfecă 
+c. Valve vaginale(late, drepte) 
+d. O pensă de col 
+e. Un porttampon 
+b, c, e
+
+Indicații absolute ale epiziotomei sunt : (pagina74 Cartea 1)
+a. Naștere înainte de termen 
+b. Nașterea feților macrozomi 
+c. Expuzie în pelviană 
+d. Expulzie în OP 
+e. Expulzie precipitată
+a, b, c
+
+Printre indicațiile controlului manual al cavității uterine se numară : (pagina 76 Cartea1)
+a. Sângerări importante după delivrența 
+b. Hipertonie uterină
+c. Utere cicatriciale 
+d. Naștere la mari multipare
+e. Naștere înainte de termen 
+a, c, d, e
+
+Prezenția pelviană: ( pagina 88 Cartea 1) 
+a. Poate fi completă sau decompletă 
+b. Pelviana decompletă are 2 moduri
+c. Pelviana completă are 3 moduri 
+d. În modul feselor coapsele sunt flectate pe abdomen și gamebele în extensie pe coapse
+e. În modul picioarelor coapsele sunt în extensie iar gambele sunt flectate pe coapse
+a, d
+
+Nașterea pelvisului în prezentația pelviană are :(pagina 89, Cartea 1)
+a. Doi timpi 
+b. Trei timpi 
+c. Patru timpi 
+d. Timpul 2 = coborârea pelvisului 
+e. Timpul 3 = degajarea pelvisului 
+b, d, e
+
+Rolul echografiei în prezentația pelviană cuprinde : (pagina 81 Cartea1)
+a. Măsurarea Biometriei fetale 
+b. Diagnosticarea placentei previa 
+c. Oligoamnios 
+d. Malformatii fetale 
+e. Starea mamei 
+a, b, c, d
+
+Printre manevrele folosite la naștere pelviană se numară: (Pagina 92, Cartea 1)
+a. Naștere spontană 
+b. Ajutor manual Bracht
+c. Mica extracție
+d. Mare extracție
+e. Niciuna din cele de mai sus
+a, b, c, d
+
+Degajarea umerilor și a brațelor folosește ca metode : (Pagina 93 Cartea 1)
+a. Műller 
+b. Metoda Pajot 
+c. Metoda Lovset 
+d. Manevra Mariceau 
+e. Manevra Bracht
+a, b, c
+
+HTA indusă de sarcină: ( pagina 200-201, Cartea 2)
+a. cuprinde 5 categorii
+b. diagnosticul de HTA în sarcină e evidențiat prin creșterea TA cu peste 140/90 mmHg
+c. apare înainte de 20 de săptămâni
+d. diagnosticul cuprinde obligatoriu proteinuria sub 300 mg/24 h
+e. se constată hemoconcentrație
+a, b, e
+
+Examenul paraclinic în cazul preeclampsiei evidențiază (pagina 201, cartea 2)  
+a. scăderea acidului uric și a creatininei
+b. perturbarea probelor hepatice 
+c. trombocitopenie
+d. creșterea nivelurilor proteinelor plasmatice
+e.  creșterea fibrinogenului
+b, c
+
+Examenul urinei în formele severe de preeclampsie evidențiază: (pagina 201, cartea 2)
+a. creșterea volumului în 24 de ore 
+b. scăderea densității
+c. creșterea nivelului proteinuriei
+d.  scăderea excreției de acid uric 
+e. creșterea excreției de creatinine
+c, d
+
+Încadrarea în forma severă de hipertensiune arterială indusă de sarcină se face în urma condițiilor: ( pagina 201, cartea 2)
+ a. ≥ 140/90 mmHg
+ b. proteinurie 5g/24 h
+ c. creșterea volumului urinar
+ d. edem pulmonar
+ e. cianoză
+b, d, e
+
+Conduita terapeutică în preeclampsie : ( pagina 203, cartea 2)
+a. depinde de gravitatea preeclampsiei
+b. depinde de maturitatea fetală
+c. pentru formele ușoare se recomandă supraveghere
+d. pentru formele moderate se indică operație cezariană
+e. pentru formele severe se indică tratamentul de urgență
+a, b, c, e
+
+Accesul eclamptic cuprinde: ( pagina 203, cartea 2)
+a. perioada de convulsii tonice e de 15-20 minute
+b. perioada de convulsii clonice cu durata de 10 minute
+c. membrele inferioare execută mișcări bruște, dezordonate
+d. în stările severe reprizele de convulsii se pot succeed rapid
+e. eclampsia poate apare în 20% din cazuri în travaliu 
+c, d, e
+
+Sindromul HEELP: ( pagina 203, cartea 2)
+a. complicație gravă a preclampsiei
+b. apare anemie hemolitică
+c. scăderea transaminazelor hepatice
+d. trombocitopenie
+e. creșterea excreției
+a, b, d
+
+HTA cronică: ( pagina 204, cartea 2)
+a. e o formă de HTA preexistentă sarcinii
+b. apare după 20 de săptămâni 
+c. Sd. Cushing e una din cauze
+d. feocromacitomul poate fi o cauză de HTA
+e. se poate asocia cu preeclampsie
+a, c, d, e
+
+În cazul unei paciente cu HTA indusă de sarcină conduita în travaliu cuprinde: ( pagina 207, cartea 2)
+a. Sulfat de Magneziu
+b. Hidralazina
+c. efectuarea de RAM de la debutul travaliului
+d. administrarea de oxitocină
+e. manevre de scurtare a expulziei
+a, b, d, e
+
+Oprirea convulsiilor în cazul crizei eclamptice se poate face prin administrarea de: ( pagina 208, cartea 2)
+a. Sulfat de Magneziu
+b. Diazepam
+c. Thiopental
+d. Hidralazina
+e. administrarea de diuretice
+a, b, c
+
+În cazul HTA cornice riscurile materne și fetale sunt crescute în: ( pagina 209, Cartea 2)
+a. vârsta maternă mai mare de 35 de ani
+b. durata HTA > 10 ani
+c. TA mai amre de 150/100 mmHg
+d. Diabet zaharat asociat 
+e. Afecțiuni renale
+d, e
+
+Printre riscurile materne din HTA cronică se numără: ( pagina 209, cartea 2)
+a. Preclampsie, eclampsie
+b. Insuficiența cardiacă congestivă
+c. Hemoragia intracerebrală
+d. Abrupțio-placentae
+e. Sarcina extrauterină
+a, b, c, d
+
+Printre testele predictive ale apariției HTA indusă de sarcină: ( pag. 201, 214-215, Cartea 2)
+a. Testul postural
+b. Gravidele care prezintă scăderi ale TA în trimestrul II
+c. Valori ale TA medii > 85 mmHg
+d. Creșterea filtrării glomerulare
+e. Creșterea fibrinogenului
+a, c
+
+Rupturile uterine se pot produce: (Pagina 116, Cartea 1)
+a. Pe uter normal
+b. Pe uter cicatricial
+c. În timpul sarcinii
+d. În timpul travaliului
+e. Niciuna dintre cele de mai sus
+a, b, c, d
+
+Rupturile uterine pot fi : ( Pagina 118, Cartea 1)
+a. Rupturile complete 
+b. Rupturi incomplete 
+c. Rupturi ale corpului uterin 
+d. Rupturi ale segmentului inferior 
+e. Rupturi ale cornului uterin 
+a, b, c, d
+
+Diagnosticul diferențial al hemoragiilor din ultima parte a sarcinii include ( pagina 119, Cartea 1)
+a. placenta praevia
+b. DPPNI
+c. Ruptura uterină
+d. Apendicita acută
+e. Sarcina extrauterină
+a, b, c, d
+
+Atitudinea terapeutica in caz de ruptura uterina  incompleta poate fi: (pagina 119, Cartea 1)
+a. expectativă
+c. histerorafie în două straturi
+d. histerectomie totală
+e. ligaturare bilaterală a arterelor iliace interne
+b, c, d, e
+
+Printre cauzele sarcinii multiple se numără: ( pag. 272, Cartea 2)
+a. Rasa
+b. Vârsta mamei
+c. Vârsta tatălui
+d. Ereditatea
+e. Talia genitorilor
+a, b, d
+
+Printre riscurile materne în sarcina multiplă amintim: ( pag. 272-273, Cartea 2)
+a. Anemia
+b. Hipotensiune
+c. Sarcina suprapurtată
+d. Hemoragii oculte în postpartum
+e. Complicații infecțioase
+a, d, e
+
+Printre riscurile fetale în sarcina multiplă se numără: ( pag. 276, cartea 2)
+a. Avortul
+b. Sarcina suprapurtată
+c. Macrosomi
+d. Malformații congenitale
+e. Sd. Transfuzor-Transfuzat
+a, d, e
+
+Examenul obstetrical în sarcina multiplă evidențiază: ( pag. 279, Cartea 2)
+a. Discordanța între VG și IFU
+b. Discordanța între VG și perioada de amenoree
+c. Scăderea în greutate a mamei
+d. Palparea de 3 poli fetali
+e. Prezența a două focare de auscultație BCF
+a, d, e
+
+Printre complicațiile care apar în sarcina gemelară se numără: ( pag. 284, Cartea 2)
+a. Acroșarea
+b. Coliziunea
+c. Impacția
+d. Compacția 
+e. Manevra Zavanelli
+a, b, c, d
+
+Printre factorii favorizanți de apariție a placentei praevia se numeră: (Pagina 240, Cartea 2)
+a. Multiparitate
+b. sarcini gemelare în antecedente 
+c. cicatrici uterine
+d. Saltosalpinx
+e. intervenții plastice la nivelul trompei 
+a, b, c
+
+Varietățile topografice de placentă previa cuprind: ( Pag. 241, Cartea 2)
+a. Laterală
+b. Marginală
+c. Centrală
+d. Fundică
+e. Anterioară
+a, b, c
+
+Gradele Norman White folosite pentru determinarea placentei praevia sunt:( Pag. 241, Cartea 2)
+a. Grad I - inserție fundică
+b. Grad II – inserție marginală
+c. Grad III – placenta total centrală
+d. Grad IV – placenta total centrală
+e. Grad I – inserție marginală
+b, d
+
+Diagnosticul placentei praevia se bazează pe: (Pag. 242-243, Cartea 2)
+a. Metroragii cu sânge negru
+b. Sângerare însoțită de durere
+c. Examenul cu valve evidențiază sângerare din canalul cervical
+d. Poate apărea în somn
+e. Sângele e de proveniență maternă
+c, d, e
+
+Diagnosticul diferențial al placentei praevia în ultimul trimestru de sarcină se face cu: ( Pag. 243-244, Cartea 2)
+a. Apoplexia utero-placentară
+b. Ruptura uterină
+c. Embolia amniotică
+d. Sarcina extrauterină
+e. Apendicita acută
+a, b, c
+
+Conduita în placenta praevia centrală cuprinde: ( Pag. 245, Cartea 2)
+a. Ruperea membranelor artificială 
+b. Operația cezariană
+c. Nașterea pe cale naturală
+d. Versiunea externă
+e. echilibrare volemică
+a, b, e
+
+În clasificarea DPPNI se numară: ( pagina 257-258, Cartea 1)
+a. decolare retroplacentara
+b. decolare marginală subcorionică
+c.  decolare preplacentară subamniotică
+d. apoplexia uteroplacentară
+e. decolare supraamniotică
+a, b, c, d
+
+Printre factorii de risc ai apoplexiei utero-placentare se numară: (pagina 258 Cartea 1)
+a. hipertensiunea arterială indusă de sarcină
+b. sindrom antifosfoipidic
+c. nuliparitatea
+d. activitatea fizică redusă
+e. traumatisme abdominale
+ a, b, e
+
+În evoluția graduală a apoplexiei uteroplacentare pot apare: (pagina 258, Cartea 1)
+a. vasospasm precapilar
+b. stare de șoc
+c. tulburări de coagulare
+d. insuficiența renală cronică
+e. rupturi uterine
+a, b, c
+
+Diagnosticul clinic și paraclinic al apoplexiei uteroplacentare cuprinde: (pagina 259, Cartea 1)
+a. apariția uterului de lemn
+b. uter în acordeon
+c. intensificarea BCF
+d. Timp  Quick scăzut
+e. absenta produșilor de degradare ai fibrinei
+a, b
+
+Diagosticul diferențial al apoplexiei uteroplacentare se face cu: ( pagina 259-260, Cartea 1)
+a. placenta praevia
+b. rupturi uterine
+c. chist de ovar torsionat
+d. sarcina extrauterină
+e. avort embrionar
+a, b, c
+
+Diabetul zaharat în sarcină poate determina: ( pag. 302-303, Cartea 2)
+a. Avort
+b. Moarte intrauterină fetală
+c. Disgravidia de prim trimestru mai puțin importantă decât la nediabetice
+d. Infecții mai puțin importante
+e. Naștere prematură
+a, b, e
+
+Efectul diabetului zaharat asupra produsului de concepție cuprinde: ( pag. 303, Cartea 2)
+Macrosomia
+Hiperglicemia 
+Malformații
+Suferința fetală
+Moarte intrauterină
+a, c, d, e
+
+Lăuzia fiziologică cuprinde: ( Pagina 122, Cartea 1)
+a. periodul IV al nașterii
+b. lăuzia imediată
+c. lauzia propriu-zisă
+d. lauzia tardivă
+e. 4 etape
+b, c, d
+
+Pe perioada lăuziei: (Paginile 122-123, Cartea 1)
+a. uterul involuează
+b. menstrele sunt reluate după 4 săptămâni
+c. ovare iși recapată potențialul functional la 14 zile post-partum
+d. vaginul revine la dimensiunile anterioare sarcinii în 3 săptămâni
+e. debitul cardiac și presiunea venoasă centrală revin la normal în 2 săptămâni
+a, e
+
+Printre parametrii urmariți în lăuzie se numară: ( Paginile 123-124, Cartea 1)
+a. involuția uterină –între 3-4 cm pe zi
+b. lohii-cantitate , aspect, miros
+c. prima micțiune
+d. instalarea lactației
+e. dieta hipocalorică, hipoproteică
+b, c, d
+
+Infecția plăgii operatorii post-operatie cazariană: (Pagina 125, Cartea 1) 
+a. are o frecvență de apariție de peste 25%
+b. debutează la 10 zile de la naștere
+c. cel mai comun agent etiologic este Stafilococus Aureus
+d. apare secreție purulentă
+e. apare febra sau subfebrilitate
+c, d, e
+    
+Tratamentul profilactic al infecțiilor de plagă cuprinde: ( Pagina 125, Cartea 1)
+a. spitalizare îndelungată anterior nașterii
+b.izolare intaoperatorie a pielii și a țesuturilor subcutane
+c. schimbarea instrumentelor după timpii septici
+d. hemostaza minuțioasă
+e. administrarea de antibiotic perioperator
+b, c, d, e
+
+Endometita în post-partum are urmatoarele semne și simptome: ( pagina 126, Cartea 1)
+a. uter tare, involuat
+b. col flasc, larg permeabil
+c.  lohii abundente, fetide
+d. abdomen suplu
+e. VSH scăzut
+b, c, d
+        
+Tratamentul curativ al endometritei post-partum cuprinde: ( Pagina 126, Cartea 1)
+a. antibioprofilaxie cu spectru larg
+b. uterotone
+c. antiinflamatorii
+d. igiena genitală
+e. evitarea tușeelor vaginale repetate
+a, b, c
+
+În boala tromboembolică distal de sediul trombozei se evidențiază: ( Pagina 127-128, Cartea 1)
+a. cianoza
+b. sensibilitate locală la palpare
+c. scădere în diametru al membrului
+d. durere
+e. puls scăzut zilnic
+a, b, d
+
+Tratamentul trombozei venoase profunde cuprinde: ( pagina 128, Cartea 1)
+a. repaos la pat
+b. mobilizare tardivă
+c. heparină clasică în bolus
+d. heparină cu greutate moleculară mică
+e. anticoagulante orale
+c, d, e
+
+În tratamentul emboliei pulmonare întilnim: ( Pagina 128, Cartea 1)
+a. Streptokinaza
+b. Heparina
+c. bronhoconstrictoare
+d. protezare respiratorie
+e. Sulfat de Magneziu
+a, b, d
+
+În hipogalactii: ( Pagina 128, Cartea 1)
+a. secreția lactată este scazută
+b. pot fi determinate de vârsta precoce a mamei
+c. pot fi secundare unor ragade
+d. alaptarea la san stimulează lactația
+e. cabergolina stimulează lactația
+a, c, d
+
+Congestia mamară: (Pagina 128, Cartea 1)
+a. apare la 7-10 zile dupa naștere
+b. apare febra
+c. alterarea stării generale
+d. în tratament se folosesc comprese calde
+e. golirea mecanică a sanului favorizează vindecarea
+b, c, e
+
+Clinic limfangita se caracterizează prin: ( pagina 129, Cartea 1)
+-  a. debut insidious
+-  b. subfebrilitate
++  c. durere locală
++  d. tegumente edemațiate
++   e. adenopatie axilară
+c, d, e
+
+Galactoforia: ( pagina 129, Cartea 1)
+a. are debut insidious
+b. febră
+c. tegumente edemațiate
+d. adenopatie axilară
+e. la exprimarea mamelonului apare puroi
+a, b, e
+
+Clinic în abesul premamar întilnim: ( Pagina 129, Cartea 1)
+a. alterarea stării generale
+b. febră, frison
+c. formațiune fluctuentă, remitentă
+d. tegumente nemodificate
+e. tratamentul este în principal medical
+a, b, c
+
+Mastita acuta nesupurată se manifestă prin: ( Pagina 129, Cartea 1)
+a. astenie
+b. ubfebrilitate
+c. cefalee
+d. puls scăzut
+e. adenopatie axilară
+a, c, e
+
+Mastita acută supurată are urmatoarele caracteristici: ( Pagina 129, Cartea 1)
+a. simptomatologia generală se agraveaza
+b. febra în platou crescut
+c. durere scazută ca intensitate
+d. tegumente roșii-violacee
+e. formațiunea nu este bine delimitată la țesuturile învecinate
+a, b, d
+
+În flegmonul difuz mamar printre măsurile generale de tratament se numară : (Pagina 130, Cartea 1)
+a. antipiretice
+b. antialgice
+c. comprese calde
+d. tratament chirurgical
+e. prelungirea intervalului dintre alăptari 
+a, b, d
+
+Fibromul uterin: (Pag. 149, Cartea 3)
+a) Este o tumoară benignă;
+b) Conține fibre musculare netede, țesut conjunctiv și vase sangvine;
+c) Poate fi întâlnit și înainte de pubertate;
+d) Este mai frecvent la negrese decât la rasa albă;
+e) Ereditatea nu pare a fi implicată în apariția lui.
+a, b, d
+
+În localizarea fibroamelor: (Pag. 150-151, Cartea 3)
+a) Fibroamele de corp uterin sunt cele mai frecvente;
+b) Fibroamele istmului reprezintă 50% din totalul fibroamelor;
+c) Fibroamele colului apar ca niște polipi fibroși;
+d) Fibroamele subseroase sunt cele mai sângerânde;
+e) Fibroamele submucoase proemină în cavitatea uterină.
+a, c, e
+
+În evoluția fibroamelor pot apare: (Pag. 151-152, Cartea 3)
+a) Creșterea marcată în volum a tumorii;
+b) Degenerare edematoasă;
+c) Necrobioză;
+d) Degenerare calcară;
+e) Degenerare sarcomatoasă frecventă.
+a, b, c, d
+
+Printre semnele clinice ale fibromului se numără: (Pag. 153-154, Cartea 3)
+a) Metroragii;
+b) Amenoreea;
+c) Leucoreea;
+d) Durerea pelvină;
+e) Tulburări micționale.
+a, c, d, e
+
+În cazul fibroamelor examenul clinic evidențiază: (Pag. 154, Cartea 3)
+a) Localizarea nodulului fibromatos;
+b) consistența tumorii;
+c) Solidaritatea cu uterul;
+d) Apariția unor leziuni asociate la nivelul colului;
+e) Niciuna din cele de mai sus.
+a, b, c, d
+
+Printre investigațiile paraclinice utilizate în diagnosticarea fibromului uterin se numără: ( Pag.  154-155, Cartea 3)
+a) Examen Babeș-Papanicolau;
+b) Colposcopia
+c) Chiuretajul uterin;
+d) Laringoscopia;
+e) Urografia.
+a, b, c, e
+
+În evoluția fibromului uterin pot apare complicații printre care: ( Pag. 156-157, Cartea 3)
+a) Retenția acută de urină;
+b) Constipația cronică;
+c) Necrobioza septică;
+d) Perforația vezico- vaginală;
+e) Adenopatia loco-regională.
+a, b, c
+
+Tratamentul medicamentos al fibromului uterin cuprinde: (Pag. 157-158, Cartea 3)
+a) Progestative;
+b) Analogi de GnRH;
+c) Derivați de secară cornută;
+d) Preparate de Fier;
+e) Miomectomia.
+a, b, c, d
+
+Tratamentul chirurgical al fibromului uterin cuprinde: (Pag. 158-159, Cartea 3)
+a) Histerectomia totală;
+b) Tamponament vaginal;
+c) Miomectomia;
+d) Chiuretaj uterin;
+e) Estroprogestative.
+a, c, d
+
+Tabloul clinic al adenomiozei cuprinde: (Paginile 162-163, Cartea 3)
+a) Menoragii;
+b) Durere pelvină;
+c) Metroragii frecvente;
+d) Tulburări de sexualitate;
+e) Senzație de presiune vezicală și rectală.
+a, b, d, e
+
+Tratamentul medicamentos al adenomiozei cuprinde: (Pagina 163, Cartea 3)
+a) Progestative;
+b) Analogi GnRH;
+c) Histerectomia totală;
+d) Miomectomia;
+e) Anticoncepționale estro-progestative.
+a, b
+
+Printre tulburarile in exces ale ciclului menstrual se numara:
+a. menoragia
+b. oligomenoreea
+c. polimenoreea
+d. menometroragia
+e. metroragia
+a, c, d, e
+
+Printre principalele cauze ale menoragiei se numara:
+a. polipul endometrial
+b. fibromul uterin
+c. adenomioza
+d. sinechiile uterine toatale
+e. hiperplazia endometriala
+a, b, c, e
+
+Polimenoreea:
+a. reprezinta episoade menstruale care survin la intervale mai mici de 21 de zile
+b. sunt apanajul ciclurilor ovulatorii
+c. poate avea cauze endocrine
+d. poate avea cauze sistemice
+e. faza postovulatorie este deobicei afectata
+a, c, d
+
+Hemoragiile genitale din perioada pubertara:
+a. pot fi organice si functionale
+b. se datoresc insuficientei maturizari a gonadostatului
+c. ciclurile sunt ovulatorii
+d. adolescenta prezinta o hiperprogesteronemie relativa
+e. pot fi cauzate de un avort
+a, c, d
+
+Cauzele hemoragiilor aparute la femeia in plina activitate genitala cuprind:
+a. afectiuni tiroidiene
+b. trombocitopenii
+c. imperforatia himenala
+d. afectiuni psihice majore maniaco-depresive
+e. patologie asociata sarcinii
+a, b, d, e
+
+Printre cauzele de amoenoree se numara
+a. perforarea himenala
+b. septuri vaginale transverse complete
+c. sinechia col uterin
+d. sindromul Rokitanski
+e. scleroza endometrului
+b, c, d, e
+
+Printre leziunile asociate fibroamelor uterine se numara:
+a. hiperplazia endometriala
+b. adenomioza
+c. diverticulita
+d. infectii ascendante ale salpingelor
+e. prolapsul genital
+a, b, d, e
+
+In simptomatologia fibromului uterin pot apare:
+a. hidroreea intermitenta
+b. pioreea
+c. dismenoree
+d. amenoree secundara
+e. tenesme rectale
+a, b, c, e
+
+Diagnosticul diferential al fibromului uterin se face cu:
+a. sarcina
+b. obezitatea
+c. tumori overiene
+d. rinichi ectopic pelvin
+e. tumori rectosigmoidiene
+a, c, d, e
+
+Evolutia si complicatiile fibroamelor uterine se caracterizeaza prin:
+a. cresc in general rapid
+b. pe parcursul sarcinilor involueaza
+c. in menopauza isi accentueaza cresterea
+d. pot determina infertilitate
+e. pot favoriza infectii salpingiene
+c, d
+
+In tratamnetul fibromului uterin se folosesc:
+a. progestative
+b. estrogeni conjugati
+c. estroprogestatitve
+d. derivati de secara cornuta
+e. analogi GnRH
+a, d, e
+
+Tabloul clinic al endometriozei cuprinde:
+a. durerea
+b. exista o relatie directa intre intensitatea durerii si extensia leziunii
+c. hemoragiiloe sunt patognomonice
+d. menoragii
+e. metroragii 
+a, d, e
+
+Etiologia prolapsului genital cuprinde:
+a. factorul constitutional
+b. excesul estrogenic
+c. scaderea presiunii intraabdominale
+d. factorul obstetrical
+e. retroversia utrina si alungirea hipertrofica a colului
+a, d, e
+
+Prolapsului utero-vaginal i se descriu mai multe grade:
+a. gradele sunt definite prin raporturile colului cu introitul vulvar
+b. gradul I cand orificiul extren al colului coboara pana in planul spinelor sciatice
+c. gradul II cand orificiul extren al colului coboara pana in planul spinelor sciatice
+d. gradul III cand colul devine vizibil la vulva cand femeia este in pozitie ginecologica
+e. in prolapsul genital total vaginul este complet ptozat
+a, b, e
+
+Diagnosticul diferential al prolapsului genital se face cu:
+a. elongatia hipertrofica a colului
+b. polipi cervicali
+c. fibroame pediculate
+d. inversiunea uterina
+e. adenomioza
+a, b, c, d
+
+Au fost definite 3 grade ale incontinentei urinare de efort:
+a. gradul I – pierderi involuntare de urina in timpul exercitiilor fizice
+b. gradul II – piederi de urina care survin la schimbarea de pozitie
+c. gradul II – pierderi involuntare de urina in timpul tusei sau stranutului
+d. gradul II – corespunde incontinentei severe
+e. gradul III – pierderile involuntare de urina sunt aproape continue
+a, b, e
+
+Diagnosticul diferential al incontinentei urinare de efort se face cu:
+a. fibromul uterin insotit de hidroree
+b. chisturi overiene eclatate
+c. afectiuni neurologice
+d. fistule uretro-vezico-vaginale
+e. instabilitatea detrusorului
+c, d, e
+
+In sarcina gemelara examenul obstetrical evidentiaza:
+a. discordanta intre  varsta sarcinii si inaltimea fundului uterin
+b. castigul penderal matern exagerat
+c. palparea a 3 poli fetali
+d. hipotensiune materna
+e. prezenta a doua focare de auscultatie
+a, b, c, e
+
+Specificati care din afirmatiile de mai jos legate de preeclamsie sunt adevarate:
+a. cresterea acidului uric si a creatininei
+b. scaderea fibrinogenului
+c. proteinuria sub 0,3 g/24h reprezinta un semn de severitate al preeclamsiei
+d.  hemodilutie (hematocrit sun 40%)
+e. scaderea transaminazelor
+a, b
+
+
+`
+
+const q_regex = new RegExp('\n\n+', 'm');
+const q_text = questions_raw.trim().split(q_regex);
+
+function load_qs() {
+  return q_text.map(function(q) {
+    var split = q.split(new RegExp('\n', 'm'));
+
+    const answer = split.pop();
+    const question = split.join('<br/>').replace(/^\d+\./,'').trim();
+
+    return [question, answer];
+  }).filter(function(q) {
+    return q[0] != "";
+  });
+}
+
+var qs = load_qs()
+
+function nextQuestion() {
+  if (qs.length === 0) {
+    qs = load_qs();
+  }
+
+  const idx = Math.floor(Math.random()*qs.length);
+  const chosen_q = qs[idx];
+  qs.splice(idx, 1);
+
+  $('#question').html(chosen_q[0]);
+  $('#answer').text(chosen_q[1]).css('visibility','hidden');
+  $('#counter').text(qs.length);
+}
+
+function showAnswer() {
+  $('#answer').css('visibility','visible');
+}
+
+$(document).ready(function() {
+  $('#b_next').click(nextQuestion);
+  $('#b_show').click(showAnswer);
+
+  nextQuestion();
+});
+
+    </script>
+
+    <div class="container-fluid" style="margin-top:1em;">
+      <div class="row">
+        <div class="col-md">&nbsp;</div>
+        <div class="col-md-8">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="question"></li>
+              <li class="list-group-item" style="border-bottom: none" id="answer"></li>
+            </ul>
+            <div class="card-body">
+              <button type="button" id="b_show" class="btn btn-secondary">Show Answer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <p><span id="counter">?</span> to go</p>
+          <button type="button" id="b_next" class="btn btn-primary btn-lg">Next Question &gt;</button>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
