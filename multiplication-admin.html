@@ -99,26 +99,55 @@
       border-radius: 3px;
     }
 
-    .card-list {
+    .grid-container {
+      margin-top: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: auto repeat(9, 1fr);
+      gap: 3px;
+      width: 100%;
+    }
+
+    .grid-header {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #888;
+      padding: 6px;
     }
 
-    .card-item {
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.9rem;
+    .grid-cell {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
     }
 
-    .card-hard {
-      background: #3a2a2a;
-      color: #f87171;
+    .cell-hard {
+      background: #f87171;
+      color: #fff;
     }
 
-    .card-easy {
-      background: #1a3a2a;
-      color: #4ade80;
+    .cell-medium {
+      background: #fbbf24;
+      color: #1a1a2e;
+    }
+
+    .cell-easy {
+      background: #4ade80;
+      color: #1a1a2e;
+    }
+
+    .cell-unseen {
+      background: #444;
+      color: #666;
     }
 
     .stats {
@@ -198,11 +227,6 @@
       gap: 12px;
       justify-content: center;
     }
-
-    .empty-message {
-      color: #666;
-      font-style: italic;
-    }
   </style>
 </head>
 <body>
@@ -233,14 +257,8 @@
       </div>
     </div>
 
-    <h2>Hardest</h2>
-    <div class="card-list" id="hardest-list">
-      <span class="empty-message">None yet</span>
-    </div>
-
-    <h2>Easiest (interval 13+)</h2>
-    <div class="card-list" id="easiest-list">
-      <span class="empty-message">None yet</span>
+    <div class="grid-container">
+      <div class="grid" id="card-grid"></div>
     </div>
 
     <div class="actions">
@@ -267,40 +285,40 @@
       return null;
     }
 
+    function getCardStatus(card) {
+      if (card.lastSeenSession === null) {
+        return 'unseen';
+      } else if ((card.wrongCount || 0) > 0 && card.interval <= 2) {
+        return 'hard';
+      } else if (card.interval <= 8) {
+        return 'medium';
+      } else {
+        return 'easy';
+      }
+    }
+
     function renderProgress() {
       const data = loadData();
+      const grid = document.getElementById('card-grid');
+      grid.innerHTML = '';
 
       if (!data) {
         document.getElementById('stats').textContent = 'No data yet - complete a session first!';
         document.getElementById('progress-bar').innerHTML = '<div class="progress-segment progress-unseen" style="width: 100%">81</div>';
+        renderGrid(grid, null);
         return;
       }
 
       document.getElementById('stats').textContent = `Sessions completed: ${data.sessionCount}`;
 
-      let hard = 0;    // has been wrong at least once and interval <= 2
-      let medium = 0;  // interval 3-8
-      let easy = 0;    // interval 13-21
-      let unseen = 0;  // never seen
-
-      const hardCards = [];
-      const easyCards = [];
+      let hard = 0, medium = 0, easy = 0, unseen = 0;
 
       for (const key in data.cards) {
-        const card = data.cards[key];
-        const wrongCount = card.wrongCount || 0;
-
-        if (card.lastSeenSession === null) {
-          unseen++;
-        } else if (wrongCount > 0 && card.interval <= 2) {
-          hard++;
-          hardCards.push({ key, interval: card.interval, wrongCount });
-        } else if (card.interval <= 8) {
-          medium++;
-        } else {
-          easy++;
-          easyCards.push({ key, interval: card.interval });
-        }
+        const status = getCardStatus(data.cards[key]);
+        if (status === 'hard') hard++;
+        else if (status === 'medium') medium++;
+        else if (status === 'easy') easy++;
+        else unseen++;
       }
 
       // Render progress bar
@@ -337,35 +355,41 @@
         bar.appendChild(seg);
       }
 
-      // Render hardest cards (sorted by interval ascending, then by wrong count descending)
-      hardCards.sort((a, b) => a.interval - b.interval || b.wrongCount - a.wrongCount);
-      const hardestList = document.getElementById('hardest-list');
-      hardestList.innerHTML = '';
-      if (hardCards.length === 0) {
-        hardestList.innerHTML = '<span class="empty-message">None yet</span>';
-      } else {
-        for (const item of hardCards.slice(0, 10)) {
-          const [a, b] = item.key.split('x').map(Number);
-          const el = document.createElement('span');
-          el.className = 'card-item card-hard';
-          el.textContent = `${a} × ${b}`;
-          hardestList.appendChild(el);
-        }
+      renderGrid(grid, data);
+    }
+
+    function renderGrid(grid, data) {
+      // Header row: empty corner + column headers 2-10
+      const corner = document.createElement('div');
+      corner.className = 'grid-header';
+      grid.appendChild(corner);
+
+      for (let col = 2; col <= 10; col++) {
+        const header = document.createElement('div');
+        header.className = 'grid-header';
+        header.textContent = col;
+        grid.appendChild(header);
       }
 
-      // Render easiest cards (sorted by interval descending, then take 10)
-      easyCards.sort((a, b) => b.interval - a.interval);
-      const easiestList = document.getElementById('easiest-list');
-      easiestList.innerHTML = '';
-      if (easyCards.length === 0) {
-        easiestList.innerHTML = '<span class="empty-message">None yet</span>';
-      } else {
-        for (const item of easyCards.slice(0, 10)) {
-          const [a, b] = item.key.split('x').map(Number);
-          const el = document.createElement('span');
-          el.className = 'card-item card-easy';
-          el.textContent = `${a} × ${b}`;
-          easiestList.appendChild(el);
+      // Data rows
+      for (let row = 2; row <= 10; row++) {
+        // Row header
+        const rowHeader = document.createElement('div');
+        rowHeader.className = 'grid-header';
+        rowHeader.textContent = row;
+        grid.appendChild(rowHeader);
+
+        // Cells
+        for (let col = 2; col <= 10; col++) {
+          const cell = document.createElement('div');
+          cell.className = 'grid-cell';
+
+          const key = `${row}x${col}`;
+          const card = data?.cards[key];
+          const status = card ? getCardStatus(card) : 'unseen';
+          cell.classList.add(`cell-${status}`);
+
+          grid.appendChild(cell);
         }
       }
     }
