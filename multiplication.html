@@ -221,6 +221,7 @@
   <!-- Start Screen -->
   <div id="start-screen" class="screen active">
     <h1>Multiplication Tables</h1>
+    <p id="session-preview" style="color: #888; margin-bottom: 16px;"></p>
     <button class="btn" onclick="startSession()">Start</button>
     <div class="hardest-cards" id="hardest-section" style="display: none;">
       <h2>Hardest</h2>
@@ -250,7 +251,7 @@
   <!-- Summary Screen -->
   <div id="summary-screen" class="screen">
     <h1>Session Complete</h1>
-    <div class="score"><span id="final-score">28</span>/30</div>
+    <div class="score"><span id="final-score">28</span>/<span id="session-total">30</span></div>
     <div class="trouble-cards" id="trouble-section">
       <h2>Cards to work on:</h2>
       <div class="trouble-list" id="trouble-list"></div>
@@ -292,8 +293,8 @@
     let data = loadData();
     let sessionQueue = [];
     let currentCardIndex = 0;
-    let sessionCorrect = 0;
     let firstTryCorrect = 0;
+    let sessionTotal = 0;
     let cardsNeededRetry = new Set();
     let currentCardFirstTry = true;
 
@@ -304,22 +305,34 @@
 
     function showStart() {
       updateHardestCards();
+      const previewCards = selectSessionCards();
+      document.getElementById('session-preview').textContent = `${previewCards.length} cards this session`;
       showScreen('start-screen');
     }
 
     function updateHardestCards() {
       // Find cards that have been gotten wrong at least once
-      const hardest = [];
+      const wrongCards = [];
       for (const key in data.cards) {
         const card = data.cards[key];
         if ((card.wrongCount || 0) > 0) {
-          hardest.push({ key, interval: card.interval, wrongCount: card.wrongCount });
+          wrongCards.push({ key, interval: card.interval, wrongCount: card.wrongCount });
+        }
+      }
+
+      // First try: cards with interval <= 2 (same as admin page)
+      let top = wrongCards.filter(c => c.interval <= 2);
+
+      // Fallback: if none, show all cards at the equal lowest interval (but not if "easy")
+      if (top.length === 0 && wrongCards.length > 0) {
+        const minInterval = Math.min(...wrongCards.map(c => c.interval));
+        if (minInterval < 13) {
+          top = wrongCards.filter(c => c.interval === minInterval);
         }
       }
 
       // Sort by interval (lowest first), then by wrong count (highest first)
-      hardest.sort((a, b) => a.interval - b.interval || b.wrongCount - a.wrongCount);
-      const top = hardest.slice(0, 10);
+      top.sort((a, b) => a.interval - b.interval || b.wrongCount - a.wrongCount);
 
       const section = document.getElementById('hardest-section');
       const list = document.getElementById('hardest-list');
@@ -390,8 +403,8 @@
 
       sessionQueue = selectSessionCards();
       currentCardIndex = 0;
-      sessionCorrect = 0;
       firstTryCorrect = 0;
+      sessionTotal = sessionQueue.length;
       cardsNeededRetry = new Set();
 
       if (sessionQueue.length === 0) {
@@ -444,7 +457,6 @@
       if (userAnswer === correctAnswer) {
         question.classList.add('correct');
         answerDisplay.textContent = correctAnswer;
-        sessionCorrect++;
 
         if (currentCardFirstTry) {
           firstTryCorrect++;
@@ -502,6 +514,7 @@
 
     function showSummary() {
       document.getElementById('final-score').textContent = firstTryCorrect;
+      document.getElementById('session-total').textContent = sessionTotal;
 
       const troubleList = document.getElementById('trouble-list');
       troubleList.innerHTML = '';
