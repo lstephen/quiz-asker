@@ -105,19 +105,9 @@
 
     .grid {
       display: grid;
-      grid-template-columns: auto repeat(9, 1fr);
+      grid-template-columns: repeat(9, 1fr);
       gap: 3px;
       width: 100%;
-    }
-
-    .grid-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      font-weight: bold;
-      color: #888;
-      padding: 6px;
     }
 
     .grid-cell {
@@ -359,27 +349,7 @@
     }
 
     function renderGrid(grid, data) {
-      // Header row: empty corner + column headers 2-10
-      const corner = document.createElement('div');
-      corner.className = 'grid-header';
-      grid.appendChild(corner);
-
-      for (let col = 2; col <= 10; col++) {
-        const header = document.createElement('div');
-        header.className = 'grid-header';
-        header.textContent = col;
-        grid.appendChild(header);
-      }
-
-      // Data rows
       for (let row = 2; row <= 10; row++) {
-        // Row header
-        const rowHeader = document.createElement('div');
-        rowHeader.className = 'grid-header';
-        rowHeader.textContent = row;
-        grid.appendChild(rowHeader);
-
-        // Cells
         for (let col = 2; col <= 10; col++) {
           const cell = document.createElement('div');
           cell.className = 'grid-cell';
@@ -388,6 +358,11 @@
           const card = data?.cards[key];
           const status = card ? getCardStatus(card) : 'unseen';
           cell.classList.add(`cell-${status}`);
+
+          // Show labels in first row and first column
+          if (row === 2 || col === 2) {
+            cell.textContent = row === 2 ? col : row;
+          }
 
           grid.appendChild(cell);
         }
