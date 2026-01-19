@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplication Tables - Admin</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #fff;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 10px;
+      margin-top: 30px;
+    }
+
+    .progress-section {
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      display: flex;
+      height: 30px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #2a2a4a;
+    }
+
+    .progress-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      transition: width 0.3s;
+    }
+
+    .progress-hard {
+      background: #f87171;
+      color: #fff;
+    }
+
+    .progress-medium {
+      background: #fbbf24;
+      color: #1a1a2e;
+    }
+
+    .progress-easy {
+      background: #4ade80;
+      color: #1a1a2e;
+    }
+
+    .progress-unseen {
+      background: #444;
+      color: #888;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .card-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .card-item {
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .card-hard {
+      background: #3a2a2a;
+      color: #f87171;
+    }
+
+    .card-easy {
+      background: #1a3a2a;
+      color: #4ade80;
+    }
+
+    .stats {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .btn {
+      background: #4a4ae8;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      min-height: 44px;
+    }
+
+    .btn:active {
+      background: #3a3ad8;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+    }
+
+    .btn-danger:active {
+      background: #b91c1c;
+    }
+
+    .btn-secondary {
+      background: #444;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 40px;
+      align-items: center;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: #2a2a4a;
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .modal p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .empty-message {
+      color: #666;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Progress</h1>
+
+    <div class="stats" id="stats">Sessions completed: 0</div>
+
+    <div class="progress-section">
+      <div class="progress-bar" id="progress-bar"></div>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot progress-hard"></div>
+          <span>Hard</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot progress-medium"></div>
+          <span>Learning</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot progress-easy"></div>
+          <span>Easy</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot progress-unseen"></div>
+          <span>Unseen</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Hardest (interval 1-2)</h2>
+    <div class="card-list" id="hardest-list">
+      <span class="empty-message">None yet</span>
+    </div>
+
+    <h2>Easiest (interval 13+)</h2>
+    <div class="card-list" id="easiest-list">
+      <span class="empty-message">None yet</span>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-danger" onclick="showResetConfirm()">Reset All Progress</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <p>Are you sure? This will erase all progress and cannot be undone.</p>
+      <div class="modal-buttons">
+        <button class="btn btn-danger" onclick="confirmReset()">Reset</button>
+        <button class="btn btn-secondary" onclick="hideResetConfirm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function loadData() {
+      const stored = localStorage.getItem('multiplication-data');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+      return null;
+    }
+
+    function renderProgress() {
+      const data = loadData();
+
+      if (!data) {
+        document.getElementById('stats').textContent = 'No data yet - complete a session first!';
+        document.getElementById('progress-bar').innerHTML = '<div class="progress-segment progress-unseen" style="width: 100%">81</div>';
+        return;
+      }
+
+      document.getElementById('stats').textContent = `Sessions completed: ${data.sessionCount}`;
+
+      let hard = 0;    // interval 0-2
+      let medium = 0;  // interval 3-8
+      let easy = 0;    // interval 13-21
+      let unseen = 0;  // never seen
+
+      const hardCards = [];
+      const easyCards = [];
+
+      for (const key in data.cards) {
+        const card = data.cards[key];
+
+        if (card.lastSeenSession === null) {
+          unseen++;
+        } else if (card.interval <= 2) {
+          hard++;
+          hardCards.push({ key, interval: card.interval });
+        } else if (card.interval <= 8) {
+          medium++;
+        } else {
+          easy++;
+          easyCards.push({ key, interval: card.interval });
+        }
+      }
+
+      // Render progress bar
+      const total = 81;
+      const bar = document.getElementById('progress-bar');
+      bar.innerHTML = '';
+
+      if (hard > 0) {
+        const seg = document.createElement('div');
+        seg.className = 'progress-segment progress-hard';
+        seg.style.width = `${(hard / total) * 100}%`;
+        seg.textContent = hard;
+        bar.appendChild(seg);
+      }
+      if (medium > 0) {
+        const seg = document.createElement('div');
+        seg.className = 'progress-segment progress-medium';
+        seg.style.width = `${(medium / total) * 100}%`;
+        seg.textContent = medium;
+        bar.appendChild(seg);
+      }
+      if (easy > 0) {
+        const seg = document.createElement('div');
+        seg.className = 'progress-segment progress-easy';
+        seg.style.width = `${(easy / total) * 100}%`;
+        seg.textContent = easy;
+        bar.appendChild(seg);
+      }
+      if (unseen > 0) {
+        const seg = document.createElement('div');
+        seg.className = 'progress-segment progress-unseen';
+        seg.style.width = `${(unseen / total) * 100}%`;
+        seg.textContent = unseen;
+        bar.appendChild(seg);
+      }
+
+      // Render hardest cards (sorted by interval ascending, then take 10)
+      hardCards.sort((a, b) => a.interval - b.interval);
+      const hardestList = document.getElementById('hardest-list');
+      hardestList.innerHTML = '';
+      if (hardCards.length === 0) {
+        hardestList.innerHTML = '<span class="empty-message">None yet</span>';
+      } else {
+        for (const item of hardCards.slice(0, 10)) {
+          const [a, b] = item.key.split('x').map(Number);
+          const el = document.createElement('span');
+          el.className = 'card-item card-hard';
+          el.textContent = `${a} × ${b}`;
+          hardestList.appendChild(el);
+        }
+      }
+
+      // Render easiest cards (sorted by interval descending, then take 10)
+      easyCards.sort((a, b) => b.interval - a.interval);
+      const easiestList = document.getElementById('easiest-list');
+      easiestList.innerHTML = '';
+      if (easyCards.length === 0) {
+        easiestList.innerHTML = '<span class="empty-message">None yet</span>';
+      } else {
+        for (const item of easyCards.slice(0, 10)) {
+          const [a, b] = item.key.split('x').map(Number);
+          const el = document.createElement('span');
+          el.className = 'card-item card-easy';
+          el.textContent = `${a} × ${b}`;
+          easiestList.appendChild(el);
+        }
+      }
+    }
+
+    function showResetConfirm() {
+      document.getElementById('modal-overlay').classList.add('active');
+    }
+
+    function hideResetConfirm() {
+      document.getElementById('modal-overlay').classList.remove('active');
+    }
+
+    function confirmReset() {
+      localStorage.removeItem('multiplication-data');
+      hideResetConfirm();
+      renderProgress();
+    }
+
+    // Close modal on overlay click
+    document.getElementById('modal-overlay').addEventListener('click', (e) => {
+      if (e.target.id === 'modal-overlay') {
+        hideResetConfirm();
+      }
+    });
+
+    renderProgress();
+  </script>
+</body>
+</html>
