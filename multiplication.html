@@ -262,6 +262,7 @@
   <script>
     const FIBONACCI = [1, 2, 3, 5, 8, 13, 21];
     const CARDS_PER_SESSION = 30;
+    const MIN_CARDS_PER_SESSION = 10;
 
     // Initialize all 81 cards
     function generateAllCards() {
@@ -305,7 +306,7 @@
 
     function showStart() {
       updateHardestCards();
-      const previewCards = selectSessionCards();
+      const previewCards = selectCards(data.sessionCount + 1);
       document.getElementById('session-preview').textContent = `${previewCards.length} cards this session`;
       showScreen('start-screen');
     }
@@ -352,23 +353,28 @@
       }
     }
 
-    function selectSessionCards() {
-      const currentSession = data.sessionCount + 1;
+    function selectCards(session) {
       const dueCards = [];
       const unseenCards = [];
+      const notYetDueCards = [];
 
       for (const key in data.cards) {
         const card = data.cards[key];
         if (card.lastSeenSession === null) {
           unseenCards.push(key);
-        } else if (currentSession >= card.lastSeenSession + card.interval) {
-          const overdue = currentSession - (card.lastSeenSession + card.interval);
+        } else if (session >= card.lastSeenSession + card.interval) {
+          const overdue = session - (card.lastSeenSession + card.interval);
           dueCards.push({ key, overdue });
+        } else {
+          const sessionsUntilDue = (card.lastSeenSession + card.interval) - session;
+          notYetDueCards.push({ key, sessionsUntilDue });
         }
       }
 
       // Sort due cards by how overdue they are (most overdue first)
       dueCards.sort((a, b) => b.overdue - a.overdue);
+      // Sort not-yet-due cards by how soon they'll be due (soonest first)
+      notYetDueCards.sort((a, b) => a.sessionsUntilDue - b.sessionsUntilDue);
 
       const selected = [];
 
@@ -378,11 +384,17 @@
         selected.push(item.key);
       }
 
-      // Fill remaining with unseen cards (shuffled)
+      // Fill with unseen cards (shuffled)
       shuffleArray(unseenCards);
       for (const key of unseenCards) {
         if (selected.length >= CARDS_PER_SESSION) break;
         selected.push(key);
+      }
+
+      // If below minimum, pull in nearly-due cards
+      for (const item of notYetDueCards) {
+        if (selected.length >= MIN_CARDS_PER_SESSION) break;
+        selected.push(item.key);
       }
 
       // Shuffle the final selection so it's not predictable
@@ -398,10 +410,9 @@
     }
 
     function startSession() {
+      sessionQueue = selectCards(data.sessionCount + 1);
       data.sessionCount++;
       saveData();
-
-      sessionQueue = selectSessionCards();
       currentCardIndex = 0;
       firstTryCorrect = 0;
       sessionTotal = sessionQueue.length;
