@@ -268,7 +268,7 @@
       for (let a = 2; a <= 10; a++) {
         for (let b = 2; b <= 10; b++) {
           const key = `${a}x${b}`;
-          cards[key] = { lastSeenSession: null, interval: 1 };
+          cards[key] = { lastSeenSession: null, interval: 1, wrongCount: 0 };
         }
       }
       return cards;
@@ -308,18 +308,17 @@
     }
 
     function updateHardestCards() {
-      // Find cards with low intervals (struggled with recently)
+      // Find cards that have been gotten wrong at least once
       const hardest = [];
       for (const key in data.cards) {
         const card = data.cards[key];
-        // Only include cards that have been seen and have low interval
-        if (card.lastSeenSession !== null && card.interval <= 2) {
-          hardest.push({ key, interval: card.interval });
+        if ((card.wrongCount || 0) > 0) {
+          hardest.push({ key, interval: card.interval, wrongCount: card.wrongCount });
         }
       }
 
-      // Sort by interval (lowest first), take top 10
-      hardest.sort((a, b) => a.interval - b.interval);
+      // Sort by interval (lowest first), then by wrong count (highest first)
+      hardest.sort((a, b) => a.interval - b.interval || b.wrongCount - a.wrongCount);
       const top = hardest.slice(0, 10);
 
       const section = document.getElementById('hardest-section');
@@ -477,8 +476,9 @@
 
         cardsNeededRetry.add(key);
 
-        // Reset interval to 0
+        // Reset interval to 0, increment wrong count
         card.interval = 0;
+        card.wrongCount = (card.wrongCount || 0) + 1;
         card.lastSeenSession = data.sessionCount;
         saveData();
 
