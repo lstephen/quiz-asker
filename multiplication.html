@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Multiplication Tables</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .btn {
+      background: #4a4ae8;
+      color: #fff;
+      border: none;
+      padding: 16px 32px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      min-width: 200px;
+      min-height: 54px;
+      touch-action: manipulation;
+    }
+
+    .btn:active {
+      background: #3a3ad8;
+    }
+
+    .btn-secondary {
+      background: #444;
+    }
+
+    .btn-secondary:active {
+      background: #555;
+    }
+
+    /* Start screen */
+    .hardest-cards {
+      margin-top: 30px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hardest-cards h2 {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .hardest-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .hardest-item {
+      background: #3a2a2a;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #f87171;
+    }
+
+    /* Card screen */
+    #card-screen {
+      padding-top: 10px;
+    }
+
+    .progress {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #2a2a4a;
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+      transition: color 0.15s;
+    }
+
+    .question.correct {
+      color: #4ade80;
+    }
+
+    .question.wrong {
+      color: #f87171;
+    }
+
+    .card-actions {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #answer-input {
+      font-size: 2rem;
+      width: 100px;
+      padding: 12px;
+      text-align: center;
+      border: 2px solid #4a4ae8;
+      border-radius: 10px;
+      background: #1a1a2e;
+      color: #fff;
+      outline: none;
+    }
+
+    #answer-input:focus {
+      border-color: #6a6aff;
+    }
+
+    #answer-input.correct {
+      border-color: #4ade80;
+      background: #1a3a2e;
+    }
+
+    #answer-input.wrong {
+      border-color: #f87171;
+      background: #3a1a1e;
+    }
+
+    .submit-btn {
+      padding: 12px 24px;
+      font-size: 1.5rem;
+    }
+
+    .continue-btn {
+      display: none;
+    }
+
+    /* Summary screen */
+    #summary-screen h1 {
+      margin-top: 20px;
+    }
+
+    .score {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #4ade80;
+      margin: 20px 0;
+    }
+
+    .trouble-cards {
+      margin: 20px 0;
+      text-align: left;
+      width: 100%;
+    }
+
+    .trouble-cards h2 {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .trouble-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .trouble-item {
+      background: #3a2a2a;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #f87171;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Start Screen -->
+  <div id="start-screen" class="screen active">
+    <h1>Multiplication Tables</h1>
+    <button class="btn" onclick="startSession()">Start</button>
+    <div class="hardest-cards" id="hardest-section" style="display: none;">
+      <h2>Hardest</h2>
+      <div class="hardest-list" id="hardest-list"></div>
+    </div>
+  </div>
+
+  <!-- Card Screen -->
+  <div id="card-screen" class="screen">
+    <div class="progress">
+      <span id="cards-remaining">30</span> to go
+    </div>
+    <div class="card">
+      <div class="question">
+        <span id="num1">7</span> &times; <span id="num2">8</span> = <span id="answer-display">?</span>
+      </div>
+      <div class="card-actions">
+        <div class="input-row">
+          <input type="text" id="answer-input" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+          <button class="btn submit-btn" onclick="submitAnswer()">OK</button>
+        </div>
+        <button id="continue-btn" class="btn continue-btn" onclick="continueToNext()">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Screen -->
+  <div id="summary-screen" class="screen">
+    <h1>Session Complete</h1>
+    <div class="score"><span id="final-score">28</span>/30</div>
+    <div class="trouble-cards" id="trouble-section">
+      <h2>Cards to work on:</h2>
+      <div class="trouble-list" id="trouble-list"></div>
+    </div>
+    <button class="btn" onclick="showStart()">Home</button>
+  </div>
+
+  <script>
+    const FIBONACCI = [1, 2, 3, 5, 8, 13, 21];
+    const CARDS_PER_SESSION = 30;
+
+    // Initialize all 81 cards
+    function generateAllCards() {
+      const cards = {};
+      for (let a = 2; a <= 10; a++) {
+        for (let b = 2; b <= 10; b++) {
+          const key = `${a}x${b}`;
+          cards[key] = { lastSeenSession: null, interval: 1 };
+        }
+      }
+      return cards;
+    }
+
+    function loadData() {
+      const stored = localStorage.getItem('multiplication-data');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+      return {
+        sessionCount: 0,
+        cards: generateAllCards()
+      };
+    }
+
+    function saveData() {
+      localStorage.setItem('multiplication-data', JSON.stringify(data));
+    }
+
+    let data = loadData();
+    let sessionQueue = [];
+    let currentCardIndex = 0;
+    let sessionCorrect = 0;
+    let firstTryCorrect = 0;
+    let cardsNeededRetry = new Set();
+    let currentCardFirstTry = true;
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function showStart() {
+      updateHardestCards();
+      showScreen('start-screen');
+    }
+
+    function updateHardestCards() {
+      // Find cards with low intervals (struggled with recently)
+      const hardest = [];
+      for (const key in data.cards) {
+        const card = data.cards[key];
+        // Only include cards that have been seen and have low interval
+        if (card.lastSeenSession !== null && card.interval <= 2) {
+          hardest.push({ key, interval: card.interval });
+        }
+      }
+
+      // Sort by interval (lowest first), take top 10
+      hardest.sort((a, b) => a.interval - b.interval);
+      const top = hardest.slice(0, 10);
+
+      const section = document.getElementById('hardest-section');
+      const list = document.getElementById('hardest-list');
+      list.innerHTML = '';
+
+      if (top.length > 0) {
+        section.style.display = 'block';
+        for (const item of top) {
+          const [a, b] = item.key.split('x').map(Number);
+          const el = document.createElement('span');
+          el.className = 'hardest-item';
+          el.textContent = `${a} × ${b}`;
+          list.appendChild(el);
+        }
+      } else {
+        section.style.display = 'none';
+      }
+    }
+
+    function selectSessionCards() {
+      const currentSession = data.sessionCount + 1;
+      const dueCards = [];
+      const unseenCards = [];
+
+      for (const key in data.cards) {
+        const card = data.cards[key];
+        if (card.lastSeenSession === null) {
+          unseenCards.push(key);
+        } else if (currentSession >= card.lastSeenSession + card.interval) {
+          const overdue = currentSession - (card.lastSeenSession + card.interval);
+          dueCards.push({ key, overdue });
+        }
+      }
+
+      // Sort due cards by how overdue they are (most overdue first)
+      dueCards.sort((a, b) => b.overdue - a.overdue);
+
+      const selected = [];
+
+      // First, add due cards
+      for (const item of dueCards) {
+        if (selected.length >= CARDS_PER_SESSION) break;
+        selected.push(item.key);
+      }
+
+      // Fill remaining with unseen cards (shuffled)
+      shuffleArray(unseenCards);
+      for (const key of unseenCards) {
+        if (selected.length >= CARDS_PER_SESSION) break;
+        selected.push(key);
+      }
+
+      // Shuffle the final selection so it's not predictable
+      shuffleArray(selected);
+      return selected;
+    }
+
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    function startSession() {
+      data.sessionCount++;
+      saveData();
+
+      sessionQueue = selectSessionCards();
+      currentCardIndex = 0;
+      sessionCorrect = 0;
+      firstTryCorrect = 0;
+      cardsNeededRetry = new Set();
+
+      if (sessionQueue.length === 0) {
+        alert('No cards to review! All caught up.');
+        data.sessionCount--;
+        saveData();
+        showStart();
+        return;
+      }
+
+      showScreen('card-screen');
+      showCard();
+    }
+
+    function showCard() {
+      const key = sessionQueue[currentCardIndex];
+      const [a, b] = key.split('x').map(Number);
+
+      document.getElementById('num1').textContent = a;
+      document.getElementById('num2').textContent = b;
+      document.getElementById('answer-display').textContent = '?';
+      document.querySelector('.question').className = 'question';
+      document.getElementById('cards-remaining').textContent = sessionQueue.length - currentCardIndex;
+
+      const input = document.getElementById('answer-input');
+      input.value = '';
+      input.className = '';
+      input.focus();
+
+      currentCardFirstTry = !cardsNeededRetry.has(key);
+    }
+
+    function submitAnswer() {
+      const input = document.getElementById('answer-input');
+      const userAnswer = parseInt(input.value, 10);
+
+      if (isNaN(userAnswer)) {
+        input.focus();
+        return;
+      }
+
+      const key = sessionQueue[currentCardIndex];
+      const [a, b] = key.split('x').map(Number);
+      const correctAnswer = a * b;
+      const card = data.cards[key];
+
+      const question = document.querySelector('.question');
+      const answerDisplay = document.getElementById('answer-display');
+
+      if (userAnswer === correctAnswer) {
+        question.classList.add('correct');
+        answerDisplay.textContent = correctAnswer;
+        sessionCorrect++;
+
+        if (currentCardFirstTry) {
+          firstTryCorrect++;
+        }
+
+        // Update card interval
+        if (card.interval === 0) {
+          card.interval = 1;
+        } else {
+          const currentIndex = FIBONACCI.indexOf(card.interval);
+          if (currentIndex < FIBONACCI.length - 1) {
+            card.interval = FIBONACCI[currentIndex + 1];
+          }
+        }
+        card.lastSeenSession = data.sessionCount;
+        saveData();
+
+        setTimeout(() => {
+          currentCardIndex++;
+          if (currentCardIndex >= sessionQueue.length) {
+            showSummary();
+          } else {
+            showCard();
+          }
+        }, 500);
+      } else {
+        question.classList.add('wrong');
+        answerDisplay.textContent = correctAnswer;
+
+        cardsNeededRetry.add(key);
+
+        // Reset interval to 0
+        card.interval = 0;
+        card.lastSeenSession = data.sessionCount;
+        saveData();
+
+        // Re-queue the card
+        sessionQueue.push(key);
+
+        // Show continue button, hide input row
+        document.querySelector('.input-row').style.display = 'none';
+        document.getElementById('continue-btn').style.display = 'inline-block';
+      }
+    }
+
+    function continueToNext() {
+      // Hide continue button, show input row
+      document.getElementById('continue-btn').style.display = 'none';
+      document.querySelector('.input-row').style.display = 'flex';
+
+      currentCardIndex++;
+      showCard();
+    }
+
+    function showSummary() {
+      document.getElementById('final-score').textContent = firstTryCorrect;
+
+      const troubleList = document.getElementById('trouble-list');
+      troubleList.innerHTML = '';
+
+      const troubleSection = document.getElementById('trouble-section');
+      if (cardsNeededRetry.size > 0) {
+        troubleSection.style.display = 'block';
+        for (const key of cardsNeededRetry) {
+          const [a, b] = key.split('x').map(Number);
+          const item = document.createElement('span');
+          item.className = 'trouble-item';
+          item.textContent = `${a} × ${b} = ${a * b}`;
+          troubleList.appendChild(item);
+        }
+      } else {
+        troubleSection.style.display = 'none';
+      }
+
+      showScreen('summary-screen');
+    }
+
+    // Handle Enter key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const continueBtn = document.getElementById('continue-btn');
+        if (continueBtn.style.display !== 'none') {
+          continueToNext();
+        } else if (document.getElementById('card-screen').classList.contains('active')) {
+          submitAnswer();
+        }
+      }
+    });
+
+    // Initialize
+    showStart();
+  </script>
+</body>
+</html>
